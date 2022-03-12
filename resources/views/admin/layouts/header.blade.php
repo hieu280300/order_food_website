@@ -34,10 +34,13 @@
                                     <i class="fas fa-circle"></i>
                                     <span>Lock Screen</span>
                                 </a>
-                                <a href="#!" class="dropdown-item">
-                                    <i class="fas fa-circle"></i>
-                                    <span>Logout</span>
-                                </a>
+                                {{-- <a href="" class="dropdown-item"> --}}
+                                    <form action="{{ route('admin.logout') }}" method="POST">
+                                        @csrf
+                                        <i class="fas fa-circle"></i>
+                                        <button type="submit" class="btn btn-danger">Logout</button>
+                                    </form>
+                                {{-- </a> --}}
                             </div>
                         </div>
                         <a href="#!" class="dropdown-item">
@@ -85,12 +88,15 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right pc-h-dropdown">
                         <div class=" dropdown-header">
-                            <h5 class="text-overflow m-0"><span class="badge bg-light-primary"><a href="https://gumroad.com/dashboardkit" target="_blank">Upgrade to Pro</a></span></h5>
+                            
                         </div>
 
                         <a href="auth-signin.html" class="dropdown-item">
                             <i class="material-icons-two-tone">chrome_reader_mode</i>
-                            <span>Logout</span>
+                            <span>  <form action="{{ route('admin.logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-danger">Logout</button>
+                            </form></span>
                         </a>
                     </div>
                 </li>

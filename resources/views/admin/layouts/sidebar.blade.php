@@ -20,19 +20,17 @@
                     <span>UI Components</span>
                 </li>
                 <li class="pc-item pc-hasmenu">
-                    <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">business_center</i></span><span class="pc-mtext">Basic</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                    <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">business_center</i></span><span class="pc-mtext">Category</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                     <ul class="pc-submenu">
-                        <li class="pc-item"><a class="pc-link" href="bc_alert.html">Alert</a></li>
-                        <li class="pc-item"><a class="pc-link" href="bc_button.html">Button</a></li>
-                        <li class="pc-item"><a class="pc-link" href="bc_badges.html">Badges</a></li>
-                        <li class="pc-item"><a class="pc-link" href="bc_breadcrumb-pagination.html">Breadcrumb & paggination</a></li>
-                        <li class="pc-item"><a class="pc-link" href="bc_card.html">Cards</a></li>
-                        <li class="pc-item"><a class="pc-link" href="bc_collapse.html">Collapse</a></li>
-                        <li class="pc-item"><a class="pc-link" href="bc_carousel.html">Carousel</a></li>
-                        <li class="pc-item"><a class="pc-link" href="bc_progress.html">Progress</a></li>
-                        <li class="pc-item"><a class="pc-link" href="bc_modal.html">Modal</a></li>
-
-                        <li class="pc-item"><a class="pc-link" href="bc_typography.html">Typography</a></li>
+                        <li class="pc-item"><a class="pc-link  {{ Route::currentRouteName() == 'admin.category.create' ? 'active' : '' }}" href="{{route('admin.category.create')}}">Create category</a></li>
+                        <li class="pc-item"><a class="pc-link {{ Route::currentRouteName() == 'admin.category.index' ? 'active' : '' }}" href="{{ route('admin.category.index') }}">List category</a></li>
+                    </ul>
+                </li>
+                <li class="pc-item pc-hasmenu">
+                    <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">business_center</i></span><span class="pc-mtext">Products</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                    <ul class="pc-submenu">
+                        <li class="pc-item"><a class="pc-link" href="bc_alert.html">List products</a></li>
+                        <li class="pc-item"><a class="pc-link" href="bc_button.html">Create product</a></li>
                     </ul>
                 </li>
                 <li class="pc-item">
