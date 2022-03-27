@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,11 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', [App\Http\Controllers\Frontend\HomeController::class ,'shop'])->name('shop');
+Route::get('/member-login',[HomeController::class,'login']);
 Route::get('shop-details/{id}', [App\Http\Controllers\Frontend\HomeController::class ,'shop_detail'])->name('shop_detail');
 Route::get('/add-to-cart/{id}',[App\Http\Controllers\Frontend\CartController::class,'addToCart'])->name('addToCart');
 Route::get('/product_detail', function () {
     return view('frontend.home.product_detail');
 });
+
 Route::get('/dashboard', function () {
     return view('admin/dashboard');
 });

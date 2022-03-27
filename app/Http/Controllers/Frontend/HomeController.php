@@ -41,6 +41,10 @@ class HomeController extends Controller
         // $data['product_relateds']=$product_relateds;
         return view('frontend.home.product_detail', $data);
     }
+    public function login(Type $var = null)
+    {
+        return view('frontend.home.login');
+    }
     public function create()
     {
         //
