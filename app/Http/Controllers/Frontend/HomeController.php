@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -22,7 +23,6 @@ class HomeController extends Controller
         $data['products'] = $products;
         $data['categories'] = $categories;
         return view('frontend.home.product',$data);
-
     }
 
     /**
@@ -41,9 +41,40 @@ class HomeController extends Controller
         // $data['product_relateds']=$product_relateds;
         return view('frontend.home.product_detail', $data);
     }
-    public function login(Type $var = null)
+    public function getLogin(Type $var = null)
     {
         return view('frontend.home.login');
+    }
+    public function postLogin(Request $request)
+    {
+        $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+        $login = [
+            'email' => $request->email,
+            'password' => $request->password,
+        ];
+        // dd($login);
+        $remember = false;
+        if($request->remeber_me)
+            $remember = true;
+        if(Auth::attempt($login,$remember)){
+            return redirect('/');
+        }
+        else {
+            return redirect('member-login')->withErrors('Your email or password are wrong.');
+        }
+    }
+    public function Logout(Type $var = null)
+    {
+        Auth::logout();
+        $getSession = session()->get('cart');
+        if (empty($getSession)) {
+            session()->forget('cart');
+        }
+        return redirect('member-login');
+
     }
     public function create()
     {

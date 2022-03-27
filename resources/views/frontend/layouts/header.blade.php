@@ -8,9 +8,9 @@
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                        <li><a href="index" class="active">Home</a></li>
-                        <li><a href="products">Products</a></li>
-                        <li><a href="checkout">Checkout</a></li>
+                        <li><a href="{{url('index')}}" class="active">Home</a></li>
+                        <li><a href="{{url('products')}}">Products</a></li>
+                        <li><a href="{{url('checkout')}}">Checkout</a></li>
                         <li>
                             <ul class="nav-right">
                                 <li class="cart-icon"><a href="#">
@@ -63,6 +63,21 @@
                                 </li>
                             </ul>
                         </li>
+                        <?php
+                                        $check = Auth::check();
+                                        if(Auth::check()){
+                            ?>
+                            <li><a href="<?php echo e(route('member-logout')); ?>"><i class="fa fa-lock"></i><?php echo e(" Logout"); ?></a></li>
+                             <?php
+
+                                        }
+                                        else {
+                            ?>
+                            <li><a href="<?php echo e(asset('member-login')); ?>"><i class="fa fa-lock"></i><?php echo e(" Login"); ?></a></li>
+                            <?php
+
+                                        }
+                            ?>
                     </ul>
                     <a class='menu-trigger'>
                         <span>Menu</span>
