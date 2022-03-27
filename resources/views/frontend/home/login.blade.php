@@ -11,15 +11,22 @@
 					<div class=" main-content-area">
 						<br>
 						<br>
+                        {{-- @if (session('success'))
+                            <div class="alert alert-success">
+                                <p>{{ session('success') }}</p>
+                            </div>
+                        @endif --}}
+
 						<div class="wrap-login-item ">
-							@if(session()->has('message'))
+							{{-- @if(session()->has('message'))
 							<div class="alert alert-success">
 							  {{ session()->get('message') }}
 							</div>
-						  @endif
+						  @endif --}}
+
 							<div class="login-form form-item form-stl">
 								<h2 class="text-muted" style="text-align: center">Login</h2>
-								<form name="frm-login" method="POST" action="{{route('login')}}">
+								<form name="frm-login" method="POST" action="">
 									@csrf
 
 									<div class="form-group">
@@ -45,7 +52,7 @@
 									<br>
 									<div class="form-group form-check">
 										<label class="form-check-label">
-											<input class="frm-input left-position " name="remember" id="remember" value="forever" type="checkbox"><span style="padding-left: 5px;">Nhớ mật khẩu</span>
+											<input class="frm-input left-position " name="remember_me" id="remember" value="forever" type="checkbox"><span style="padding-left: 5px;">Nhớ mật khẩu</span>
 										</label>
 										<label class="form-check-label" style="float:right">
 										<a class="link-function right-position" href="{{route('password.email')}}" title="Forgotten password?">Quên mật khẩu ?</a>
@@ -55,6 +62,11 @@
 									</div>
 								</form>
 							</div>
+                            @foreach ($errors->all() as $error)
+                            <div class="alert alert-danger">
+                                <p>{{ $error }} </p>
+                            </div>
+                        @endforeach
 						</div>
 					</div><!--end main products area-->
 				</div>
