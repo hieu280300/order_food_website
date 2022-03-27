@@ -4,20 +4,19 @@
             <div class="col-12">
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
-                    <a href="index.html" class="logo">Food Store <em> Website</em></a>
+                    <a href="index" class="logo">Food Store <em> Website</em></a>
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                        <li><a href="index.html" class="active">Home</a></li>
-                        <li><a href="products.html">Products</a></li>
-                        <li><a href="checkout.html">Checkout</a></li>
+                        <li><a href="index" class="active">Home</a></li>
+                        <li><a href="products">Products</a></li>
+                        <li><a href="checkout">Checkout</a></li>
                         <li>
-
                             <ul class="nav-right">
                                 <li class="cart-icon"><a href="#">
                                         {{-- <i class="icon_bag_alt"></i> --}}
-                                        <i class="fas fa-shopping-cart" style="font:40px"></i>
-                                        <span>3</span>
+                                        <i class="fas fa-shopping-cart" style="margin-top:12px"></i>
+                                        <span style="margin-top:12px">3</span>
                                     </a>
                                     <div class="cart-hover">
                                         <div class="select-items">
@@ -63,9 +62,11 @@
                                     </div>
                                 </li>
                             </ul>
-
                         </li>
                     </ul>
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
                     <!-- ***** Menu End ***** -->
                 </nav>
             </div>

@@ -6,8 +6,8 @@
 @section('content')
 
 		<div class="container">
-			<div class="row">
-				<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12 col-md-offset-3">
+			<div class="row" style="justify-content: center;">
+				<div class="col-lg-4 col-sm-8 col-md-6 col-xs-12 col-md-offset-3">
 					<div class=" main-content-area">
 						<br>
 						<br>
@@ -18,10 +18,10 @@
 							</div>
 						  @endif
 							<div class="login-form form-item form-stl">
-								<h2 class="text-muted" style="text-align: center">Đăng nhập tài khoản của bạn</h2>		
+								<h2 class="text-muted" style="text-align: center">Login</h2>
 								<form name="frm-login" method="POST" action="{{route('login')}}">
 									@csrf
-								
+
 									<div class="form-group">
 										<label for="email">Email:</label>
 										<br>
@@ -45,22 +45,22 @@
 									<br>
 									<div class="form-group form-check">
 										<label class="form-check-label">
-											<input class="frm-input left-position " name="remember" id="remember" value="forever" type="checkbox"><span>Nhớ mật khẩu</span>
+											<input class="frm-input left-position " name="remember" id="remember" value="forever" type="checkbox"><span style="padding-left: 5px;">Nhớ mật khẩu</span>
 										</label>
 										<label class="form-check-label" style="float:right">
 										<a class="link-function right-position" href="{{route('password.email')}}" title="Forgotten password?">Quên mật khẩu ?</a>
 									</div>
-									<input type="submit" class="btn btn-primary" value="Đăng nhập" name="submit" style="margin-left:220px;width:100px" >
-									
+									<input type="submit" class="btn btn-primary" value="Đăng nhập" name="submit">
+
 									</div>
 								</form>
-							</div>												
+							</div>
 						</div>
-					</div><!--end main products area-->		
+					</div><!--end main products area-->
 				</div>
 			</div><!--end row-->
 
 		</div><!--end container-->
 
-</div><!--end container-->>
+</div><!--end container-->
 @endsection
