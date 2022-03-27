@@ -29,8 +29,8 @@
                 <li class="pc-item pc-hasmenu">
                     <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">business_center</i></span><span class="pc-mtext">Products</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                     <ul class="pc-submenu">
-                        <li class="pc-item"><a class="pc-link" href="bc_alert.html">List products</a></li>
-                        <li class="pc-item"><a class="pc-link" href="bc_button.html">Create product</a></li>
+                        <li class="pc-item"><a class="pc-link {{ Route::currentRouteName() == 'admin.product.create' ? 'active' : '' }}" href="{{route('admin.product.create')}}">List products</a></li>
+                        <li class="pc-item"><a class="pc-link {{ Route::currentRouteName() == 'admin.product.index' ? 'active' : '' }}" href="{{ route('admin.product.index') }}">Create product</a></li>
                     </ul>
                 </li>
                 <li class="pc-item">

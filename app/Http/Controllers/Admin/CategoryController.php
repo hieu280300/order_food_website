@@ -66,7 +66,7 @@ class CategoryController extends Controller
             // insert into data to table category (successful)
             DB::commit();
 
-            return redirect()->route('category.index')->with('sucess', 'Insert into data to Category Sucessful.');
+            return redirect()->route('admin.category.index')->with('sucess', 'Insert into data to Category Sucessful.');
         } catch (\Exception $ex) {
             // insert into data to table category (fail)
             DB::rollBack();
@@ -116,10 +116,11 @@ class CategoryController extends Controller
         try {
             $category = Category::find($id);
             $category->name = $request->category_name;
+            $category->slug = $request->category_slug;
             
             $category->save();
             DB::commit();
-            return redirect()->route('category.index')->with('success', 'Insert Category seccessful');
+            return redirect()->route('admin.category.index')->with('success', 'Insert Category seccessful');
         } catch (\Throwable $ex) {
             DB::rollBack();
             return redirect()->back()->with('error', $ex->getMessage());

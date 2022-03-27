@@ -21,6 +21,7 @@ class Product extends Model
         'is_feature',
         'category_id',
         'status',
+        'shop_id'
     ];
     public const PAGE_LIMIT = 10;
     public function category()
