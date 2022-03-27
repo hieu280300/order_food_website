@@ -22,6 +22,13 @@
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
+        <div class="form-group mb-3">
+            <label for="">Category Slug</label>
+            <input type="text" name="category_slug" value="{{ $category->slug }} {{old('slug')}}">
+            @error('category_slug')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+        </div>
         <div class="form-group">
             <a href="{{ route('admin.category.index') }}" class="btn btn-secondary">List Category</a>
             <input type="submit" name="submit" value="Update" class="btn btn-primary">

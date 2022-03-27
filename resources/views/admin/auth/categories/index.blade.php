@@ -13,6 +13,11 @@
     {{-- create category link --}}
     {{-- case 1 --}}
     <p><a href="{{ route('admin.category.create') }} " class="btn btn-secondary">Create</a></p>
+    @if(session()->has('success'))
+    <div class="alert alert-success">
+        {{ session()->get('success') }}
+    </div>
+@endif
     <table id="category-list" class="table table-bordered table-hover table-striped">
         <thead>
             <tr>

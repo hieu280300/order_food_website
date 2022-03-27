@@ -9,6 +9,7 @@
     <br>
     <form action="{{ route('admin.category.store') }}" method="post">
         @csrf
+        success
         @if ($errors->any())
         <?php echo implode('', $errors->all('<div>:message</div>')); ?>
     @endif
