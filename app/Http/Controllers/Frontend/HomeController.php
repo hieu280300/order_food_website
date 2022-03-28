@@ -23,7 +23,6 @@ class HomeController extends Controller
         $data['products'] = $products;
         $data['categories'] = $categories;
         return view('frontend.home.product',$data);
-
     }
 
     /**

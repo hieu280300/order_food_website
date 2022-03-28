@@ -6,7 +6,7 @@
 @section('content')
 
 		<div class="container">
-			<div class="row" style="justify-content: center;">
+			<div class="row" style="justify-content: center; margin-bottom:35px">
 				<div class="col-lg-4 col-sm-8 col-md-6 col-xs-12 col-md-offset-3">
 					<div class=" main-content-area">
 						<br>
@@ -55,11 +55,16 @@
 											<input class="frm-input left-position " name="remember_me" id="remember" value="forever" type="checkbox"><span style="padding-left: 5px;">Nhớ mật khẩu</span>
 										</label>
 										<label class="form-check-label" style="float:right">
-										<a class="link-function right-position" href="{{route('password.email')}}" title="Forgotten password?">Quên mật khẩu ?</a>
+										<a class="link-function right-position" href="{{route('password.email')}}" style="color: #ed563b" title="Forgotten password?">Quên mật khẩu ?</a>
 									</div>
-									<input type="submit" class="btn btn-primary" value="Đăng nhập" name="submit">
+                                    <div class="main-button text-center">
+                                        {{-- <a href="#" type="submit" name="submit">Đăng nhập</a> --}}
+                                        <button type="submit" class="" name="submit">Đăng nhập</button>
+
+                                    </div>
 
 									</div>
+
 								</form>
 							</div>
                             @foreach ($errors->all() as $error)
@@ -75,4 +80,6 @@
 		</div><!--end container-->
 
 </div><!--end container-->
+
+
 @endsection

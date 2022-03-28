@@ -67,13 +67,13 @@
                                         $check = Auth::check();
                                         if(Auth::check()){
                             ?>
-                            <li><a href="<?php echo e(route('member-logout')); ?>"><i class="fa fa-lock"></i><?php echo e("Logout"); ?></a></li>
+                            <li><a href="<?php echo e(route('member-logout')); ?>"><i class="fa fa-lock"></i><?php echo e(" Logout"); ?></a></li>
                              <?php
 
                                         }
                                         else {
                             ?>
-                            <li><a href="<?php echo e(asset('member-login')); ?>"><i class="fa fa-lock"></i><?php echo e("Login"); ?></a></li>
+                            <li><a href="<?php echo e(asset('member-login')); ?>"><i class="fa fa-lock"></i><?php echo e(" Login"); ?></a></li>
                             <?php
 
                                         }
