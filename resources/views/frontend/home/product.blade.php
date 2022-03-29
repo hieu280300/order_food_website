@@ -26,7 +26,13 @@
     <!-- ***** Call to Action End ***** -->
 
     <!-- ***** Fleet Starts ***** -->
+
     <div class="container" style="margin-top:40px">
+        @if (session('success'))
+            <div class="alert alert-success">
+                <p>{{ session('success') }}</p>
+            </div>
+        @endif
         <div class="row">
             <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 ">
                 <nav class="sticky" id="myScrollspy">
@@ -48,7 +54,7 @@
                 <div id="section1">
                     <h2><span class="menuhome">MÓN NỔI BẬT </h2>
                     <div class="list_product_related flex_wrap display_flex menu_lists">
-                      
+
                         @foreach ($products as $product)
                         <a href="{{ route('shop_detail', ['id' => $product->id]) }}">
                             <div class="menu_item">
@@ -64,7 +70,7 @@
                                 </a>
                                     <div class="">
                                         <button id="products" data-name="TRÀ CAM VÀNG" data-price="55000"
-                                            class="add-to-cart button text"><a style="color:white" href="{{route('addToCart', ['id' => $product->id]) }}">MUA NGAY</a> 
+                                            class="add-to-cart button text"><a style="color:white" href="{{route('addToCart', ['id' => $product->id]) }}">MUA NGAY</a>
                                           </button>
                                     </div>
 
@@ -101,5 +107,5 @@
     </nav>
 
     </div>
-    </section> 
+    </section>
 @endsection

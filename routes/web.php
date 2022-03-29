@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [App\Http\Controllers\Frontend\HomeController::class ,'shop'])->name('shop');
 Route::get('/member-login',[HomeController::class,'getLogin']);
 Route::post('/member-login',[HomeController::class,'postLogin']);
+Route::get('/member-register',[HomeController::class,'getRegister']);
+Route::post('/member-register',[HomeController::class,'postRegister']);
+
 Route::get('/member-logout', [HomeController::class,'Logout'])->name('member-logout');
 Route::get('shop-details/{id}', [App\Http\Controllers\Frontend\HomeController::class ,'shop_detail'])->name('shop_detail');
 Route::get('/add-to-cart/{id}',[App\Http\Controllers\Frontend\CartController::class,'addToCart'])->name('addToCart');
