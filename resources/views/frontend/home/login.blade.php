@@ -6,7 +6,7 @@
 @section('content')
 
 		<div class="container">
-			<div class="row" style="justify-content: center; margin-bottom:35px">
+			<div class="row" style="justify-content: center; margin:42px">
 				<div class="col-lg-4 col-sm-8 col-md-6 col-xs-12 col-md-offset-3">
 					<div class=" main-content-area">
 						<br>
@@ -26,7 +26,12 @@
 
 							<div class="login-form form-item form-stl">
 								<h2 class="text-muted" style="text-align: center">Login</h2>
-								<form name="frm-login" method="POST" action="">
+								@foreach ($errors->all() as $error)
+                                    <div class="alert alert-danger">
+                                        <p>{{ $error }} </p>
+                                    </div>
+                                @endforeach
+                                <form name="frm-login" method="POST" action="">
 									@csrf
 
 									<div class="form-group">
@@ -68,17 +73,13 @@
 											<span style="">Bạn chưa có tài khoản ?</span>
 										</label>
 										<label class="form-check-label" style="float:right">
-										<a class="link-function right-position" href="#" style="">Đăng ký ngay</a>
+										<a class="link-function right-position" href="{{url('/member-register')}}" style="">Đăng ký ngay</a>
 									</div>
 									</div>
 
 								</form>
 							</div>
-                            @foreach ($errors->all() as $error)
-                            <div class="alert alert-danger">
-                                <p>{{ $error }} </p>
-                            </div>
-                        @endforeach
+
 						</div>
 					</div><!--end main products area-->
 				</div>

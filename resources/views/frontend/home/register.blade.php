@@ -7,20 +7,20 @@
 @section('content')
 
 		<div class="container">
-			<div class="row">
+			<div class="row"  style="justify-content: center; margin:42px">
 				<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12 col-md-offset-3">
 					<br>
 					<br>
 					<div class=" main-content-area">
-						<div class="wrap-login-item ">						
+						<div class="wrap-login-item ">
 							<div class="login-form form-item form-stl">
 								<fieldset class="wrap-title" >
-									<h2 class="text-muted" style="text-align: center">Tạo tài khoản</h2>		
-									<h4 class="text-muted" style="text-align: center">Thông tin cá nhân</h4>								
+									<h2 class="text-muted" style="text-align: center">Đăng ký tài khoản</h2>
+									<h4 class="text-muted" style="text-align: center">Thông tin cá nhân</h4>
 								</fieldset>
-								<form name="frm-login" method="POST" action="{{route('register')}}">
+								<form name="frm-login" method="POST" action="">
 									@csrf
-								
+
                                     <fieldset class="wrap-input">
 										<label for="frm-login-uname">Tên:</label>
 										<input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Nhập tên của bạn" value="{{old('name')}}" required autofocus>
@@ -29,12 +29,12 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                         @enderror
-                                 
+
 									</fieldset>
 									<br>
 									<fieldset class="wrap-input">
 										<label for="frm-login-uname">Email:</label>
-										<input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="nhập email của bạn" value="{{old('email')}}" required autofocus>
+										<input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Nhập email của bạn" value="{{old('email')}}" required autofocus>
                                         @error('email')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -67,15 +67,19 @@
 										<input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                                     </fieldset>
 									<br>
-			
-									<input type="submit" class="btn btn-primary" value="Đăng kí" name="register" style="margin-left:220px;width:100px;">	
-								<br>	
+                                    <div class="main-button text-center">
+                                        {{-- <a href="#" type="submit" name="submit">Đăng nhập</a> --}}
+                                        <button type="submit" class="" name="register">Đăng kí</button>
+
+                                    </div>
+									{{-- <input type="submit" class="btn btn-primary" value="Đăng kí" name="register" style="margin-left:220px;width:100px;"> --}}
+								<br>
 								</div>
 								</form>
 								<br>
-							</div>												
+							</div>
 						</div>
-					</div><!--end main products area-->		
+					</div><!--end main products area-->
 				</div>
 			</div><!--end row-->
 

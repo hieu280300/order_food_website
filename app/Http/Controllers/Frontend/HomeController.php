@@ -5,8 +5,12 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Controller
 {
@@ -60,11 +64,38 @@ class HomeController extends Controller
         if($request->remeber_me)
             $remember = true;
         if(Auth::attempt($login,$remember)){
-            return redirect('/');
+            return redirect('/')->with('success',__('You are successfully logged in.'));
         }
         else {
             return redirect('member-login')->withErrors('Your email or password are wrong.');
         }
+    }
+    public function getRegister(Request $remember)
+    {
+        return view('frontend.home.register');
+
+    }
+    public function postRegister(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'phone' => 'required|numeric',
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role_id' => '1'
+        ]);
+
+        event(new Registered($user));
+
+        Auth::login($user);
+
+        return redirect('/')->with('success',__('Congratulations, your account has been successfully created.'));
     }
     public function Logout(Type $var = null)
     {
