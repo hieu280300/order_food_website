@@ -62,7 +62,14 @@
                                         <button type="submit" class="" name="submit">Đăng nhập</button>
 
                                     </div>
-
+                                    <br>
+                                    <div class="form-group">
+										<label class="form-check-label">
+											<span style="">Bạn chưa có tài khoản ?</span>
+										</label>
+										<label class="form-check-label" style="float:right">
+										<a class="link-function right-position" href="#" style="">Đăng ký ngay</a>
+									</div>
 									</div>
 
 								</form>
