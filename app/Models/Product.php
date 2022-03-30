@@ -21,12 +21,21 @@ class Product extends Model
         'is_feature',
         'category_id',
         'status',
-        'shop_id'
+        'shop_id',
+        'user_id'
     ];
     public const PAGE_LIMIT = 10;
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+    public function shops()
+    {
+        return $this->hasMany(Shop::class);
+    }
+    public function product_detail()
+    {
+        return $this->belongsTo(OrderDetail::class);
     }
 
 }
