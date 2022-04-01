@@ -33,6 +33,8 @@
                     <tr>
                         <td scope="col">{{ $key+1 }}</td>
                         <td scope="col">{{ $product->name }}</td>
+                        <td scope="col">{{ $product->slug }}</td>
+                        <td scope="col">{{ $product->code}}</td>
                         <td>
                             <img src="{{ asset($product->thumbnail) }}" alt="{{ $product->name }}" class="img-flid" style="width:100px">
                         </td>

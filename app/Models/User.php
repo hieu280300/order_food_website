@@ -16,8 +16,12 @@ class User extends Authenticatable
      *
      * @var array
      */
+    public const ROLE=[
+        0,
+        1,
+    ];
     protected $fillable = [
-        'name', 'email', 'password','role_id'
+        'name', 'email', 'password','role'
     ];
 
     /**
@@ -37,12 +41,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function role()
-    {
-        return $this->belongsTo(Role::class);
-    }
+
     public function orders()
     {
         return $this->hasOne(Order::class);
+    }
+    public function shop()
+    {
+        return $this->belongsTo(Shop::class);
     }
 }

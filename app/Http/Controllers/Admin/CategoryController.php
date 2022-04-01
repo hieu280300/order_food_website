@@ -84,7 +84,14 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        return view('admin.auth.categories.detail', ['category' => Category::findOrFail($id)]);
+        $data = [];
+        $categories = DB::table('shops')
+        ->join('categories','shops.id','=','categories.shop_id')
+        ->where('shops.id',$id)->select('categories.name as category_name','categories.slug as category_slug')->get();
+    
+        $data['categories'] = $categories;
+
+        return view('admin.auth.categories.index', $data);
     }
 
     /**
@@ -98,7 +105,7 @@ class CategoryController extends Controller
         $data = [];
         $category = Category::findOrFail($id);
         $data['category'] = $category;
-        return view('admin.auth.categories.edit', $data);
+        return view('admin.auth.categories.index', $data);
     }
 
     /**
