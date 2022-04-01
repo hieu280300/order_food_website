@@ -64,7 +64,7 @@ class HomeController extends Controller
         if($request->remeber_me)
             $remember = true;
         if(Auth::attempt($login,$remember)){
-            return redirect('/')->with('success',__('You are successfully logged in.'));
+            return redirect('/')->with('login_success',__('You are successfully logged in.'));
         }
         else {
             return redirect('member-login')->withErrors('Your email or password are wrong.');

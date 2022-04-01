@@ -28,9 +28,9 @@
     <!-- ***** Fleet Starts ***** -->
 
     <div class="container" style="margin-top:40px">
-        @if (session('success'))
+        @if (session('login_success'))
             <div class="alert alert-success">
-                <p>{{ session('success') }}</p>
+                <p>{{ session('login_success') }}</p>
             </div>
         @endif
         <div class="row">
@@ -40,7 +40,7 @@
                         <li class="nav-item"><a href="#section1" class="nav-link active"> MÓN NỔI BẬT </a></li>
 
                         @foreach ($categories as $categoryId => $categoryName)
-                            <li class="nav-item"><a href="#section2" class="nav-link">{{ $categoryName }} </a>
+                            <li class="nav-item"><a href="#{{$categoryId}}" class="nav-link">{{ $categoryName }} </a>
                             </li>
                         @endforeach
                     </ul>
@@ -64,7 +64,7 @@
                                 </div>
                                 <div class="menu_item_info bg_white">
                                     <h3>
-                                        <a>{{ $product->name }}</a>
+                                        <a href="{{ route('shop_detail', ['id' => $product->id]) }}">{{ $product->name }}</a>
                                     </h3>
                                     <div class="price_product_item">{{ $product->money }} Đ</div>
                                 </a>
@@ -80,6 +80,40 @@
                         @endforeach
                     </div>
                 </div>
+                @foreach ($categories as $categoryId => $categoryName)
+                <div id="{{$categoryId}}">
+                    <h2><span class="menuhome">{{ $categoryName }} </h2>
+                    <div class="list_product_related flex_wrap display_flex menu_lists">
+
+                        @foreach ($products as $product)
+                        @if ($product->category_id == $categoryId)
+                            <a href="{{ route('shop_detail', ['id' => $product->id]) }}">
+                            <div class="menu_item">
+
+                                <div class="menu_item_image">
+                                    <img src="{{ $product->thumbnail }}">
+                                </div>
+                                <div class="menu_item_info bg_white">
+                                    <h3>
+                                        <a href="{{ route('shop_detail', ['id' => $product->id]) }}">{{ $product->name }}</a>
+                                    </h3>
+                                    <div class="price_product_item">{{ $product->money }} Đ</div>
+                                </a>
+                                    <div class="">
+                                        <button id="products" data-name="TRÀ CAM VÀNG" data-price="55000"
+                                            class="add-to-cart button text"><a style="color:white" href="{{route('addToCart', ['id' => $product->id]) }}">MUA NGAY</a>
+                                          </button>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        @endif
+
+                        @endforeach
+                    </div>
+                </div>
+                @endforeach
             </div>
         </div>
     </div>
