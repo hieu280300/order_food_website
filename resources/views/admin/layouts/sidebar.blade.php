@@ -33,6 +33,13 @@
                         <li class="pc-item"><a class="pc-link {{ Route::currentRouteName() == 'admin.product.index' ? 'active' : '' }}" href="{{ route('admin.product.index') }}">Create product</a></li>
                     </ul>
                 </li>
+                <li class="pc-item pc-hasmenu">
+                    <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">business_center</i></span><span class="pc-mtext">Users</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                    <ul class="pc-submenu">
+                        <li class="pc-item"><a class="pc-link {{ Route::currentRouteName() == 'admin.user.create' ? 'active' : '' }}" href="{{route('admin.user.create')}}">List user</a></li>
+                        <li class="pc-item"><a class="pc-link {{ Route::currentRouteName() == 'admin.user.index' ? 'active' : '' }}" href="{{ route('admin.user.index') }}">Create user</a></li>
+                    </ul>
+                </li>
                 <li class="pc-item">
                     <a href="icon-feather.html" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">history_edu</i></span><span class="pc-mtext">Icons</span></a>
                 </li>

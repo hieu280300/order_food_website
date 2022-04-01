@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddShopIdToCategories extends Migration
+class AddShopIdToProducts extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class AddShopIdToCategories extends Migration
      */
     public function up()
     {
-        Schema::table('categories', function (Blueprint $table) {
-            $table->bigInteger('user_id')->unsigned()->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
+        Schema::table('products', function (Blueprint $table) {
+            $table->bigInteger('shop_id')->unsigned()->nullable();
+            $table->foreign('shop_id')->references('id')->on('shops');
         });
     }
 
@@ -26,7 +26,7 @@ class AddShopIdToCategories extends Migration
      */
     public function down()
     {
-        Schema::table('categories', function (Blueprint $table) {
+        Schema::table('products', function (Blueprint $table) {
             //
         });
     }

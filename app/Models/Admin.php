@@ -17,12 +17,8 @@ class Admin extends Authenticatable
         'name',
         'email',
         'password',
-        'role_id',
         'status',
     ];
     protected $guarded = array();
-    public function role()
-    {
-        return $this->belongsTo(Role::class);
-    }
+   
 }
