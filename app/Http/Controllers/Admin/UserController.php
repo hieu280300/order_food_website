@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Models\Admin;
+use App\Models\Category;
 use App\Models\Role;
+use App\Models\Shop;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,10 +15,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 class UserController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('check_role_admin');
-    }
    /**
      * Display a listing of the resource.
      *
@@ -25,7 +23,8 @@ class UserController extends Controller
     public function index()
     {
         $data=[];
-        $users=Admin::where('role_id','>','1')->with('role')->paginate(5);
+        $users=User::get();
+        $users = User::paginate(5);
         $data['users']=$users;
         return view('admin.auth.users.index',$data);
     }
@@ -82,7 +81,12 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return view('admin.auth.users.detail', ['user' => Admin::findOrFail($id)]);
+        $data = [];
+        $user = DB::table('users')
+        ->leftJoin('shops', 'users.id', '=', 'shops.user_id')
+        ->where('users.id',$id)->select('users.name as user_name','shops.name as shop_name','shops.id as shop_id','shops.address as shop_address','users.role as user_role','users.email as user_email','users.password as user_password')->get();
+        $data['user'] = $user;
+        return view('admin.auth.users.detail', $data);
     }
 
     /**
@@ -97,7 +101,7 @@ class UserController extends Controller
         $user = Admin::findOrFail($id);
         $roles = Role::where('id','>','1')->get();
         $data['roles']=$roles;
-        $data['user'] = $user;
+        
         return view('admin.auth.users.edit', $data);
     }
 

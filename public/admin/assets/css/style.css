@@ -25043,7 +25043,6 @@ new-task label input[type=checkbox] {
 .table th {
     border-top: 1px solid #f1f1f1;
     border-bottom: 1px solid #f1f1f1;
-    white-space: nowrap;
     padding: 0.7rem 0.75rem;
 }
 
