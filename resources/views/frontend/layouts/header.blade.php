@@ -4,16 +4,25 @@
             <div class="col-12">
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
-                    <a href="index" class="logo">Food Store <em> Website</em></a>
+                    <a href="{{url('/')}}" class="logo">Food Store <em> Website</em></a>
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                        <li><a href="{{url('index')}}" class="active">Home</a></li>
+                        <li><a href="{{url('/')}}" class="active">Home</a></li>
                         <li><a href="{{url('products')}}">Products</a></li>
                         <li><a href="{{url('checkout')}}">Checkout</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">About</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="about.html">About Us</a>
+                                <a class="dropdown-item" href="blog.html">Blog</a>
+                                <a class="dropdown-item" href="testimonials.html">Testimonials</a>
+                                <a class="dropdown-item" href="terms.html">Terms</a>
+                            </div>
+                        </li>
                         <li>
                             <ul class="nav-right">
-                                <li class="cart-icon"><a href="#">
+                                <li class="cart-icon" style="padding: 0px"><a href="#">
                                         {{-- <i class="icon_bag_alt"></i> --}}
                                         <i class="fas fa-shopping-cart" style="margin-top:12px"></i>
                                         <span style="margin-top:12px">3</span>

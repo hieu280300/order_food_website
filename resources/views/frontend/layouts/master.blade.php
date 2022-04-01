@@ -16,9 +16,9 @@
    @include('frontend.layouts.css')
 
     </head>
-    
-    <body>
-    
+
+    <body  data-spy="scroll" data-target="#myScrollspy" data-offset="1">
+
     <!-- ***** Preloader Start ***** -->
     <div id="js-preloader" class="js-preloader">
       <div class="preloader-inner">
@@ -31,8 +31,8 @@
       </div>
     </div>
     <!-- ***** Preloader End ***** -->
-    
-    
+
+
     <!-- ***** Header Area Start ***** -->
    @include('frontend.layouts.header')
     <!-- ***** Header Area End ***** -->
@@ -42,9 +42,9 @@
         @yield('content')
     </div>
     <!-- ***** Testimonials Item End ***** -->
-    
+
     <!-- ***** Footer Start ***** -->
-  
+
 @include('frontend.layouts.footer')
     <!-- jQuery -->
     @include('frontend.layouts.js')

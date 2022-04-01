@@ -25,7 +25,7 @@
 						  @endif --}}
 
 							<div class="login-form form-item form-stl">
-								<h2 class="text-muted" style="text-align: center">Login</h2>
+								<h2 class="text-muted" style="text-align: center">Đăng nhập</h2>
 								@foreach ($errors->all() as $error)
                                     <div class="alert alert-danger">
                                         <p>{{ $error }} </p>
@@ -55,7 +55,7 @@
                                     @enderror
                                    <div>
 									<br>
-									<div class="form-group form-check">
+									<div class="form-group">
 										<label class="form-check-label">
 											<input class="frm-input left-position " name="remember_me" id="remember" value="forever" type="checkbox"><span style="padding-left: 5px;">Nhớ mật khẩu</span>
 										</label>
