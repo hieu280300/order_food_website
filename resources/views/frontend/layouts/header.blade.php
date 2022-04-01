@@ -4,15 +4,16 @@
             <div class="col-12">
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
-                    <a href="{{url('/')}}" class="logo">Food Store <em> Website</em></a>
+                    <a href="{{ url('/') }}" class="logo">Food Store <em> Website</em></a>
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                        <li><a href="{{url('/')}}" class="active">Home</a></li>
-                        <li><a href="{{url('products')}}">Products</a></li>
-                        <li><a href="{{url('checkout')}}">Checkout</a></li>
+                        <li><a href="{{ url('/') }}" class="active">Home</a></li>
+                        <li><a href="{{ url('products') }}">Products</a></li>
+                        <li><a href="{{ url('checkout') }}">Checkout</a></li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">About</a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                                aria-expanded="false">About</a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="about.html">About Us</a>
                                 <a class="dropdown-item" href="blog.html">Blog</a>
@@ -32,7 +33,8 @@
                                             <table>
                                                 <tbody>
                                                     <tr>
-                                                        <td class="si-pic"><img src="{{ asset('frontend/assets/images/select-product-1.jpg')}}"
+                                                        <td class="si-pic"><img
+                                                                src="{{ asset('frontend/assets/images/select-product-1.jpg') }}"
                                                                 alt=""></td>
                                                         <td class="si-text">
                                                             <div class="product-selected">
@@ -45,7 +47,8 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="si-pic"><img src="{{ asset('frontend/assets/images/select-product-2.jpg')}}"
+                                                        <td class="si-pic"><img
+                                                                src="{{ asset('frontend/assets/images/select-product-2.jpg') }}"
                                                                 alt=""></td>
                                                         <td class="si-text">
                                                             <div class="product-selected">
@@ -72,28 +75,50 @@
                                 </li>
                             </ul>
                         </li>
-                        <?php
-                                        $check = Auth::check();
-                                        if(Auth::check()){
-                            ?>
-                            <li><a href="<?php echo e(route('member-logout')); ?>"><i class="fa fa-lock"></i><?php echo e(" Logout"); ?></a></li>
-                             <?php
+                        @if (Route::has('login'))
+                            @auth
+                                @if (Auth::user()->utype == 'ADM')
 
-                                        }
-                                        else {
-                            ?>
-                            <li><a href="<?php echo e(asset('member-login')); ?>"><i class="fa fa-lock"></i><?php echo e(" Login"); ?></a></li>
-                            <?php
+                                    <li class="menu-item menu-item-has-children parent">
+                                        <a title="My account" ">My account ({{ Auth::user()->name }}) <i class="
+                                             fa
+                                        fa-angle-down"
+                                            aria-hidden="true"></i></a>
+                                    </li>
+                                    <li class="menu-item menu-item-has-children parent">
+                                        <a title="My account" ">My account ({{ Auth::user()->name }}) <i class="
+                                             fa
+                                        fa-angle-down"
+                                            aria-hidden="true"></i></a>
+                                    </li>
+                                @else
+                                    <li><a title="My account" class class="text-sm text-gray-700 underline"
+                                            href="{{ route('info-user') }}">
+                                            {{ Auth::user()->name }}</a></li>
 
-                                        }
-                            ?>
-                    </ul>
-                    <a class='menu-trigger'>
-                        <span>Menu</span>
-                    </a>
-                    <!-- ***** Menu End ***** -->
+                                    <form method="get" action="{{ route('member-logout') }}">
+                                        @csrf
+
+                                        <li><a title="Logout" class="ml-4 text-sm text-gray-700 underline" type="button"
+                                                onclick="event.preventDefault();
+                                            this.closest('form').submit();">{{ __('Logout') }}</a>
+                                        </li>
+
+                                    </form>
+                </div>
+                @endif
+            @else
+                <li><a href="{{ route('member-login') }}" class="text-sm text-gray-700 underline">Login</a></li>
+                <li> <a href="{{ route('member-register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
+                </li>
+
+                @endif
+                @endif
+                </li>
+                </ul>
+
                 </nav>
             </div>
         </div>
-    </div>
-</header>
+        </div>
+    </header>

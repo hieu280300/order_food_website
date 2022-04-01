@@ -77,6 +77,9 @@
             padding-top:20px;
             padding-left: 150px;
         }
+        p{
+            color: white;
+        }
 
     </style>
     <div class="container emp-profile">
@@ -93,8 +96,8 @@
                 </div>
             </div>
             <div class="col-md-8">
-                @if (!empty($info_users))
-                    @foreach ($info_users as $info)
+                @if (!empty($infoUsers))
+                    @foreach ($infoUsers as $info)
                         <div class="info">
                             <div>
                                 <div class="row">
@@ -121,7 +124,7 @@
                                         <p>{{ $info->email }}</p>
                                     </div>
                                 </div>
-                                <div class="row">
+                                {{-- <div class="row">
                                     <div class="col-md-6">
                                         <label>Phone</label>
                                     </div>
@@ -135,18 +138,18 @@
                                     </div>
                                     <div class="col-md-6">
                                         <p>{{$info->address}}</p>
-                                    </div>
-                                </div>
+                                    </div>--}}
+                                </div> 
                    
             </div>
 
         </div>
         <div class="bn">
         <div class="col-md-2">
-            <a href="{{route('edit_profile',$info->id)}}"><input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" /></a>
+            <a href=""><input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" /></a>
         </div>
         <div class="col-md-2">
-            <a href="{{route('show_change_password')}}"><input type="submit" class="change-password-btn" name="btnAddMore" value="Change Password" /></a>
+            <a href=""><input type="submit" class="change-password-btn" name="btnAddMore" value="Change Password" /></a>
         </div>
     </div>
         @endforeach
