@@ -35,7 +35,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function shop_detail($id)
+    public function shopDetail($id)
     {
         $data=[];
         $product=Product::find($id);
@@ -107,6 +107,14 @@ class HomeController extends Controller
         }
         return redirect('member-login');
 
+    }
+    public function infoUser()
+    {
+        $data=[];
+        $id = Auth::user()->id;
+        $infoUsers=User::where('id',$id)->get();
+        $data['infoUsers']=$infoUsers;
+        return view('frontend.profile.profile',$data);
     }
     public function create()
     {

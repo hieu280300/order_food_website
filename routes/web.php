@@ -14,18 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', [App\Http\Controllers\Frontend\HomeController::class ,'shop'])->name('shop');
-Route::get('/member-login',[HomeController::class,'getLogin']);
+Route::get('/member-login',[HomeController::class,'getLogin'])->name('member-login');
 Route::post('/member-login',[HomeController::class,'postLogin']);
-Route::get('/member-register',[HomeController::class,'getRegister']);
+Route::get('/member-register',[HomeController::class,'getRegister'])->name('member-register');
 Route::post('/member-register',[HomeController::class,'postRegister']);
 
 Route::get('/member-logout', [HomeController::class,'Logout'])->name('member-logout');
-Route::get('shop-details/{id}', [App\Http\Controllers\Frontend\HomeController::class ,'shop_detail'])->name('shop_detail');
+Route::get('shop-detail/{id}', [App\Http\Controllers\Frontend\HomeController::class ,'shopDetail'])->name('shop-detail');
 Route::get('/add-to-cart/{id}',[App\Http\Controllers\Frontend\CartController::class,'addToCart'])->name('addToCart');
 Route::get('/product_detail', function () {
     return view('frontend.home.product_detail');
 });
-
+Route::get('info-user',[App\Http\Controllers\Frontend\HomeController::class,'infoUser'])->name('info-user');
 Route::get('/dashboard', function () {
     return view('admin/dashboard');
 });
