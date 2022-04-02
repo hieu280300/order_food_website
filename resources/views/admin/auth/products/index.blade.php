@@ -32,25 +32,25 @@
                 @foreach ($products as $key => $product)
                     <tr>
                         <td scope="col">{{ $key+1 }}</td>
-                        <td scope="col">{{ $product->name }}</td>
-                        <td scope="col">{{ $product->slug }}</td>
-                        <td scope="col">{{ $product->code}}</td>
+                        <td scope="col">{{ $product->product_name }}</td>
+                        <td scope="col">{{ $product->product_slug }}</td>
+                        <td scope="col">{{ $product->product_code}}</td>
                         <td>
-                            <img src="{{ asset($product->thumbnail) }}" alt="{{ $product->name }}" class="img-flid" style="width:100px">
+                            <img src="{{ asset($product->product_thumbnail) }}" alt="{{ $product->product_name }}" class="img-flid" style="width:100px">
                         </td>
-                        <td scope="col">{{ number_format($product->money)}} VNĐ</td>
-                        <td scope="col">{{ $product->description }}</td>
-                        <td scope="col">{{ $product->content }}</td>
-                        <td scope="col">{{ $product->quantity }}</td>
-                        <td scope="col">{{ $product->category->name }}</td>
+                        <td scope="col">{{ number_format($product->product_money)}} VNĐ</td>
+                        <td scope="col">{{ $product->product_description }}</td>
+                        <td scope="col">{{ $product->product_content }}</td>
+                        <td scope="col">{{ $product->product_quantity }}</td>
+                        <td scope="col">{{ $product->category_id }}</td>
                        
                         {{-- <td scope="col">{{$posts->}}</td> --}}
 
                         <td>
-                            <a href="{{ route('admin.product.show', $product->id) }}"><input type="submit" name="submit" value="Detail" class="btn btn-info"></a></td>
-                        <td scope="col"><a href="{{ route('admin.product.edit', $product->id) }}"><input type="submit" name="submit" value="Edit" class="btn btn-success"></a> </td>
+                            <a href=""><input type="submit" name="submit" value="Detail" class="btn btn-info"></a></td>
+                        <td scope="col"><a href=""><input type="submit" name="submit" value="Edit" class="btn btn-success"></a> </td>
                         <td>
-                            <form action="{{ route('admin.product.destroy', $product->id) }}" method="post">
+                            <form action="" method="post">
                                 @method('delete')
                                 @csrf
                                 <input type="submit" name="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure DELETE Product?')">
@@ -61,5 +61,5 @@
             @endif
         </tbody>
     </table>
-{{$products -> links()}}
+
 @endsection
