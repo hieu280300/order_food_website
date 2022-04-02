@@ -84,7 +84,7 @@ class UserController extends Controller
         $data = [];
         $user = DB::table('users')
         ->leftJoin('shops', 'users.id', '=', 'shops.user_id')
-        ->where('users.id',$id)->select('users.name as user_name','shops.name as shop_name','shops.id as shop_id','shops.address as shop_address','users.role as user_role','users.email as user_email','users.password as user_password')->get();
+        ->where('users.id',$id)->select('users.name as user_name','shops.name as shop_name','shops.image as shop_image','shops.id as shop_id','shops.address as shop_address','users.role as user_role','users.email as user_email','users.password as user_password')->get();
         $data['user'] = $user;
         return view('admin.auth.users.detail', $data);
     }
