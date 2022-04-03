@@ -127,9 +127,19 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id,request $request)
     {
-        return view('admin.auth.products.detail', ['product' => Product::findOrFail($id)]);
+      
+        $data = [];
+        $products = DB::table('shops')
+        ->join('products','shops.id','=','products.shop_id')
+        ->where('shops.id',$id)->select('products.name as product_name','products.slug as product_slug','products.code as product_code','products.thumbnail as product_thumbnail','products.description as product_description','products.content as product_content','products.money as product_money','products.quantity as product_quantity','products.category_id')->get();
+        // $products = Product::with('category');
+        //  $categories = Category::pluck('name', 'id')
+        //  ->toArray();
+        // $data['categories'] = $categories;
+        $data['products'] = $products;
+        return view('admin.auth.products.index', $data);
     }
 
     /**
