@@ -11,7 +11,7 @@
                         <li><a href="{{ url('/') }}" class="active">Home</a></li>
                         <li><a href="{{ url('products') }}">Products</a></li>
                         <li><a href="{{ url('checkout') }}">Checkout</a></li>
-                        <li class="dropdown">
+                        {{-- <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                                 aria-expanded="false">About</a>
                             <div class="dropdown-menu">
@@ -20,7 +20,7 @@
                                 <a class="dropdown-item" href="testimonials.html">Testimonials</a>
                                 <a class="dropdown-item" href="terms.html">Terms</a>
                             </div>
-                        </li>
+                        </li> --}}
                         <li>
                             <ul class="nav-right">
                                 <li class="cart-icon" style="padding: 0px"><a href="#">
@@ -80,13 +80,13 @@
                                 @if (Auth::user()->utype == 'ADM')
 
                                     <li class="menu-item menu-item-has-children parent">
-                                        <a title="My account" ">My account ({{ Auth::user()->name }}) <i class="
+                                        <a title="My account">My account ({{ Auth::user()->name }}) <i class="
                                              fa
                                         fa-angle-down"
                                             aria-hidden="true"></i></a>
                                     </li>
                                     <li class="menu-item menu-item-has-children parent">
-                                        <a title="My account" ">My account ({{ Auth::user()->name }}) <i class="
+                                        <a title="My account" >My account ({{ Auth::user()->name }}) <i class="
                                              fa
                                         fa-angle-down"
                                             aria-hidden="true"></i></a>
@@ -95,28 +95,29 @@
                                     <li><a title="My account" class class="text-sm text-gray-700 underline"
                                             href="{{ route('info-user') }}">
                                             {{ Auth::user()->name }}</a></li>
-
+                                    <li>
                                     <form method="get" action="{{ route('member-logout') }}">
                                         @csrf
 
-                                        <li><a title="Logout" class="ml-4 text-sm text-gray-700 underline" type="button"
+                                        <a title="Logout" class="text-sm text-gray-700 underline" type="button"
                                                 onclick="event.preventDefault();
                                             this.closest('form').submit();">{{ __('Logout') }}</a>
-                                        </li>
+
 
                                     </form>
-                </div>
-                @endif
-            @else
-                <li><a href="{{ route('member-login') }}" class="text-sm text-gray-700 underline">Login</a></li>
-                <li> <a href="{{ route('member-register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
-                </li>
-
-                @endif
-                @endif
-                </li>
-                </ul>
-
+                                    </li>
+                                @endif
+                            @else
+                                <li><a href="{{ route('member-login') }}" class="text-sm text-gray-700 underline">Login</a></li>
+                                {{-- <li> <a href="{{ route('member-register') }}" class="text-sm text-gray-700 underline">Register</a> --}}
+                                </li>
+                            @endif
+                        @endif
+                        </li>
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
                 </nav>
             </div>
         </div>

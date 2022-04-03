@@ -5,11 +5,14 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Shop;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Mockery\Matcher\Type;
 
@@ -20,33 +23,28 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function shop(request $request)
+    public function getShop()
     {
-        $data=[];
-        $products =  Product::with('category')->get();
-        $categories =  Category::pluck('name','id')->toArray();
-        $data['products'] = $products;
-        $data['categories'] = $categories;
-        return view('frontend.home.product',$data);
+        $data = [];
+        $time = Carbon::now()->toArray();
+        $shops = Shop::all()->toArray();
+        $data['shops'] = $shops;
+        $data['time'] = $time;
+        // dd($data);
+        return view('frontend.home.shop', $data);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function shopDetail($id)
+    public function postSearchShop(Request $request)
     {
-        $data=[];
-        $product=Product::find($id);
-        // $products =Product::get();
-        // $product_relateds=Product::where('category_id',$product->category_id )->get();
-        $data['product']=$product;
-        // $data['products']=$products;
-        // $data['product_relateds']=$product_relateds;
-        return view('frontend.home.product_detail', $data);
+        $shops = Shop::where('name', 'like', '%' . $request->name_shop . '%')
+            ->get()
+            ->toArray();
+        $data = [];
+        $time = Carbon::now()->toArray();
+        $data['shops'] = $shops;
+        $data['time'] = $time;
+        return view('frontend.home.shop', $data);
     }
-    public function getLogin(Type $var = null)
+    public function getLogin()
     {
         return view('frontend.home.login');
     }
@@ -62,19 +60,17 @@ class HomeController extends Controller
         ];
         // dd($login);
         $remember = false;
-        if($request->remeber_me)
+        if ($request->remeber_me)
             $remember = true;
-        if(Auth::attempt($login,$remember)){
-            return redirect('/')->with('login_success',__('You are successfully logged in.'));
-        }
-        else {
+        if (Auth::attempt($login, $remember)) {
+            return redirect('/')->with('login_success', __('You are successfully logged in.'));
+        } else {
             return redirect('member-login')->withErrors('Your email or password are wrong.');
         }
     }
     public function getRegister(Request $remember)
     {
         return view('frontend.home.register');
-
     }
     public function postRegister(Request $request)
     {
@@ -96,7 +92,7 @@ class HomeController extends Controller
 
         Auth::login($user);
 
-        return redirect('/')->with('success',__('Congratulations, your account has been successfully created.'));
+        return redirect('/')->with('success', __('Congratulations, your account has been successfully created.'));
     }
     public function Logout(Type $var = null)
     {
@@ -106,15 +102,14 @@ class HomeController extends Controller
             session()->forget('cart');
         }
         return redirect('member-login');
-
     }
     public function infoUser()
     {
-        $data=[];
+        $data = [];
         $id = Auth::user()->id;
-        $infoUsers=User::where('id',$id)->get();
-        $data['infoUsers']=$infoUsers;
-        return view('frontend.profile.profile',$data);
+        $infoUsers = User::where('id', $id)->get();
+        $data['infoUsers'] = $infoUsers;
+        return view('frontend.profile.profile', $data);
     }
     public function create()
     {
