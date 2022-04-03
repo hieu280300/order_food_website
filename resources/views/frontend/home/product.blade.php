@@ -17,7 +17,6 @@
                         <br>
                         <br>
                         <h2>Our <em>Products</em></h2>
-                        <p>Ut consectetur, metus sit amet aliquet placerat, enim est ultricies ligula</p>
                     </div>
                 </div>
             </div>
@@ -60,7 +59,7 @@
                             <div class="menu_item">
 
                                 <div class="menu_item_image">
-                                    <img src="{{ $product->thumbnail }}">
+                                    <img src="{{asset($product->thumbnail)}}">
                                 </div>
                                 <div class="menu_item_info bg_white">
                                     <h3>
@@ -91,7 +90,7 @@
                             <div class="menu_item">
 
                                 <div class="menu_item_image">
-                                    <img src="{{ $product->thumbnail }}">
+                                    <img src="{{asset($product->thumbnail)}}">
                                 </div>
                                 <div class="menu_item_info bg_white">
                                     <h3>
@@ -99,7 +98,7 @@
                                     </h3>
                                     <div class="price_product_item">{{ $product->money }} Đ</div>
                                 </a>
-                                    <div class="">
+                                    <div>
                                         <button id="products" data-name="TRÀ CAM VÀNG" data-price="55000"
                                             class="add-to-cart button text"><a style="color:white" href="{{route('addToCart', ['id' => $product->id]) }}">MUA NGAY</a>
                                           </button>
@@ -120,7 +119,7 @@
 
     <br>
 
-    <nav>
+    {{-- <nav>
         <ul class="pagination pagination-lg justify-content-center">
             <li class="page-item">
                 <a class="page-link" href="#" aria-label="Previous">
@@ -138,7 +137,7 @@
                 </a>
             </li>
         </ul>
-    </nav>
+    </nav> --}}
 
     </div>
     </section>
