@@ -42,7 +42,7 @@
                         <td scope="col">{{ $product->product_description }}</td>
                         <td scope="col">{{ $product->product_content }}</td>
                         <td scope="col">{{ $product->product_quantity }}</td>
-                        <td scope="col">{{ $product->category_id }}</td>
+                        <td scope="col">{{ $product->category_name }}</td>
                        
                         {{-- <td scope="col">{{$posts->}}</td> --}}
 
