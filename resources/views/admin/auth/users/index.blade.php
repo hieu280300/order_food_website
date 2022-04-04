@@ -17,8 +17,8 @@
                 <th scope="col">#</th>
                 <th scope="col"> Name</th>
                 <th scope="col">Email</th>
-                <th scope="col">Password</th>
-                <th scope="col">Role</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Avatar</th>
                 <th scope="col" colspan="3">Action</th>
             </tr>
         </thead class="thead-light">
@@ -27,18 +27,14 @@
                 @foreach ($users as $key => $user)
                     <tr>
                         <td scope="col">{{ $key+1 }}</td>
-                        <td scope="col">{{ $user->name }}</td>
-                        <td scope="col">{{ $user->email }}</td>
-                        <td scope="col">{{ $user->password }}</td>
-                        @if (empty($user->role) || $user->role == \App\Models\User::ROLE[0])
-                         <td scope="col">USER</td>
-                         @else 
-                       <td scope="col">SHOP</td>
-                       @endif
+                        <td scope="col">{{ $user->user_name }}</td>
+                        <td scope="col">{{ $user->user_email }}</td>
+                        <td scope="col">{{ $user->user_gender }}</td>
+                        <td scope="col">{{ $user->user_avatar}}</td>
                        
 
                         <td>
-                            <a href="{{ route('admin.user.show', $user->id) }}"><input type="submit" name="submit" value="Detail" class="btn btn-info"></a></td>
+                            <a href="{{ route('admin.user.show', $user->user_id) }}"><input type="submit" name="submit" value="Detail" class="btn btn-info"></a></td>
                         <td scope="col"><a href=""><input type="submit" name="submit" value="Edit" class="btn btn-success"></a> </td>
                         <td>
                             <form action="" method="post">
@@ -52,5 +48,4 @@
             @endif
         </tbody>
     </table>
-{{$users -> links()}}
 @endsection

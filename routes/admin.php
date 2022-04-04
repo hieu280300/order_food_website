@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ShopController;
  
 /*
 |--------------------------------------------------------------------------
@@ -48,5 +49,14 @@ Route::group(['middleware' => ['check_login_admin'] , 'as' => 'admin.'], functio
         Route::get('/edit/{id}', [UserController::class, 'edit'])->name('edit');
         Route::put('/update/{id}', [UserController::class, 'update'])->name('update');
         Route::delete('/delete/{id}', [UserController::class, 'destroy'])->name('destroy');
+    });
+    Route::group(['prefix' => 'shop', 'as' => 'shop.'], function () {
+        Route::get('/list', [ShopController::class, 'index'])->name('index');
+        Route::get('/create', [ShopController::class, 'create'])->name('create');
+        Route::post('/store', [ShopController::class, 'store'])->name('store');
+        Route::get('/show/{id}', [ShopController::class, 'show'])->name('show');
+        Route::get('/edit/{id}', [ShopController::class, 'edit'])->name('edit');
+        Route::put('/update/{id}', [ShopController::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [ShopController::class, 'destroy'])->name('destroy');
     });
 });

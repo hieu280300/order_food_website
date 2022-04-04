@@ -22,11 +22,13 @@ class UserController extends Controller
      */
     public function index()
     {
-        $data=[];
-        $users=User::get();
-        $users = User::paginate(5);
-        $data['users']=$users;
-        return view('admin.auth.users.index',$data);
+        $data = [];
+        $users = DB::table('users')
+        ->leftJoin('shops', 'users.id', '=', 'shops.user_id')
+        ->where('users.role','=','0')
+        ->select('users.name as user_name', 'shops.id as shop_id','users.email as user_email','users.gender as user_gender','users.avatar as user_avatar','users.id as user_id')->get();
+        $data['users'] = $users;
+        return view('admin.auth.users.index', $data);
     }
 
     /**

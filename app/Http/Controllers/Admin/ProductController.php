@@ -131,9 +131,11 @@ class ProductController extends Controller
     {
       
         $data = [];
-        $products = DB::table('shops')
-        ->join('products','shops.id','=','products.shop_id')
-        ->where('shops.id',$id)->select('products.name as product_name','products.slug as product_slug','products.code as product_code','products.thumbnail as product_thumbnail','products.description as product_description','products.content as product_content','products.money as product_money','products.quantity as product_quantity','products.category_id')->get();
+        $products = DB::table('products')
+        ->join('shops','shops.id','=','products.shop_id')
+        ->join('categories','products.category_id','=','categories.id')
+
+        ->where('shops.id',$id)->select('products.name as product_name','products.slug as product_slug','products.code as product_code','products.thumbnail as product_thumbnail','products.description as product_description','products.content as product_content','products.money as product_money','products.quantity as product_quantity','products.category_id','categories.name as category_name','categories.slug as category')->get();
         // $products = Product::with('category');
         //  $categories = Category::pluck('name', 'id')
         //  ->toArray();

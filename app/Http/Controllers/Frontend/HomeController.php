@@ -30,7 +30,6 @@ class HomeController extends Controller
         $shops = Shop::all()->toArray();
         $data['shops'] = $shops;
         $data['time'] = $time;
-        // dd($data);
         return view('frontend.home.shop', $data);
     }
     public function postSearchShop(Request $request)
