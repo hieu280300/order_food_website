@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,8 +22,9 @@ Route::get('/member-login',[HomeController::class,'getLogin'])->name('member-log
 Route::post('/member-login',[HomeController::class,'postLogin']);
 Route::get('/member-register',[HomeController::class,'getRegister'])->name('member-register');
 Route::post('/member-register',[HomeController::class,'postRegister']);
-
 Route::get('/member-logout', [HomeController::class,'Logout'])->name('member-logout');
+
+Route::get('/cart',[CartController::class,'index']);
 Route::get('shop-detail/{id}', [App\Http\Controllers\Frontend\ProductController::class ,'shopDetail'])->name('shop-detail');
 Route::get('/add-to-cart/{id}',[App\Http\Controllers\Frontend\CartController::class,'addToCart'])->name('addToCart');
 Route::get('/product_detail', function () {
