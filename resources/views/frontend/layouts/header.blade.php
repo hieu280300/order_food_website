@@ -8,9 +8,8 @@
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     @php
-                $route=Route::getFacadeRoot()->current()->uri();
-                echo $route;
-            @endphp
+                        $route=Route::getFacadeRoot()->current()->uri();
+                    @endphp
                     <ul class="nav">
                         <li><a href="{{ url('/') }}"
                             @php if ($route == '/') { echo ('class="active"'); } @endphp >Home</a></li>
