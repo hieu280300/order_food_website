@@ -1023,10 +1023,20 @@ trainers
     color: #232d39;
     letter-spacing: 0.5px;
     margin-bottom: 18px;
+    overflow: hidden;
+    display: block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height:1.8rem;
 }
 
 #trainers .trainer-item p {
     margin-bottom: 20px;
+    height: 3rem ;
+    overflow: hidden;
+    display: block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 ul.social-icons li {
