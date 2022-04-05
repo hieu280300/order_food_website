@@ -170,18 +170,22 @@
 	display: block;
 	text-align: center;
 	background: #191919;
-	color: #ffffff;
+	color: #ffffff !important;
 	/* padding: 15px 30px 12px; */
 	margin-bottom: 10px;
 }
-
+.nav-right li.cart-icon .cart-hover .select-button .view-card:hover,.nav-right li.cart-icon .cart-hover .select-button .checkout-btn:hover a{
+    color: #ffffff !important;
+}
  .nav-right li.cart-icon .cart-hover .select-button .checkout-btn {
 	font-size: 12px;
 	letter-spacing: 2px;
 	display: block;
 	text-align: center;
-	color: #ffffff;
-	padding: 15px 30px 12px;
+    background-color: #ed563b;
+	color: #FFF !important;
+	/* padding: 15px 30px 12px; */
+	margin-bottom: 10px;
 }
 
  .nav-right li.cart-price {

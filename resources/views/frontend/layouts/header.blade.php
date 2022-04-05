@@ -10,7 +10,6 @@
                     <ul class="nav">
                         <li><a href="{{ url('/') }}" class="active">Home</a></li>
                         <li><a href="{{ url('products') }}">Products</a></li>
-                        <li><a href="{{ url('checkout') }}">Checkout</a></li>
                         {{-- <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                                 aria-expanded="false">About</a>
@@ -23,7 +22,7 @@
                         </li> --}}
                         <li>
                             <ul class="nav-right">
-                                <li class="cart-icon" style="padding: 0px"><a href="#">
+                                <li class="cart-icon" style="padding: 0px"><a href="{{url('cart')}}">
                                         {{-- <i class="icon_bag_alt"></i> --}}
                                         <i class="fas fa-shopping-cart" style="margin-top:12px"></i>
                                         <span style="margin-top:12px">3</span>
@@ -68,8 +67,8 @@
                                             <h5>₫120.00</h5>
                                         </div>
                                         <div class="select-button">
-                                            <a href="#" class="primary-btn view-card">VIEW CARD</a>
-                                            <a href="#" class="primary-btn checkout-btn">CHECK OUT</a>
+                                            <a href="{{url('cart')}}" class="primary-btn view-card">VIEW CARD</a>
+                                            <a href="{{url('checkout')}}" class="primary-btn checkout-btn">CHECK OUT</a>
                                         </div>
                                     </div>
                                 </li>
