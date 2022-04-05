@@ -56,9 +56,7 @@
         </form>
 
             <div class="row">
-                {{-- @php
-                    dd($time)
-                @endphp --}}
+
                 @foreach ($shops as $shop)
                 <div class="col-lg-4">
                     <div class="trainer-item">
@@ -66,12 +64,22 @@
                             <img src="{{$shop['image']}}" alt="">
                         </div>
                         <div class="down-content">
-                            @if ($shop['time_open']<$time['hour'] && $shop['time_close']>$time['hour'] )
-                                <span class="fa fa-clock-o" style="color: green"> Đang mở cửa </span>
+                            @if ($shop['time_open']>$shop['time_close'])
+                                @if (($shop['time_open']< $time+24) && ( $time< $shop['time_close']))
+                                    <span class="fa fa-clock-o" style="color: green"> Đang mở cửa </span>
 
+                                @else
+                                    <span class="fa fa-clock-o" style="color:#ed563b"> Đang đóng cửa </span>
+                                @endif
                             @else
-                                <span class="fa fa-clock-o" style="color:#ed563b"> Đang đóng cửa </span>
+                                @if (($shop['time_open']< $time) && ( $time< $shop['time_close']))
+                                    <span class="fa fa-clock-o" style="color: green"> Đang mở cửa </span>
+
+                                @else
+                                    <span class="fa fa-clock-o" style="color:#ed563b"> Đang đóng cửa </span>
+                                @endif
                             @endif
+
                             <span>
                                 {{$shop['time_open']}} - {{$shop['time_close']}}
                             </span>

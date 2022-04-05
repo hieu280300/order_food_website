@@ -7,9 +7,14 @@
                     <a href="{{ url('/') }}" class="logo">Food Store <em> Website</em></a>
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
+                    @php
+                        $route=Route::getFacadeRoot()->current()->uri();
+                    @endphp
                     <ul class="nav">
-                        <li><a href="{{ url('/') }}" class="active">Home</a></li>
-                        <li><a href="{{ url('products') }}">Products</a></li>
+                        <li><a href="{{ url('/') }}"
+                            @php if ($route == '/') { echo ('class="active"'); } @endphp >Home</a></li>
+                        <li><a href="{{ url('products') }}"
+                            @php if ($route == 'products/{id}') { echo ('class="active"'); } @endphp>Products</a></li>
                         {{-- <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                                 aria-expanded="false">About</a>
@@ -22,7 +27,8 @@
                         </li> --}}
                         <li>
                             <ul class="nav-right">
-                                <li class="cart-icon" style="padding: 0px"><a href="{{url('cart')}}">
+                                <li class="cart-icon" style="padding: 0px"><a href="{{url('cart')}}"
+                                    @php if ($route == 'cart') { echo ('class="active"'); } @endphp>
                                         {{-- <i class="icon_bag_alt"></i> --}}
                                         <i class="fas fa-shopping-cart" style="margin-top:12px"></i>
                                         <span style="margin-top:12px">3</span>
@@ -84,15 +90,15 @@
                                         fa-angle-down"
                                             aria-hidden="true"></i></a>
                                     </li>
-                                    <li class="menu-item menu-item-has-children parent">
+                                    {{-- <li class="menu-item menu-item-has-children parent">
                                         <a title="My account" >My account ({{ Auth::user()->name }}) <i class="
                                              fa
                                         fa-angle-down"
                                             aria-hidden="true"></i></a>
-                                    </li>
+                                    </li> --}}
                                 @else
-                                    <li><a title="My account" class class="text-sm text-gray-700 underline"
-                                            href="{{ route('info-user') }}">
+                                    <li><a title="My account"
+                                            href="{{ route('info-user') }}"  @php if ($route == 'info-user') echo ('class="text-sm text-gray-700 underline active"'); else echo ('class="text-sm text-gray-700 underline"'); @endphp>
                                             {{ Auth::user()->name }}</a></li>
                                     <li>
                                     <form method="get" action="{{ route('member-logout') }}">
@@ -107,7 +113,7 @@
                                     </li>
                                 @endif
                             @else
-                                <li><a href="{{ route('member-login') }}" class="text-sm text-gray-700 underline">Login</a></li>
+                                <li><a href="{{ route('member-login') }}" @php if ($route == 'member-login') echo ('class="text-sm text-gray-700 underline active"'); else echo ('class="text-sm text-gray-700 underline"'); @endphp>Login</a></li>
                                 {{-- <li> <a href="{{ route('member-register') }}" class="text-sm text-gray-700 underline">Register</a> --}}
                                 </li>
                             @endif
@@ -118,6 +124,7 @@
                         <span>Menu</span>
                     </a>
                 </nav>
+
             </div>
         </div>
         </div>

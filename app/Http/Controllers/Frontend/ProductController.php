@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+// use Symfony\Component\Routing\Route;
+use Illuminate\Support\Facades\Route;
+
 
 class ProductController extends Controller
 {
@@ -24,6 +27,10 @@ class ProductController extends Controller
         $data['products'] = $products;
         $data['categories'] = $categories;
         // dd($data);
+
+        // $route=Route::getFacadeRoot()->current()->uri();
+    //    $route= Route::current()->url();
+        // dd($route);
         return view('frontend.home.product', $data);
     }
 

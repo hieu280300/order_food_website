@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Mockery\Matcher\Type;
+use Symfony\Component\Routing\Route;
 
 class HomeController extends Controller
 {
@@ -26,11 +27,15 @@ class HomeController extends Controller
     public function getShop()
     {
         $data = [];
-        $time = Carbon::now()->toArray();
+        $time = Carbon::now('+07:00')->toArray();
         $shops = Shop::all()->toArray();
         $data['shops'] = $shops;
-        $data['time'] = $time;
+        $data['time']= $time['hour'];
+        $route=\Request::route()->getName();
+        // dd($route);
         return view('frontend.home.shop', $data);
+
+
     }
     public function postSearchShop(Request $request)
     {
@@ -39,6 +44,7 @@ class HomeController extends Controller
             ->toArray();
         $data = [];
         $time = Carbon::now()->toArray();
+
         $data['shops'] = $shops;
         $data['time'] = $time;
         return view('frontend.home.shop', $data);
