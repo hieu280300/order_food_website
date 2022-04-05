@@ -10,6 +10,7 @@
         <table id="post" class="table">
             <thead class="thead-dark">
                 <tr>   
+                    <th scope="col">Id</th>
                     <th scope="col">User Name</th>
                     <th scope="col">Name Shop</th>
                     <th scope="col">Adress Shop</th>
@@ -18,8 +19,9 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($shops as $shop)
+                @foreach ($shops as $key => $shop)
                 <tr>
+                    <td scope="col">{{$key+1}}</td>
                     <td scope="col">{{$shop->user_name}}</td>
                     <td scope="col">{{ $shop->shop_name }} </td>
                     <td scope="col">{{ $shop->shop_address }}</td>
@@ -37,4 +39,5 @@
     <div class="form-group">
         <a href="{{ route('admin.user.index') }}" class="btn btn-secondary">List User</a>
     </div>
+    {{$shops->links() }} 
     @endsection

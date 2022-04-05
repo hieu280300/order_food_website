@@ -65,7 +65,7 @@
                                     <h3>
                                         <a href="{{ route('shop-detail', ['id' => $product->id]) }}">{{ $product->name }}</a>
                                     </h3>
-                                    <div class="price_product_item">{{ $product->money }} Đ</div>
+                                    <div class="price_product_item">{{ number_format($product->money) }} Đ</div>
                                 </a>
                                     <div class="">
                                         <button id="products" data-name="TRÀ CAM VÀNG" data-price="55000"
@@ -96,7 +96,7 @@
                                     <h3>
                                         <a href="{{ route('shop-detail', ['id' => $product->id]) }}">{{ $product->name }}</a>
                                     </h3>
-                                    <div class="price_product_item">{{ $product->money }} Đ</div>
+                                    <div class="price_product_item">{{  number_format($product->money) }} Đ</div>
                                 </a>
                                     <div>
                                         <button id="products" data-name="TRÀ CAM VÀNG" data-price="55000"
