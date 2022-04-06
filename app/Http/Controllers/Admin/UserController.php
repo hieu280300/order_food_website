@@ -38,12 +38,12 @@ class UserController extends Controller
      */
     public function create()
     {
-        $data=[];
-        $users=Admin::where('role_id','>','1')->get();
-        $roles = Role::where('id','>','1')->get();
-        $data['roles']=$roles;
-        $data['users']=$users;
-        return view('admin.auth.users.create',$data);
+        // $data=[];
+        // $users=Admin::where('role_id','>','1')->get();
+        // $roles = Role::where('id','>','1')->get();
+        // $data['roles']=$roles;
+        // $data['users']=$users;
+        return view('admin.auth.shops.create');
     }
 
     /**
