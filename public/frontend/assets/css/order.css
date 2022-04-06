@@ -318,7 +318,7 @@ main {
 }
 .dathang{
     padding: 20px 0px;
-    border-bottom: 1px solid #e5e5e5 ;
+    border-bottom: 2px solid #e5e5e5 ;
     background-color: #fff;
     margin-top: 10px;
     text-align: center;
@@ -331,14 +331,14 @@ main {
     padding:15px 100px;
     color: #fff;
     font-size: 14px;
-    background-color: #EA8025;
+    background-color: #ed563b;
 
     min-width: 100%;
 }
 .dathang a:hover{
     text-decoration: none;
     color: #fff;
-    background-color: rgb(230, 119, 22);
+    background-color: rgb(223, 65, 17);
 }
 .thanhtoan{
     padding: 0 20px;
@@ -349,7 +349,7 @@ main {
 
 .bang{
     color: #fff;
-    background-color:#EA8025;
+    background-color:#ed563b;
     text-align: center;
     font-weight: 700;
 }
@@ -359,7 +359,7 @@ main {
     text-align: center;
     font-size: 15px;
     padding: 0px 12px;
-    background-color: rgb(252, 157, 73);
+    background-color: #ed563b;
     border-radius: 2px;
 }
 .tenmon{
@@ -367,6 +367,10 @@ main {
     font-weight: 700;
     padding: 15px;
     padding-right: 5px;
+    border-bottom: none;
+}
+.tenmon:hover{
+    color:#ed563b ;
 }
 .giamon{
     color: #333;
@@ -375,10 +379,16 @@ main {
 }
 .giatongcong{
     font-weight: 700;
-    color: #000;
+    color: #ed563b;
     text-align: center;
     font-size: 20px;
     padding-right: 10px;
+    border-bottom: none;
+    display: flex;
+    margin-top: 10px;
+}
+#price_total{
+    color: #ed563b;
 }
 footer {
     background: #000000;
@@ -462,8 +472,8 @@ table{
     min-width: 100%;
 }
 td{
-    border: 1px solid #fff;
-    border-bottom:1px solid #ddd;
+    /* border: 1px solid #fff; */
+    border-bottom:2px solid #ddd;
 
 }
 tr{
@@ -474,7 +484,7 @@ tr{
     padding-bottom: 6px;
 }
 #giohang {
-    background-color: #EA8025;
+    background-color: #ed563b;
     padding: 4px 10px;
     padding-bottom: 6px;
     border-radius: 100%;

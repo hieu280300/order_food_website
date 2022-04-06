@@ -26,7 +26,7 @@ Route::get('/member-logout', [HomeController::class,'Logout'])->name('member-log
 
 Route::get('/cart',[CartController::class,'index']);
 Route::get('shop-detail/{id}', [App\Http\Controllers\Frontend\ProductController::class ,'shopDetail'])->name('shop-detail');
-Route::get('/add-to-cart/{id}',[App\Http\Controllers\Frontend\CartController::class,'addToCart'])->name('addToCart');
+Route::post('/addToCard',[App\Http\Controllers\Frontend\CartController::class,'addToCart'])->name('addToCart');
 Route::get('/product_detail', function () {
     return view('frontend.home.product_detail');
 });
