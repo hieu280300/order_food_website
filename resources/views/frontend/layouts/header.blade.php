@@ -8,7 +8,10 @@
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     @php
+
                         $route=Route::getFacadeRoot()->current()->uri();
+
+                        // dd($data);
                     @endphp
                     <ul class="nav">
                         <li><a href="{{ url('/') }}"
@@ -33,31 +36,36 @@
                                         <i class="fas fa-shopping-cart" style="margin-top:12px"></i>
                                         <span style="margin-top:12px">3</span>
                                     </a>
-                                    <div class="cart-hover">
+                                    {{-- <div class="cart-hover">
                                         <div class="select-items">
                                             <table>
                                                 <tbody>
-                                                    <tr>
-                                                        <td class="si-pic"><img
-                                                                src="{{ asset('frontend/assets/images/select-product-1.jpg') }}"
-                                                                alt=""></td>
-                                                        <td class="si-text">
-                                                            <div class="product-selected">
-                                                                <p>₫60.00 x 1</p>
-                                                                <h6>Kabino Bedside Table</h6>
-                                                            </div>
-                                                        </td>
-                                                        <td class="si-close">
-                                                            <i class="ti-close"></i>
-                                                        </td>
-                                                    </tr>
+                                                    @if(!empty($product_cart))
+                                                        @foreach ($product_cart as $value)
+                                                            <tr>
+                                                                <td class="si-pic"><img
+                                                                        src="{{ asset('frontend/assets/images/select-product-1.jpg') }}"
+                                                                        alt=""></td>
+                                                                <td class="si-text">
+                                                                    <div class="product-selected">
+                                                                        <p>₫60.00 x 1</p>
+                                                                        <h6>Kabino Bedside Table</h6>
+                                                                    </div>
+                                                                </td>
+                                                                <td class="si-close">
+                                                                    <i class="ti-close"></i>
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+
+                                                    @endif
                                                     <tr>
                                                         <td class="si-pic"><img
                                                                 src="{{ asset('frontend/assets/images/select-product-2.jpg') }}"
                                                                 alt=""></td>
                                                         <td class="si-text">
                                                             <div class="product-selected">
-                                                                <p>₫60.00 x 1</p>
+                                                                <p>₫ <span>60.00</span> x 1</p>
                                                                 <h6>Kabino Bedside Table</h6>
                                                             </div>
                                                         </td>
@@ -70,13 +78,17 @@
                                         </div>
                                         <div class="select-total">
                                             <span>total:</span>
-                                            <h5>₫120.00</h5>
+                                            @if (!empty($total))
+                                                <h5 class="total">0đ</h5>
+
+                                            @endif
+
                                         </div>
                                         <div class="select-button">
                                             <a href="{{url('cart')}}" class="primary-btn view-card">VIEW CARD</a>
                                             <a href="{{url('checkout')}}" class="primary-btn checkout-btn">CHECK OUT</a>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </li>
                             </ul>
                         </li>
@@ -128,4 +140,5 @@
             </div>
         </div>
         </div>
+
     </header>

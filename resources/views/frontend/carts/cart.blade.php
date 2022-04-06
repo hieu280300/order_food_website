@@ -88,18 +88,28 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td> <span class='soluong'>2</span></td>
-                                <td> <span> <label  for='modal_input' class='tenmon'>fadsfsad</lable> </span> </td>
-                                    <td class='giamon'><span>23<span>.000 đ</td>
+                            @if(!empty($product))
+                                @foreach ($product as $value)
+                                    <tr>
+                                        <td> <span class='soluong'>{{$value['qty']}}</span></td>
+                                        <td> <span> <label  for='modal_input' class='tenmon'>{{$value['name']}}</lable> </span> </td>
+                                        <td class='giamon'><span>{{number_format($value['money'])}} đ<span></td>
 
-                            </tr>
+                                    </tr>
+                                @endforeach
+
+                            @endif
                         </tbody>
 <!-- <div class="div_modal"></div> -->
                         <thead>
                             <tr>
                                 <td colspan="2" class="tenmon">TỔNG CỘNG:</span>
-                                <td class="giatongcong"><span id="price_total" ></span>.000đ</td>
+                                <td class="giatongcong">
+                                    <span id="price_total" >
+                                        @if (!empty($total))
+                                        {{number_format($total) }}
+                                        @endif
+                                    </span>đ</td>
                             </tr>
                         </thead>
                     </table>

@@ -68,8 +68,8 @@
                                     <div class="price_product_item">{{ number_format($product->money) }} Đ</div>
                                 </a>
                                     <div class="">
-                                        <button id="products" data-name="TRÀ CAM VÀNG" data-price="55000"
-                                            class="add-to-cart button text"><a style="color:white" href="{{route('addToCart', ['id' => $product->id]) }}">MUA NGAY</a>
+                                        <button id="products" class="button text">
+                                            <a id ="{{$product->id}}" class ="add-to-cart" style="color:white">MUA NGAY</a>
                                           </button>
                                     </div>
 
@@ -99,8 +99,8 @@
                                     <div class="price_product_item">{{  number_format($product->money) }} Đ</div>
                                 </a>
                                     <div>
-                                        <button id="products" data-name="TRÀ CAM VÀNG" data-price="55000"
-                                            class="add-to-cart button text"><a style="color:white" href="{{route('addToCart', ['id' => $product->id]) }}">MUA NGAY</a>
+                                        <button id="products" class="button text">
+                                            <a id ="{{$product->id}}" class ="add-to-cart" style="color:white">MUA NGAY</a>
                                           </button>
                                     </div>
 
@@ -119,26 +119,35 @@
 
     <br>
 
-    {{-- <nav>
-        <ul class="pagination pagination-lg justify-content-center">
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                    <span class="sr-only">Previous</span>
-                </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </li>
-        </ul>
-    </nav> --}}
-
     </div>
+    <script>
+        $(document).ready(function(){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $(".add-to-cart").click(function(){
+
+                var id = parseInt($(this).attr('id'));
+                var gia = $(this).closest('.menu_item').find('.price_product_item span').text();
+
+                // id= $(".id").val();
+                // console.log(gia);
+                $.ajax({
+                    type:'POST',
+                    url:"{{ url('addToCard')}}",
+                    data:{id:id},
+                    success:function(data){
+                        console.log(data.success);
+                        // $('span.total').text(data.success.total);
+                    }
+                // console.log(data.success);
+
+                });
+                // $('span.total').text(23);
+            });
+        });
+    </script>
     </section>
 @endsection

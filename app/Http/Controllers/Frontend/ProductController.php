@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 
 class ProductController extends Controller
 {
+    
     public function getProductsShop(request $request)
     {
         $shop_id = $request->id;
@@ -26,11 +27,7 @@ class ProductController extends Controller
         // $categories = Category::pluck('name','id')->toArray();
         $data['products'] = $products;
         $data['categories'] = $categories;
-        // dd($data);
 
-        // $route=Route::getFacadeRoot()->current()->uri();
-    //    $route= Route::current()->url();
-        // dd($route);
         return view('frontend.home.product', $data);
     }
 

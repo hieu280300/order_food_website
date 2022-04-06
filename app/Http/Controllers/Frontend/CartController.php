@@ -14,22 +14,104 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function addToCart($id)
+    // public function addToCart($id)
+    // {
+    //     $data = [];
+    //     $product = Product::find($id);
+    //     if($product != null){
+    //         $oldCart = Session('Cart') ? Session('Cart') :null;
+    //         $newCart = new Cart($oldCart);
+    //         $newCart->AddCart($product,$id);
+    //         dd($newCart);
+    //     }
+    // }
+    public function addToCart(Request $request)
     {
+        $id = $request->id;
+        $array = [];
         $data = [];
-        $product = Product::find($id);
-        if($product != null){
-            $oldCart = Session('Cart') ? Session('Cart') :null;
-            $newCart = new Cart($oldCart);
-            $newCart->AddCart($product,$id);
-            dd($newCart);
+        $array['id'] = $id;
+        $array['qty'] = 1;
+        if (session()->has('cart')) {
+            $getSession = session()->get('cart');
+            $flag = 1;
+            foreach ($getSession as $key => $value) {
+                if ($id == $value['id']) {
+                    $getSession[$key]['qty']++;
+                    session()->put('cart', $getSession);
+                    $flag = 0;
+                }
+            }
+            if ($flag == 1) {
+                session()->push('cart', $array);
+            }
+        } else {
+            session()->push('cart', $array);
         }
-    }
-    public function index()
-    {
-        return view('frontend.carts.cart');
+        // $getSession = session()->get('cart');
+        // var_dump($getSession);
+        return response()->json(['success' => $data]);
     }
 
+    public function index()
+    {
+        $total = 0;
+        // session()->forget('cart');
+        if (session()->has('cart')) {
+            $getSession = session()->get('cart');
+            // dd($getSession);
+            foreach ($getSession as $key => $value) {
+                $product[$key] = Product::find($value['id'])->toArray();
+                $product[$key]['qty'] = $value['qty'];
+                $total += $product[$key]['qty'] * $product[$key]['money'];
+            }
+            // dd($product);
+            return view('frontend/carts/cart', compact('product', 'total'));
+        } else {
+            return view('frontend/carts/cart');
+        }
+    }
+    public function plusProduct(Request $request)
+    {
+        $id = $request->id;
+        if (session()->has('cart')) {
+            $getSession = session()->get('cart');
+            // dd($getSession);
+
+            foreach ($getSession as $key => $value) {
+                if ($id == $value['id']) {
+                    $getSession[$key]['qty']++;
+                    session()->put('cart', $getSession);
+                }
+            }
+        }
+        // $getSession = session()->get('cart');
+        // dd($getSession);
+        return back();
+    }
+    public function minusProduct(Request $request)
+    {
+        $id = $request->id;
+        // echo $id;
+        if (session()->has('cart')) {
+            $getSession = session()->get('cart');
+            // dd($getSession);
+
+            foreach ($getSession as $key => $value) {
+                if ($id == $value['id']) {
+                    $getSession[$key]['qty']--;
+                    if ($getSession[$key]['qty'] == 0) {
+                        unset($getSession[$key]);
+                    }
+                    session()->put('cart', $getSession);
+                }
+            }
+        }
+        $getSession = session()->get('cart');
+        if (empty($getSession)) {
+            session()->forget('cart');
+        }
+    }
     /**
      * Show the form for creating a new resource.
      *
