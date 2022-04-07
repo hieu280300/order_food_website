@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryRequest ;
+use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
+use App\Models\Shop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -41,6 +43,8 @@ class CategoryController extends Controller
     public function create()
     {
         $data = [];
+        $shops = Shop::pluck('name', 'id')->toArray();
+        $data['shops'] = $shops;
         return view('admin.auth.categories.create', $data);
     }
 
@@ -55,18 +59,20 @@ class CategoryController extends Controller
         // insert to DB
         $categoryInsert = [
             'name' => $request->category_name,
-            'slug' => $request->category_slug
+            'slug' => $request->category_slug,
+            'shop_id'=> $request->shop_id
         ];
 
+        $category = Category::create($categoryInsert);
+
         DB::beginTransaction();
-
+       
         try {
-            Category::create($categoryInsert);
-
+            
             // insert into data to table category (successful)
             DB::commit();
-
-            return redirect()->route('admin.category.index')->with('sucess', 'Insert into data to Category Sucessful.');
+        return redirect()->route('admin.category.show',$category->shop_id)->with('sucess', 'Insert into data to Category Sucessful.');
+         
         } catch (\Exception $ex) {
             // insert into data to table category (fail)
             DB::rollBack();
@@ -87,8 +93,7 @@ class CategoryController extends Controller
         $data = [];
         $categories = DB::table('shops')
         ->join('categories','shops.id','=','categories.shop_id')
-        ->where('shops.id',$id)->select('categories.name as category_name','categories.slug as category_slug')->get();
-    
+        ->where('shops.id',$id)->select('categories.name as category_name','categories.slug as category_slug','categories.id as category_id')->get();
         $data['categories'] = $categories;
 
         return view('admin.auth.categories.index', $data);
@@ -103,9 +108,12 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $data = [];
-        $category = Category::findOrFail($id);
-        $data['category'] = $category;
-        return view('admin.auth.categories.index', $data);
+        $categories = DB::table('shops')
+        ->join('categories','shops.id','=','categories.shop_id')
+        ->where('categories.id',$id)->orWhere('categories.shop_id','=','shops.id')->select('categories.name as category_name','categories.slug as category_slug','categories.id as category_id','shops.name as shop_name')->get();
+
+        $data['categories'] = $categories;
+        return view('admin.auth.categories.edit', $data);
     }
 
     /**
@@ -115,7 +123,7 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreCategoryRequest $request, $id)
+    public function update(UpdateCategoryRequest $request, $id)
     {
 
         //create
@@ -124,10 +132,9 @@ class CategoryController extends Controller
             $category = Category::find($id);
             $category->name = $request->category_name;
             $category->slug = $request->category_slug;
-            
             $category->save();
             DB::commit();
-            return redirect()->route('admin.category.index')->with('success', 'Insert Category seccessful');
+            return redirect()->route('admin.category.show',$category->shop_id)->with('success', 'Update Category successful');
         } catch (\Throwable $ex) {
             DB::rollBack();
             return redirect()->back()->with('error', $ex->getMessage());
