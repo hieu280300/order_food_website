@@ -35,13 +35,13 @@
                         <td>{{ $category->category_name }}</td>
                         <td>{{$category->category_slug}}</td>
                         <td><a href=""><input type="submit" name="submit" value="Detail" class="btn btn-info"></a></td>
-                        <td><a href=""><input type="submit" name="submit" value="Edit" class="btn btn-success"></a></td>
+                        <td><a href="{{route('admin.category.edit',$category->category_id)}}"><input type="submit" name="submit" value="Edit" class="btn btn-success"></a></td>
                         <td>
-                            {{-- <form action="{{ route('admin.category.destroy', $category->id) }}" method="post">
+                            <form action="{{ route('admin.category.destroy', $category->category_id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <input type="submit" name="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure DELETE Category?')">
-                            </form> --}}
+                            </form>
                         </td>
                     </tr>
                 @endforeach

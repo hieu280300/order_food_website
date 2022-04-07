@@ -12,15 +12,15 @@ class Category extends Model
     protected $fillable = [
         'name',
         'slug',
-        'user_id'
+        'shop_id'
     ];
     public function products()
     {
         return $this->hasMany(Product::class);
     }
-    public function user()
+    public function shops()
     {
-        return $this->belongsTo(User::class);
+        return $this->hasOne(Shop::class);
     }
 }
 
