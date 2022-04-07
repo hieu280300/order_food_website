@@ -25,12 +25,12 @@ class StoreProductRequest extends FormRequest
     {
         return [
             'name' => 'required|min:5|max:255', // rule: not null, minumum: 5, maximum: 255
-            'description' => 'required|min:10', // rule: not null, minumum: 10
+            'description' => 'required', // rule: not null, minumum: 10
             'slug' => 'required',
             'code'=> 'required',
             'category_id' => 'required', 
             'quantity'=>'required',
-            'content' => 'required|min:10',
+            'content' => 'required',
             'money'=>'required',// 
         ];
     }
