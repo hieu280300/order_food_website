@@ -67,10 +67,8 @@ class CategoryController extends Controller
         $category = Category::create($categoryInsert);
         DB::beginTransaction();
         try {
-
-            // insert into data to table category (successful)
             DB::commit();
-            return redirect()->route('admin.category.show', $category->shop_id)->with('sucess', 'Insert into data to Category Sucessful.');
+            return redirect()->route('admin.category.show', $category->shop_id)->with('success', 'Create data to Category Sucessful.');
         } catch (\Exception $ex) {
             // insert into data to table category (fail)
             DB::rollBack();
@@ -109,7 +107,6 @@ class CategoryController extends Controller
         $categories = DB::table('shops')
             ->join('categories', 'shops.id', '=', 'categories.shop_id')
             ->where('categories.id', $id)->orWhere('categories.shop_id', '=', 'shops.id')->select('categories.name as category_name', 'categories.slug as category_slug', 'categories.id as category_id', 'shops.name as shop_name')->get();
-
         $data['categories'] = $categories;
         return view('admin.auth.categories.edit', $data);
     }

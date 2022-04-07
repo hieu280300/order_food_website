@@ -1,20 +1,16 @@
 @extends('admin.layouts.app')
 @section('title', 'Create Post')
-    @push('css')
-        <link rel="stylesheet" href="/css/categories/category-create.css">
-    @endpush
+@push('css')
+    <link rel="stylesheet" href="/css/categories/category-create.css">
+@endpush
 @section('content')
-<style type="text/css">
-.color_id
-{
-    width: 500px;
-}
-</style>
+    <style type="text/css">
+        .color_id {
+            width: 500px;
+        }
+
+    </style>
     <h1>Create Product</h1>
-    @include('errors.error')
-    @if ($errors->any())
-    <?php echo implode('', $errors->all('<div>:message</div>')); ?>
-    @endif
     <br>
     <form action="{{ route('admin.product.store') }}" method="post" enctype="multipart/form-data">
         @csrf
@@ -42,7 +38,7 @@
             @enderror
         </div>
         <br>
-   
+
         <div class="form-group mb-5">
             <label for="">Post Content</label>
             <textarea name="content" rows="10" class="form-control">{{ old('description') }}</textarea>
@@ -52,7 +48,7 @@
 
         </div>
         <br>
-        
+
         <div class="form-group mb-5">
             <label for="">Post Description</label>
             <textarea name="description" rows="10" class="form-control">{{ old('description') }}</textarea>
@@ -63,40 +59,13 @@
         </div>
         <br>
         <div class="form-group mb-5">
-            <label for="">Product Money</label>
-            <div class="border p-5">
-                <div class="row">
-                    <div class="col-6">
-                        <div class="form-group mb-2">
                             <label for="">Money</label>
                             <input type="number" name="money" class="form-control" placeholder="">
-                        </div>
-                        <div class="form-group mb-2">
-                            <label for="">Status</label>
-                            <div>
-                                <input type="radio" name="price_status" value="0" checked id="price-status-0">
-                                <label for="price-status-0">Private</label>
-                                <input type="radio" name="price_status" value="1" id="price-status-1">
-                                <label for="price-status-1">Public</label>
-                            </div>
-                        </div>
-                    </div>
-                    {{-- <div class="col-6">
-                        <div class="form-group mb-2">
-                            <label for="">Begin Date</label>
-                            <input type="date" name="begin_date" placeholder="YYYY-mm-dd" class="datepicker form-control">
-                        </div>
-                        <div class="form-group mb-2">
-                            <label for="">End Date</label>
-                            <input type="date" name="end_date" placeholder="YYYY-mm-dd" class="datepicker form-control">
-                        </div>
-                    </div> --}}
-                </div>
-            </div>
-        </div>
+         </div>         
         <div class="form-group mb-5">
             <label for="">Quantity</label>
-            <input type="number" name="quantity" placeholder="quanntity" value="{{ old('quantity') }}" class="form-control">
+            <input type="number" name="quantity" placeholder="quanntity" value="{{ old('quantity') }}"
+                class="form-control">
             @error('quantity')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
@@ -105,10 +74,10 @@
             <label for="">Category Name</label>
             <select name="category_id" class="form-control">
                 <option value=""></option>
-                @if (!empty($categories))
-                    @foreach ($categories as $categoryId => $categoryName)
-                        <option value="{{ $categoryId }}" {{ old('category_id') == $categoryId ? 'selected' : ' ' }}>
-                            {{ $categoryName }}</option>
+                @if (!empty($products))
+                    @foreach ($products as $product)
+                        <option value="{{ $product->category_id }}" {{ old('category_id') == $product->category_id? 'selected' : ' ' }}>
+                            {{ $product->category_name }}</option>
                     @endforeach
                 @endif
             </select>
@@ -116,6 +85,17 @@
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
+        <div class="form-group mb-5" class="form-control">
+            <label for="">Shop Name</label>
+            <select name="shop_id" class="form-control">
+            <option value="{{ $product->shop_id }}" {{ old('shop_id') == $product->shop_id ? 'selected' : ' ' }}>
+                {{ $product->shop_name }}</option>
+        </select>
+        @error('shop_id')
+        <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
+        </div>
+        <br>
         <div class="form-group mb-5">
             <label for="">Post Thumbnail</label>
             <input type="file" name="thumbnail" placeholder="post thumbnail" class="form-control">
