@@ -20,6 +20,10 @@ class User extends Authenticatable
         0,
         1,
     ];
+    public const GENDER = [
+        0,
+        1,
+    ];
     protected $fillable = [
         'name', 'email', 'password','role','birthday','gender', 'avatar','phone','address'
     ];
