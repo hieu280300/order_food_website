@@ -78,7 +78,7 @@
         </div>
         <div class="form-group mb-5" class="form-control">
             <label for="">Category Name</label>
-            <input type="text" name="shop_id" value="{{ $product->category_name }} " class="form-control" disabled>
+            <input type="text" name="category_id" value="{{ $product->category_name }} " class="form-control" disabled>
             @error('category_id')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror

@@ -6,6 +6,11 @@
 @section('title', 'List Post')
 @section('content')
 @include('admin.auth.products.search')
+@if(session()->has('mess'))
+<div class="alert alert-success">
+    {{ session()->get('mess') }}
+</div>
+@endif
         <p><a href="{{ route('admin.product.create',$shop_id) }}" class="btn btn-secondary" >Create</a></p>
     <br>
     <table id="post"  class="table table-bordered table-hover table-striped">
