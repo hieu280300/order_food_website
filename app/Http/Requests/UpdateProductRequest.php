@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use PHPUnit\Framework\Constraint\IsTrue;
 
 class UpdateProductRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class UpdateProductRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return True;
     }
 
     /**
@@ -26,10 +27,11 @@ class UpdateProductRequest extends FormRequest
         return [
             'name' => 'required|min:5|max:255', // rule: not null, minumum: 5, maximum: 255
             'description' => 'required|min:10', // rule: not null, minumum: 10
-            'category_id' => 'required', 
             'quantity'=>'required',
             'content' => 'required|min:10',
             'money'=>'required',// 
+            'slug'=>'required',
+             'code'=>'required',
         ];
     }
 }

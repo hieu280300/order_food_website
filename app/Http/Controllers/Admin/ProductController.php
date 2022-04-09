@@ -168,6 +168,7 @@ class ProductController extends Controller
         ->join('shops','shops.id','=','products.shop_id')
         ->join('categories','products.category_id','=','categories.id')
         ->where('products.id',$id)->orWhere('products.shop_id','=','shops.id')->select('products.id as product_id','products.name as product_name','products.slug as product_slug','products.code as product_code','products.thumbnail as product_thumbnail','products.description as product_description','products.content as product_content','products.money as product_money','products.quantity as product_quantity','products.category_id','categories.name as category_name','categories.id as category_id','products.shop_id as shop_id','shops.name as shop_name','products.thumbnail as thumbnail')->get();
+        $data['shop_id']=$id;
         $data['products'] = $products;
         return view('admin.auth.products.edit', $data);
     }
@@ -183,24 +184,25 @@ class ProductController extends Controller
     {
  
         $product = Product::find($id);
-        dd('hellp');
         $thumbnailOld = $product->thumbnail;
         $product->name = $request->name;
+        $product->slug = $request->slug;
+        $product->code = $request->code;
+        $product->content = $request->content;
         $product->description = $request->description;
         $product->quantity = $request->quantity;
-        $product->category_id = $request->category_id;
-        
-
-        $thumbnailPath = null;
+        $product->money = $request->money;
+        $thumbnailPath = $product->thumbnail;
         if (
             $request->hasFile('thumbnail')
             && $request->file('thumbnail')->isValid()
-        ) {
+        )
+        {
             // Nếu có thì thục hiện lưu trữ file vào public/thumbnail
             $image = $request->file('thumbnail');
             $extension = $request->thumbnail->extension();
             $fileName = 'thumbnail_' . time() . '.' . $extension;
-            $thumbnailPath = $image->move('thumbnail', $fileName);
+            $thumbnailPath = $image->move('product/thumbnails'. '/' . $fileName);
             $product->thumbnail = $thumbnailPath;
             Log::info('thumbnailPath: ' . $thumbnailPath);
         }
@@ -209,24 +211,7 @@ class ProductController extends Controller
         try {
             // update data for table posts
             $product->save();
-            
-            Price::updateOrCreate([
-                'price' => $request->price,
-               
-            ]);
-            foreach ($request->color_id as $color) {
-                ProductColor::updateOrCreate([
-                    'product_id' => $product->id,
-                    'product_color' => $color
-                ]);
-               
-            } 
-            foreach ($request->size_id as $size) {
-                ProductSize::updateOrCreate([
-                    'product_id' => $product->id,
-                    'product_size' => $size
-                ]);
-            }
+          
             // create or update data for table post_details
          
             DB::commit();
@@ -236,7 +221,7 @@ class ProductController extends Controller
             }
 
             // success
-            return redirect()->route('admin.product.index')->with('success', 'Update successful!');
+            return redirect()->route('admin.product.show',$product->shop_id)->with('mess', 'Update successful!');
         } catch (\Exception $ex) {
             DB::rollback();
             
