@@ -16,7 +16,7 @@
         @csrf
         <div class="form-group mb-5">
             <label for="">User Name</label>
-            <input type="text" name="name" placeholder="user name" value="{{ old('name') }}" class="form-control">
+            <input type="text" name="name" placeholder="User Name" value="{{ old('name') }}" class="form-control">
             @error('name')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
@@ -24,7 +24,7 @@
         <br>
         <div class="form-group mb-5">
             <label for="">Email</label>
-            <input type="email" name="email" placeholder="email" value="{{ old('email') }}" class="form-control">
+            <input type="email" name="email" placeholder="Email" value="{{ old('email') }}" class="form-control" required>
             @error('email')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
@@ -32,7 +32,7 @@
         <br>
         <div class="form-group mb-5">
             <label for="">Password</label>
-            <input type="text" name="password" placeholder="password" value="{{ old('password') }}" class="form-control">
+            <input type="password" name="password" placeholder="Password" value="{{ old('password') }}" class="form-control">
             @error('password')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
@@ -40,7 +40,7 @@
         <br>
         <div class="form-group mb-5">
             <label for="">Name Shop</label>
-            <input type="text" name="name_shop" placeholder="name shop" value="{{ old('name_shop') }}" class="form-control">
+            <input type="text" name="name_shop" placeholder="Name Shop" value="{{ old('name_shop') }}" class="form-control">
             @error('name_shop')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
@@ -48,7 +48,7 @@
         <br>
         <div class="form-group mb-5">
             <label for="">Address Shop</label>
-            <input type="text" name="address_shop" placeholder="address shop" value="{{ old('address_shop') }}" class="form-control">
+            <input type="text" name="address_shop" placeholder="Address Shop" value="{{ old('address_shop') }}" class="form-control">
             @error('address_shop')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
@@ -70,7 +70,7 @@
             @enderror
         </div>
         <br>
-   
+
         <div class="form-group mb-5">
             <label for="">Image Shop</label>
             <input type="file" name="image_shop" placeholder="image shop" class="form-control">
@@ -79,8 +79,8 @@
             @enderror
         </div>
         <br>
-        
-      
+
+
         <div class="form-group">
             <a href="{{ route('admin.shop.index') }}" class="btn btn-secondary">List Shops</a>
             <button class="btn btn-primary" type="submit">create</button>

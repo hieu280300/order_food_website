@@ -540,11 +540,11 @@ footer {
 }
 
 .minus:hover {
-    color: #ed563b;
+    color: rgb(223, 65, 17);
 }
 
 .plus {
-    padding-left: 1.5rem;
+    /* padding-left: 1.5rem; */
     width: 40px;
     height: 40px;
     color: #ed563b;
@@ -553,7 +553,7 @@ footer {
 }
 
 .plus:hover {
-    color: #ed563b;
+    color: rgb(223, 65, 17);
 }
 
 .modal_tien {
@@ -567,7 +567,7 @@ footer {
 }
 
 .modal_tien:hover {
-    background-color: #ed563b;
+    background-color: rgb(223, 65, 17);
 }
 
 #size p {
@@ -603,4 +603,8 @@ footer {
 #modal_topping_text {
     display: inline-block;
     margin: 0px;
+}
+button:focus
+{
+    outline: none !important;
 }

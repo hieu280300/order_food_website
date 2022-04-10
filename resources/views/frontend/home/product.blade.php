@@ -131,7 +131,9 @@
 
                 var id = parseInt($(this).attr('id'));
                 var gia = $(this).closest('.menu_item').find('.price_product_item span').text();
-
+                var sum_cart = $('span.sum_cart').text()*1;
+                // sum_cart++;
+                // $('span.sum_cart').text(sum_cart);
                 // id= $(".id").val();
                 // console.log(gia);
                 $.ajax({
@@ -139,8 +141,11 @@
                     url:"{{ url('addToCard')}}",
                     data:{id:id},
                     success:function(data){
-                        console.log(data.success);
+                        alert(data.success);
+                        $('span.sum_cart').html(data.sum_cart);
+
                         // $('span.total').text(data.success.total);
+
                     }
                 // console.log(data.success);
 

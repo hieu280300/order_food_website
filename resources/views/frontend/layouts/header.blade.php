@@ -4,14 +4,15 @@
             <div class="col-12">
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
-                    <a href="{{ url('/') }}" class="logo">Food Store <em> Website</em></a>
+                    <a href="{{ url('/') }}" class="logo">Food <em>Store</em></a>
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     @php
 
                         $route=Route::getFacadeRoot()->current()->uri();
 
-                        // dd($data);
+
+
                     @endphp
                     <ul class="nav">
                         <li><a href="{{ url('/') }}"
@@ -34,7 +35,15 @@
                                     @php if ($route == 'cart') { echo ('class="active"'); } @endphp>
                                         {{-- <i class="icon_bag_alt"></i> --}}
                                         <i class="fas fa-shopping-cart" style="margin-top:12px"></i>
-                                        <span style="margin-top:12px">3</span>
+                                        <span class="sum_cart" style="margin-top:12px">
+                                            @php
+                                            if(session()->has('cart')){
+                                                $getSession = session()->get('cart');
+                                                echo(count($getSession));
+                                            }
+                                            else echo("0");
+                                            @endphp
+                                        </span>
                                     </a>
                                     {{-- <div class="cart-hover">
                                         <div class="select-items">
@@ -140,5 +149,4 @@
             </div>
         </div>
         </div>
-
     </header>

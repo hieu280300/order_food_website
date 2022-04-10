@@ -29,7 +29,7 @@
         <br>
         <div class="form-group mb-5" class="form-control">
             <label for="">User password</label>
-            <input type="text" name="password" placeholder="password" value="{{old('password')}}" class="form-control">
+            <input type="password" name="password" placeholder="password" value="{{old('password')}}" class="form-control">
             @error('password')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror

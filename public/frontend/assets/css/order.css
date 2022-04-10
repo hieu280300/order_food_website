@@ -203,21 +203,23 @@ header {
 
 }
 .minus{
+    margin-top: 8px;
+    margin-left: 6px;
     float: left;
     width: 40px;
     height: 40px;
-    color: #EA8025;
+    color: #ed563b;
 }
 .plus{
-    padding-left: 40px;
+    margin-left: 6px;
     width: 40px;
     height: 40px;
-    color: #EA8025;
+    color: #ed563b;
 }
 .modal_tien{
     color: #fff;
-    background-color: #EA8025;
-    font-size: 20px;
+    background-color: #ed563b;
+    font-size: 18px;
     float: right;
 
 }
@@ -250,7 +252,7 @@ header {
     display: block;
 }
 .dropbtn:active, link{
-    border-bottom: 4px solid #EA8025;
+    border-bottom: 4px solid #ed563b;
 }
 .header_menu ul li {
     display: inline-block;
@@ -286,13 +288,13 @@ header {
     display: block;
     font-weight: 700;
 }
-.header-menu-ul-li-content a:hover {border-bottom: 4px solid #EA8025;}
+.header-menu-ul-li-content a:hover {border-bottom: 4px solid #ed563b;}
 
 .header_menu ul li:hover .header-menu-ul-li-content {
     display: block;
 }
 .header_menu ul li:hover .dropbtn {
-    border-bottom: 4px solid #EA8025;
+    border-bottom: 4px solid #ed563b;
     padding-bottom: 15px;
 }
 
@@ -319,7 +321,7 @@ main {
 .dathang{
     padding: 20px 0px;
     border-bottom: 2px solid #e5e5e5 ;
-    background-color: #fff;
+    background-color: #ed563b;
     margin-top: 10px;
     text-align: center;
     padding-bottom: 20px;
@@ -328,20 +330,18 @@ main {
 }
 .dathang a{
     font-weight: 700;
-    padding:15px 100px;
     color: #fff;
     font-size: 14px;
-    background-color: #ed563b;
-
+    /* background-color: #ed563b; */
     min-width: 100%;
 }
-.dathang a:hover{
+.dathang:hover{
     text-decoration: none;
     color: #fff;
     background-color: rgb(223, 65, 17);
 }
 .thanhtoan{
-    padding: 0 20px;
+    padding: 0 8px;
     border-bottom: 1px solid #e5e5e5 ;
     background-color: #fff;
     margin-bottom: 20px;
@@ -363,13 +363,25 @@ main {
     border-radius: 2px;
 }
 .tenmon{
+    margin-bottom: 0;
     color: #000;
     font-weight: 700;
-    padding: 15px;
+    padding: 16px;
     padding-right: 5px;
     border-bottom: none;
 }
 .tenmon:hover{
+    color:#ed563b ;
+}
+.delete{
+    margin-bottom: 0;
+    margin-left: 6px;
+    color: #000;
+    font-weight: 700;
+
+    border-bottom: none;
+}
+.delete:hover{
     color:#ed563b ;
 }
 .giamon{
@@ -382,9 +394,9 @@ main {
     color: #ed563b;
     text-align: center;
     font-size: 20px;
-    padding-right: 10px;
+    /* padding-right: 10px; */
     border-bottom: none;
-    display: flex;
+    /* display: flex; */
     margin-top: 10px;
 }
 #price_total{
@@ -489,4 +501,8 @@ tr{
     padding-bottom: 6px;
     border-radius: 100%;
     color: #fff;
+}
+.card-product-quantity {
+    font-size: 24px;
+    margin: auto 18px  12px  24px;
 }

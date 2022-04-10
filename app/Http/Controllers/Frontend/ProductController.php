@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 
 class ProductController extends Controller
 {
-    
+
     public function getProductsShop(request $request)
     {
         $shop_id = $request->id;
@@ -36,7 +36,7 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function shopDetail($id)
+    public function getShopDetail($id)
     {
         $data = [];
         $product = Product::find($id);
