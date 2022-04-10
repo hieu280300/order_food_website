@@ -6,10 +6,12 @@
 @section('title', 'List Post')
 @section('content')
 @include('admin.auth.products.search')
-<p><a href="{{ route('admin.product.create') }}" class="btn btn-secondary" >Create</a></p>
-        
-        {{-- show message --}}
-    
+@if(session()->has('mess'))
+<div class="alert alert-success">
+    {{ session()->get('mess') }}
+</div>
+@endif
+        <p><a href="{{ route('admin.product.create',$shop_id) }}" class="btn btn-secondary" >Create</a></p>
     <br>
     <table id="post"  class="table table-bordered table-hover table-striped">
         <thead class="thead-dark">
@@ -48,12 +50,12 @@
 
                         <td>
                             <a href=""><input type="submit" name="submit" value="Detail" class="btn btn-info"></a></td>
-                        <td scope="col"><a href=""><input type="submit" name="submit" value="Edit" class="btn btn-success"></a> </td>
+                        <td scope="col"><a href="{{route('admin.product.edit',$product->product_id)}}"><input type="submit" name="submit" value="Edit" class="btn btn-success"></a> </td>
                         <td>
-                            <form action="" method="post">
-                                @method('delete')
+                            <form action="{{ route('admin.product.destroy', $product->product_id) }}" method="post">
                                 @csrf
-                                <input type="submit" name="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure DELETE Product?')">
+                                @method('DELETE')
+                                <input type="submit" name="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure DELETE Category?')">
                             </form>
                         </td>
                     </tr>

@@ -34,7 +34,7 @@ Route::group(['middleware' => ['check_login_admin'] , 'as' => 'admin.'], functio
     });
     Route::group(['prefix' => 'product', 'as' => 'product.'], function () {
         Route::get('/list', [ProductController::class, 'index'])->name('index');
-        Route::get('/create', [ProductController::class, 'create'])->name('create');
+        Route::get('/create/{id}', [ProductController::class, 'create'])->name('create');
         Route::post('/store', [ProductController::class, 'store'])->name('store');
         Route::get('/show/{id}', [ProductController::class, 'show'])->name('show');
         Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('edit');

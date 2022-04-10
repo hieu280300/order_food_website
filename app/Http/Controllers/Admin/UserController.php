@@ -9,12 +9,14 @@ use App\Models\Category;
 use App\Models\Role;
 use App\Models\Shop;
 use App\Models\User;
+use File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 class UserController extends Controller
 {
+    private const FOLDER_UPLOAD_USER_THUMBNAIL = 'users/thumbnails';
    /**
      * Display a listing of the resource.
      *
@@ -26,7 +28,7 @@ class UserController extends Controller
         $users = DB::table('users')
         ->leftJoin('shops', 'users.id', '=', 'shops.user_id')
         ->where('users.role','=','0')
-        ->select('users.name as user_name', 'shops.id as shop_id','users.email as user_email','users.gender as user_gender','users.avatar as user_avatar','users.id as user_id')->get();
+        ->select('users.name as user_name', 'shops.id as shop_id','users.email as user_email','users.gender as user_gender','users.avatar as user_avatar','users.id as user_id')->paginate(5);
         $data['users'] = $users;
         return view('admin.auth.users.index', $data);
     }
@@ -38,12 +40,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        // $data=[];
-        // $users=Admin::where('role_id','>','1')->get();
-        // $roles = Role::where('id','>','1')->get();
-        // $data['roles']=$roles;
-        // $data['users']=$users;
-        return view('admin.auth.shops.create');
+        return view('admin.auth.users.create');
     }
 
     /**
@@ -54,17 +51,36 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-     
+        $thumbnailPath = null;
+        if (
+            $request->hasFile('avatar')
+            && $request->file('avatar')->isValid()
+        ) {
+            // Nếu có thì thục hiện lưu trữ file vào public/products/thumbnail
+            $image = $request->file('avatar');
+            $extension = $request->avatar->extension();
+            $extension = strtolower($extension); // convert string to lowercase
+            $fileName = 'avatar_' . time() . '.' . $extension;
+
+            // upload file to server
+            $image->move(self::FOLDER_UPLOAD_USER_THUMBNAIL, $fileName);
+
+            // set filename
+            $thumbnailPath = self::FOLDER_UPLOAD_USER_THUMBNAIL . '/' . $fileName;
+        }
         $userInsert=[
             'name'=>$request->name,
             'email'=>$request->email,
             'password'=>Hash::make('$request->password'),
-            'role_id'=>$request->role_id,
-            'status'=>1,
+            'role'=>0,
+            'gender'=>$request->gender,
+            'avatar'=> $thumbnailPath
         ];
+      
+    
         DB::beginTransaction();
         try{
-            Admin::create($userInsert);
+            $user = User::create($userInsert);
             DB::commit();
             return redirect()->route('admin.user.index')->with('sucess', 'Insert into data to User Sucessful.');
         }catch(\Exception $ex){

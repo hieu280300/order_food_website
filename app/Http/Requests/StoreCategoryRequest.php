@@ -28,6 +28,7 @@ class StoreCategoryRequest extends FormRequest
             //required: la rule bat buoc nhap
             'category_name' => 'required',
             'category_slug' => 'required',
+            'shop_id'=>'required',
         ];
     }
 }

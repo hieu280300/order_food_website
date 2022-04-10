@@ -6,7 +6,7 @@
 @section('title', 'List Post')
 @section('content')
 @include('admin.auth.products.search')
-<p><a href="{{ route('admin.product.create') }}" class="btn btn-secondary" >Create</a></p>
+<p><a href="{{ route('admin.user.create') }}" class="btn btn-secondary" >Create</a></p>
         
         {{-- show message --}}
     
@@ -29,10 +29,12 @@
                         <td scope="col">{{ $key+1 }}</td>
                         <td scope="col">{{ $user->user_name }}</td>
                         <td scope="col">{{ $user->user_email }}</td>
-                        <td scope="col">{{ $user->user_gender }}</td>
+                        <td> @if ( $user->user_gender  == \App\Models\User::GENDER[0])
+                            <div class="alert alert-secondary" role="alert">Male</div>
+                              @elseif ($user->user_gender == \App\Models\User::GENDER[1])
+                            <div class="alert alert-primary" role="alert">Female</div>
+                          @endif</td>
                         <td scope="col">{{ $user->user_avatar}}</td>
-                       
-
                         <td>
                             <a href="{{ route('admin.user.show', $user->user_id) }}"><input type="submit" name="submit" value="Detail" class="btn btn-info"></a></td>
                         <td scope="col"><a href=""><input type="submit" name="submit" value="Edit" class="btn btn-success"></a> </td>
@@ -48,4 +50,5 @@
             @endif
         </tbody>
     </table>
+    {{$users->links() }}
 @endsection
