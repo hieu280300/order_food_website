@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>DashboardKit Bootstrap 5 Admin Template</title>
+    <title>Admin Food Store</title>
     <!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 11]>
@@ -19,7 +19,7 @@
 
 
     <!-- Favicon icon -->
-    <link rel="icon" href="{{asset('assets/images/favicon.svg')}}" type="image/x-icon">
+    <link rel="icon" href="{{asset('admin/assets/images/favicon.svg')}}" type="image/x-icon">
 
     <!-- font css -->
     <link rel="stylesheet" href="{{asset('admin/assets/fonts/feather.css')}}">
@@ -154,9 +154,9 @@
 
 <!-- Apex Chart -->
 <script src="assets/js/plugins/apexcharts.min.js"></script>
-<script>
+{{-- <script>
     $("body").append('<div class="fixed-button active"><a href="https://gumroad.com/dashboardkit" target="_blank" class="btn btn-md btn-success"><i class="material-icons-two-tone text-white">shopping_cart</i> Upgrade To Pro</a> </div>');
-</script>
+</script> --}}
 
 <!-- custom-chart js -->
 <script src="{{asset('admin/assets/js/pages/dashboard-sale.js')}}"></script>

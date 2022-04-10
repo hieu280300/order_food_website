@@ -48,9 +48,11 @@ class CartController extends Controller
         } else {
             session()->push('cart', $array);
         }
-        // $getSession = session()->get('cart');
-        // var_dump($getSession);
-        return response()->json(['success' => $data]);
+        $getSession = session()->get('cart');
+        $sum_cart=count($getSession);
+        return response()->json(['success' => 'Đặt hàng thành công !!!',
+                                'sum_cart' => $sum_cart
+                                ]);
     }
 
     public function index()
@@ -173,8 +175,28 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $id = $request->id;
+        if (session()->has('cart')) {
+            $getCart = session()->pull('cart');
+            // dd($getCart);
+
+            foreach ($getCart as $key => $value) {
+                if ($id == $value['id']) {
+                    // dd($getCart[$key]);
+                    unset($getCart[$key]);
+                    // unset( $product[$key]);
+                }
+            }
+            session()->forget('cart');
+            session()->put('cart', $getCart);
+        }
+
+        $getSession = session()->get('cart');
+        // dd($getSession);
+        if (empty($getSession)) {
+            session()->forget('cart');
+        }
     }
 }

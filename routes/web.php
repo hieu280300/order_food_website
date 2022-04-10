@@ -24,9 +24,15 @@ Route::get('/member-register',[HomeController::class,'getRegister'])->name('memb
 Route::post('/member-register',[HomeController::class,'postRegister']);
 Route::get('/member-logout', [HomeController::class,'Logout'])->name('member-logout');
 
+Route::get('shop-detail/{id}', [App\Http\Controllers\Frontend\ProductController::class ,'getShopDetail'])->name('shop-detail');
+
 Route::get('/cart',[CartController::class,'index']);
-Route::get('shop-detail/{id}', [App\Http\Controllers\Frontend\ProductController::class ,'shopDetail'])->name('shop-detail');
 Route::post('/addToCard',[App\Http\Controllers\Frontend\CartController::class,'addToCart'])->name('addToCart');
+Route::post('cart_quantity_up.post', [CartController::class,'plusProduct']);
+Route::post('cart_quantity_down.post',[CartController::class,'minusProduct']);
+Route::post('cart_quantity_delete.post',[CartController::class,'destroy']);
+
+
 Route::get('/product_detail', function () {
     return view('frontend.home.product_detail');
 });
