@@ -97,6 +97,7 @@
 
                                         <td><span class='soluong'>{{$value['qty']}}</span>
                                             <input class='id' id ="{{$value['id']}}" type = "text" hidden>
+                                            <input class="img" src="{{$value['thumbnail']}}" hidden>
                                         </td>
 
                                         {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
@@ -181,7 +182,7 @@
 
             <div class="modal-header" style="display: block;" >
 
-                <img class="img_modal" id="img">
+                <img class="img_modal" id="img" src="">
                 <div class="bold">
                     <p id="modal_name"></p>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -218,25 +219,27 @@
             </div>
             <div class="footer_modal">
                 <div style="float: left; width: 50%;">
-                    <div data-v-6eb2f7d4="" class="card-product-quantity-config d-flex align-items-center">
-                        <div data-v-6eb2f7d4="" aria-hidden="true" class="minus card-product-decrease btn btn--orange-1 quantity-product add-to-cart p-0 active" style="margin-top: 0px">
+                    {{-- <div data-v-6eb2f7d4="" class="card-product-quantity-config d-flex align-items-center">
+                        <div data-v-6eb2f7d4="" aria-hidden="true" class="add-to-cart-dow minus card-product-decrease btn btn--orange-1 quantity-product  p-0 active" style="margin-top: 0px">
                             <svg class="bi bi-dash-circle" width="2em" height="2em" viewBox="0 0 16 16"fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z" clip-rule="evenodd"/>
                                 <path fill-rule="evenodd" d="M3.5 8a.5.5 0 01.5-.5h8a.5.5 0 010 1H4a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
-                            </svg>                        </div>
+                            </svg>
+                        </div>
                         <span data-v-6eb2f7d4="" class="card-product-quantity">2</span>
-                        <div data-v-6eb2f7d4="" class=" plus btn btn--orange-1 card-product-increase quantity-product active add-to-cart p-0">
+                        <div data-v-6eb2f7d4="" class="add-to-cart-up plus btn btn--orange-1 card-product-increase quantity-product active  p-0">
                             <svg class="bi bi-plus-circle" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M8 3.5a.5.5 0 01.5.5v4a.5.5 0 01-.5.5H4a.5.5 0 010-1h3.5V4a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
                                 <path fill-rule="evenodd" d="M7.5 8a.5.5 0 01.5-.5h4a.5.5 0 010 1H8.5V12a.5.5 0 01-1 0V8z" clip-rule="evenodd"/>
                                 <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z" clip-rule="evenodd"/>
-                            </svg>                        </div>
-                    </div>
+                            </svg>
+                        </div>
+                    </div> --}}
 
                     <div id="price_modal"></div>
                 </div>
                 <div style="float: right; width: 50%;">
-                    <a onclick="add_to_cart()" class="modal_tien" style="max-width: 300px; float: right; color:fff" data-dismiss="modal"><span class="total_product"></span><span>,000đ</span></a>
+                    <button class="modal_tien" style="max-width: 300px; float: right; color:fff" data-dismiss="modal"><span class="total_product"></span><span>,000đ</span></button>
                 </div>
             </div>
         </div>
@@ -250,14 +253,21 @@
             }
         });
         $('td.show_product').click(function(){
+            var getId = $(this).closest('tr').find('td input.id').attr('id')*1;
             var name = $(this).find('label.tenmon').text();
-            $('#modal_name').text(name);
+            var sl = $(this).closest('tr').find('td span.soluong').text()*1;
             var gia = $(this).closest('tr').find('td span.gia').text()*1;
-            $('.total_product').text(gia);
-            // alert(gia);
-
+            var sum_gia = gia*sl;
+            $('#modal_name').text(name);
+            $('.total_product').text(sum_gia);
+            $('span.card-product-quantity').text(sl);
+            var getImg = $(this).closest('tr').find('td input.img').attr('src');
+            $('.img_modal').attr("src",getImg);
+            // $("#my_image").attr("src","second.jpg");
+            // console.log(getImg);
         })
-        $('a.cart_quantity_down').click(function(){
+
+        $('.cart_quantity_down').click(function(){
 
 			var getId = $(this).closest('tr').find('td input.id').attr('id')*1;
 			var sl = $(this).closest('tr').find('td span.soluong').text()*1;
@@ -295,6 +305,7 @@
                 url:"{{ url('cart_quantity_down.post')}}",
                 data:{
                     id:getId,
+                    qty:sl,
                 },
                 // success:function(data){
                 //     alert(data.success);
@@ -303,7 +314,7 @@
 			return false;
 		})
 
-		$('a.cart_quantity_up').click(function(){
+		$('.cart_quantity_up').click(function(){
 			var getId = $(this).closest('tr').find('td input.id').attr('id')*1;
 			var sl = $(this).closest('tr').find('td span.soluong').text()*1;
 			var gia = $(this).closest('tr').find('td span.gia').text()*1;
