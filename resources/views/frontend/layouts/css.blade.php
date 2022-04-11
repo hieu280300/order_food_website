@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="{{asset('frontend/assets/css/bootstrap.min.css')}}">
+{{-- <link rel="stylesheet" type="text/css" href="{{asset('frontend/assets/css/bootstrap.min.css')}}"> --}}
 
 <link rel="stylesheet" type="text/css" href="{{asset('frontend/assets/css/cart.css')}}">
 
@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="{{asset('frontend/assets/css/menu.css')}}">
 <link rel="stylesheet" href="{{asset('frontend/assets/css/product_detail.css')}}">
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+{{-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script> --}}
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <meta name="csrf-token" content="{{ csrf_token() }}" />

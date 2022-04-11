@@ -29,7 +29,6 @@ class CartController extends Controller
     {
         $id = $request->id;
         $array = [];
-        $data = [];
         $array['id'] = $id;
         $array['qty'] = 1;
         if (session()->has('cart')) {
@@ -94,6 +93,8 @@ class CartController extends Controller
     public function minusProduct(Request $request)
     {
         $id = $request->id;
+        $qty = $request->qty;
+
         // echo $id;
         if (session()->has('cart')) {
             $getSession = session()->get('cart');
