@@ -55,7 +55,7 @@
                     <div class="list_product_related flex_wrap display_flex menu_lists">
 
                         @foreach ($products as $product)
-                        <a href="{{ route('shop-detail', ['id' => $product->id]) }}">
+                        <a href="{{ route('product-detail', ['id' => $product->id]) }}">
                             <div class="menu_item">
 
                                 <div class="menu_item_image">
@@ -63,7 +63,7 @@
                                 </div>
                                 <div class="menu_item_info bg_white">
                                     <h3>
-                                        <a href="{{ route('shop-detail', ['id' => $product->id]) }}">{{ $product->name }}</a>
+                                        <a href="{{ route('product-detail', ['id' => $product->id]) }}">{{ $product->name }}</a>
                                     </h3>
                                     <div class="price_product_item">{{ number_format($product->money) }} Đ</div>
                                 </a>
@@ -86,7 +86,7 @@
 
                         @foreach ($products as $product)
                         @if ($product->category_id == $categoryId)
-                            <a href="{{ route('shop-detail', ['id' => $product->id]) }}">
+                            <a href="{{ route('product-detail', ['id' => $product->id]) }}">
                             <div class="menu_item">
 
                                 <div class="menu_item_image">
@@ -94,7 +94,7 @@
                                 </div>
                                 <div class="menu_item_info bg_white">
                                     <h3>
-                                        <a href="{{ route('shop-detail', ['id' => $product->id]) }}">{{ $product->name }}</a>
+                                        <a href="{{ route('product-detail', ['id' => $product->id]) }}">{{ $product->name }}</a>
                                     </h3>
                                     <div class="price_product_item">{{  number_format($product->money) }} Đ</div>
                                 </a>

@@ -1,7 +1,9 @@
 <?php
 
+
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,7 +26,8 @@ Route::get('/member-register',[HomeController::class,'getRegister'])->name('memb
 Route::post('/member-register',[HomeController::class,'postRegister']);
 Route::get('/member-logout', [HomeController::class,'Logout'])->name('member-logout');
 
-Route::get('shop-detail/{id}', [App\Http\Controllers\Frontend\ProductController::class ,'getShopDetail'])->name('shop-detail');
+Route::get('product-detail/{id}', [ProductController::class,'getProductDetail'])->name('product-detail');
+Route::post('product-detail/stars/rate', [ProductController::class,'postRate'])->name('ajax.rate');
 
 Route::get('/cart',[CartController::class,'index']);
 Route::post('/addToCard',[App\Http\Controllers\Frontend\CartController::class,'addToCart'])->name('addToCart');
