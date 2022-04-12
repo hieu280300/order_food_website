@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Rate;
 use Illuminate\Http\Request;
+use Illuminate\Queue\Middleware\RateLimited;
+use Illuminate\Support\Facades\Auth;
 // use Symfony\Component\Routing\Route;
 use Illuminate\Support\Facades\Route;
 
@@ -36,15 +39,56 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getShopDetail($id)
+    public function getProductDetail($id)
     {
         $data = [];
         $product = Product::find($id);
-        // $products =Product::get();
-        // $product_relateds=Product::where('category_id',$product->category_id )->get();
+        $rate = Rate::where('product_id','=',$id)
+                    ->get()
+                    ->toArray();
+
+        $sum = 0;
+            foreach($rate as $value){
+                $sum = $sum + $value['point'];
+            }
+        $dem = count($rate);
+        if($dem==0){
+            $stars=0;
+        }
+        else{
+            $stars = round($sum/$dem,1);
+        }
         $data['product'] = $product;
-        // $data['products']=$products;
-        // $data['product_relateds']=$product_relateds;
+        $data['stars'] = $stars;
+        $data['dem'] = $dem;
+        // dd($data);
         return view('frontend.home.product_detail', $data);
+    }
+    public function postRate(Request $request)
+    {
+        // dd("adsf");
+        $checkRate = Rate::where('product_id','=',$request->id)
+                        ->get()
+                        ->toArray();
+
+            $check = true;
+            foreach($checkRate as $value){
+                // dd($value['user_id']);
+                if ($value['user_id'] == Auth::user()->id){
+                    $check = false;
+               }
+            }
+
+        if ($check){
+            $rate = Rate::create([
+                'user_id' => Auth::user()->id,
+                'product_id' => $request->id,
+                'point'    => $request->stars
+            ]);
+            return redirect()->back();
+        }
+        else{
+            return redirect()->back();
+        }
     }
 }

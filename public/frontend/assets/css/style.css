@@ -1126,7 +1126,7 @@ contact
 .contact-form button {
     display: inline-block;
     font-size: 13px;
-    padding: 11px 17px;
+    padding: 4px 14px;
     background-color: #ed563b;
     color: #fff;
     text-align: center;
@@ -1136,6 +1136,7 @@ contact
     border: none;
     outline: none;
     margin-top: -8px;
+    float: right;
 }
 
 .contact-form button:hover {
@@ -1387,4 +1388,7 @@ a:hover {
     text-transform: uppercase;
     transition: all 0.3s;
     border: #ed563b;
+}
+.color-star{
+    color: #ed563b;
 }

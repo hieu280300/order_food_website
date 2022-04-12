@@ -14,24 +14,27 @@
                     <div class="cta-content">
                         <br>
                         <br>
-                        <h2><del><sup>$</sup>18.00</del> <em><sup>$</sup>17.00</em></h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur.</p>
+                        <h2>OUR <em>PRODUCTS</em></h2>
+                        {{-- <p>Lorem ipsum dolor sit amet, consectetur.</p> --}}
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <div class="container">
-          <div class="heading-section">
+    <div class="container" style="margin-top:40px">
+          {{-- <div class="heading-section">
               <h2>Product Details</h2>
-          </div>
+          </div> --}}
+          @php
+            //   dd($product);
+          @endphp
           <div class="row">
             <div class="col-md-6">
               <div id="slider" class="owl-carousel product-slider">
             <div class="item">
-                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80" />
+                <img src="{{asset($product['thumbnail'])}}" />
             </div>
-            <div class="item">
+            {{-- <div class="item">
                 <img src="https://i.ytimg.com/vi/PJ_zomNMK_s/maxresdefault.jpg" />
             </div>
             <div class="item">
@@ -71,30 +74,90 @@
             </div>
             <div class="item">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQI6nUmObt62eDkqNSmIvCN_KkQExtbpJmUbVx_eTh_Y3v3r-Jw" />
+            </div> --}}
             </div>
-          </div>
             </div>
+            <script>
+                $(document).ready(function(){
+                    //vote
+                    // $('.ratings_stars').hover(
+                    //     // Handles the mouseover
+                    //     function() {
+                    //         $(this).prevAll().andSelf().addClass('ratings_hover');
+                    //         // $(this).nextAll().removeClass('ratings_vote');
+                    //     },
+                    //     function() {
+                    //         $(this).prevAll().andSelf().removeClass('ratings_hover');
+                    //         // set_votes($(this).parent());
+                    //     }
+                    // );
+
+                    $('.ratings_stars').click(function(){
+                        var values =  $(this).val();
+
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
+                        var check = "{{Auth::check()}}";
+                        var idBlog = "{{$product['id']}}";
+                        // console.log(check);
+                        if(check==1){
+                            $.ajax({
+                                type:'POST',
+                                url:"{{ url('product-detail/stars/rate') }}",
+                                data:{
+                                    stars: values,
+                                    id: idBlog
+                                },
+                                success:function(data) {
+                                }
+                            });
+                            $('.point_stars').text(values);
+
+                        }else{
+                            alert("Vui long dang nhap!");
+                        }
+                        // if ($(this).hasClass('ratings_over')) {
+                        //     $('.ratings_stars').removeClass('ratings_over');
+                        //     $(this).prevAll().andSelf().addClass('ratings_over');
+                        // } else {
+                        //     $(this).prevAll().andSelf().addClass('ratings_over');
+                        // }
+                        return true;
+                    });
+                });
+            </script>
             <div class="col-md-6">
               <div class="product-dtl">
-               
+
                 <div class="product-info">
                   <div class="product-name">{{$product->name}}</div>
                   <div class="reviews-counter">
-                <div class="rate">
-                    <input type="radio" id="star5" name="rate" value="5" checked />
-                    <label for="star5" title="text">5 stars</label>
-                    <input type="radio" id="star4" name="rate" value="4" checked />
-                    <label for="star4" title="text">4 stars</label>
-                    <input type="radio" id="star3" name="rate" value="3" checked />
-                    <label for="star3" title="text">3 stars</label>
-                    <input type="radio" id="star2" name="rate" value="2" />
-                    <label for="star2" title="text">2 stars</label>
-                    <input type="radio" id="star1" name="rate" value="1" />
-                    <label for="star1" title="text">1 star</label>
-                  </div>
-                <span>3 Reviews</span>
+                    <div class="rate">
+                        <?php
+                            for ($i=5; $i >= 1 ; $i--) {
+                            if($i >=$stars){
+                        ?>
+                        <input class = "ratings_stars" type="radio" id="star{{$i}}" name="rate" value="{{$i}}" checked />
+                        <label for="star{{$i}}" title="text"></label>
+                        <?php
+                            }
+                            else {
+                        ?>
+                            <input class = "ratings_stars" type="radio" id="star{{$i}}" name="rate" value="{{$i}}"  />
+                            <label for="star{{$i}}" title="text"></label>
+                        <?php
+                                }
+                            }
+                        ?>
+
+                    </div>
+                <p class="point_stars">{{$stars}}</p>
+
               </div>
-                  <div class="product-price-discount"><span>{{$product->money}}</span><span class="line-through">$29.00</span></div>
+                  <div class="product-price-discount"><span>{{number_format($product->money)}}</span>đ</div>
                 </div>
                 <p>{{$product->description}}</p>
                 <div class="row">
@@ -107,14 +170,14 @@
                   <option>XL</option>
                 </select>
                   </div>
-                  <div class="col-md-6">
+                  {{-- <div class="col-md-6">
                     <label for="color">Color</label>
                 <select id="color" name="color" class="form-control">
                   <option>Blue</option>
                   <option>Green</option>
                   <option>Red</option>
                 </select>
-                  </div>
+                  </div> --}}
                 </div>
                 <div class="product-count">
                   <label for="size">Quantity</label>
@@ -143,28 +206,110 @@
             </div>
             <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
               <div class="review-heading">REVIEWS</div>
-              <p class="mb-20">There are no reviews yet.</p>
-              <form class="review-form">
-                  <div class="form-group">
-                    <label>Your rating</label>
-                    <div class="reviews-counter">
-                  <div class="rate">
-                      <input type="radio" id="star5" name="rate" value="5" />
-                      <label for="star5" title="text">5 stars</label>
-                      <input type="radio" id="star4" name="rate" value="4" />
-                      <label for="star4" title="text">4 stars</label>
-                      <input type="radio" id="star3" name="rate" value="3" />
-                      <label for="star3" title="text">3 stars</label>
-                      <input type="radio" id="star2" name="rate" value="2" />
-                      <label for="star2" title="text">2 stars</label>
-                      <input type="radio" id="star1" name="rate" value="1" />
-                      <label for="star1" title="text">1 star</label>
-                  </div>
+              {{-- <p class="mb-20">There are no reviews yet.</p> --}}
+              <section class='tabs-content'>
+                <div class="row">
+                    <div class="col-md-8 contact-form">
+                        <h4>Comments</h4>
+                        <ul class="features-items">
+                            <li>
+                                <div class="feature-item" style="margin-bottom:15px;">
+                                    <div class="left-icon">
+                                        <img src="{{asset('frontend/assets/images/features-first-icon.png')}}" alt="First One">
+                                    </div>
+                                    <div class="right-content">
+                                        <h4>John Doe <small>27.07.2020 10:10</small></h4>
+                                        <p><em>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta numquam maxime voluptatibus, impedit sed! Necessitatibus repellendus sed deleniti id et!"</em></p>
+                                        <button type="submit" id="form-submit" class="main-button">Replay</button>
+                                    </div>
+
+                                </div>
+
+                                <div class="tabs-content">
+                                    <div class="feature-item" style="margin-bottom:15px;">
+                                        <div class="left-icon">
+                                            <img src="{{asset('frontend/assets/images/features-first-icon.png')}}" alt="First One">
+                                        </div>
+                                        <div class="right-content">
+                                            <h4>John Doe <small>27.07.2020 11:10</small></h4>
+                                            <p><em>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta numquam maxime voluptatibus, impedit sed! Necessitatibus repellendus sed deleniti id et!"</em></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="feature-item" style="margin-bottom:15px;">
+                                <div class="left-icon">
+                                    <img src="{{asset('frontend/assets/images/features-first-icon.png')}}" alt="second one">
+                                </div>
+                                <div class="right-content">
+                                    <h4>John Doe <small>27.07.2020 12:10</small></h4>
+                                    <p><em>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta numquam maxime voluptatibus, impedit sed! Necessitatibus repellendus sed deleniti id et!"</em></p>
+                                    <button type="submit" id="form-submit" class="main-button">Replay</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    {{-- <div class="col-md-4">
+                        <h4>Leave a comment</h4>
+
+                        <div class="contact-form">
+                            <form action="" method="post">
+                              <div class="row">
+                                <div class="col-lg-12">
+                                  <fieldset>
+                                    <input name="name" type="text" id="name" placeholder="Your Name*" required="">
+                                  </fieldset>
+                                </div>
+                                <div class="col-lg-12">
+                                  <fieldset>
+                                    <input name="email" type="text" id="email" pattern="[^ @]*@[^ @]*" placeholder="Your Email*" required="">
+                                  </fieldset>
+                                </div>
+                                <div class="col-lg-12">
+                                  <fieldset>
+                                    <textarea name="message" rows="6" id="message" placeholder="Message" required=""></textarea>
+                                  </fieldset>
+                                </div>
+                                <div class="col-lg-12">
+                                  <fieldset>
+                                    <button type="submit" id="form-submit" class="main-button">Submit</button>
+                                  </fieldset>
+                                </div>
+                              </div>
+                            </form>
+                        </div>
+                    </div> --}}
                 </div>
-              </div>
+            </section>
+                <div class="form-group">
+                    <h4>Leave a comment</h4>
+                    <p>{{$dem}} Reviews</p>
+
+                    <form class="review-form" method="POST" action="{{url('blog-single/post')}}">
+                    @csrf
+
+                    <div class="reviews-counter">
+                        <input class="id_cmt" type="hidden" name="level" value="0">
+                        <input type="hidden" name="id" value="{{$product['id']}}">
+                        {{-- <div class="rate">
+                            <input type="radio" id="star5" name="rate" value="5" />
+                            <label for="star5" title="text">5 stars</label>
+                            <input type="radio" id="star4" name="rate" value="4" />
+                            <label for="star4" title="text">4 stars</label>
+                            <input type="radio" id="star3" name="rate" value="3" />
+                            <label for="star3" title="text">3 stars</label>
+                            <input type="radio" id="star2" name="rate" value="2" />
+                            <label for="star2" title="text">2 stars</label>
+                            <input type="radio" id="star1" name="rate" value="1" />
+                            <label for="star1" title="text">1 star</label>
+                        </div> --}}
+
+                    </div>
+                </div>
                   <div class="form-group">
                     <label>Your message</label>
-                    <textarea class="form-control" rows="10"></textarea>
+                    <textarea  name="message" class="form-control" rows="10"></textarea>
                   </div>
                   <div class="row">
                     <div class="col-md-6">
@@ -178,12 +323,12 @@
                       </div>
                     </div>
                   </div>
-                  <button class="round-black-btn">Submit Review</button>
+                  <button class="round-black-btn" name="submit">Submit Review</button>
                 </form>
             </div>
         </div>
       </div>
-      <div style="text-align:center;font-size:14px;padding-bottom:20px;">Get free icon packs for your next project at <a href="http://iiicons.in/" target="_blank" style="color:#ff5e63;font-weight:bold;">www.iiicons.in</a></div>
+      {{-- <div style="text-align:center;font-size:14px;padding-bottom:20px;">Get free icon packs for your next project at <a href="http://iiicons.in/" target="_blank" style="color:#ff5e63;font-weight:bold;">www.iiicons.in</a></div> --}}
     </div>
   </div>
  <script type="text/javascript">
@@ -196,7 +341,7 @@
 		        items: 1,
 		        slideSpeed: 2000,
 		        nav: false,
-		        autoplay: false, 
+		        autoplay: false,
 		        dots: false,
 		        loop: true,
 		        responsiveRefreshRate: 200
@@ -212,7 +357,7 @@
 		            item: 4,
 		            smartSpeed: 200,
 		            slideSpeed: 500,
-		            slideBy: slidesPerPage, 
+		            slideBy: slidesPerPage,
 		        	navText: ['<svg width="18px" height="18px" viewBox="0 0 11 20"><path style="fill:none;stroke-width: 1px;stroke: #000;" d="M9.554,1.001l-8.607,8.607l8.607,8.606"/></svg>', '<svg width="25px" height="25px" viewBox="0 0 11 20" version="1.1"><path style="fill:none;stroke-width: 1px;stroke: #000;" d="M1.054,18.214l8.606,-8.606l-8.606,-8.607"/></svg>'],
 		            responsiveRefreshRate: 100
 		        }).on('changed.owl.carousel', syncPosition2);
@@ -260,7 +405,7 @@
                     { now--;}
                     $(".qty").val(now);
                 }
-            })            
+            })
             $(".qtyplus").on("click",function(){
                 var now = $(".qty").val();
                 if ($.isNumeric(now)){
@@ -269,4 +414,5 @@
             });
 		});
  </script>
+
  @endsection
