@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateProductRequest;
+use App\Http\Requests\UpdateProfileRequest;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Shop;
@@ -15,8 +17,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Mockery\Matcher\Type;
+use File;
 use Symfony\Component\Routing\Route;
-
+use Illuminate\Support\Facades\Log;
 class HomeController extends Controller
 {
     /**
@@ -116,10 +119,59 @@ class HomeController extends Controller
         $data['infoUsers'] = $infoUsers;
         return view('frontend.profile.profile', $data);
     }
-    public function create()
+    public function editProfile($id)
     {
-        //
+       $data = [];
+       $user = User::find($id);
+      $data['user'] = $user;
+      return view('frontend.profile.edit_profile',$data);
     }
+    public function updateProfile(UpdateProfileRequest $request,$id)
+    {
+        $user = User::find($id);
+        $thumbnailOld = $user->avatar;
+        $user->name = $request->name;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->birthday = $request->birthday;
+        $user->gender = $request->gender;
+        $thumbnailPath = $user->avatar;
+        if (
+            $request->hasFile('avatar')
+            && $request->file('avatar')->isValid()
+        )
+        {
+            // Nếu có thì thục hiện lưu trữ file vào public/thumbnail
+            $image = $request->file('avatar');
+            $extension = $request->avatar->extension();
+            $fileName = 'avatar_' . time() . '.' . $extension;
+            $thumbnailPath = $image->move('users/thumbnails'. '/' . $fileName);
+            $user->avatar = $thumbnailPath;
+            Log::info('thumbnailPath: ' . $thumbnailPath);
+        }
+
+        DB::beginTransaction();
+ 
+ 
+        try {
+            // update data for table posts
+            $user->save();
+            // create or update data for table post_details
+            DB::commit();
+            // SAVE OK then delete OLD file
+            if (File::exists(public_path($thumbnailOld))) {
+                File::delete(public_path($thumbnailOld));
+            }
+            // success
+            return redirect()->route('frontend.profile.profile',$user->id)->with('mess', 'Update successful!');
+        } catch (\Exception $ex) {
+            DB::rollback();
+            
+            return redirect()->back()->with('error', $ex->getMessage());
+        }
+    }
+
+    
 
     /**
      * Store a newly created resource in storage.
@@ -127,10 +179,7 @@ class HomeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
+
 
     /**
      * Display the specified resource.
@@ -149,10 +198,7 @@ class HomeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
-    }
+ 
 
     /**
      * Update the specified resource in storage.

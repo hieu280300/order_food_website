@@ -33,6 +33,9 @@ Route::post('cart_quantity_down.post',[CartController::class,'minusProduct']);
 Route::post('cart_quantity_delete.post',[CartController::class,'destroy']);
 
 
+Route::get('/edit_profile/{id}',[App\Http\Controllers\Frontend\HomeController::class,'editProfile'])->name('edit-profile');
+Route::put('/update_profile/{id}',[HomeController::class,'updateProfile'])->name('updateProfile');
+
 Route::get('/product_detail', function () {
     return view('frontend.home.product_detail');
 });

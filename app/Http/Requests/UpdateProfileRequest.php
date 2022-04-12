@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-
 use Illuminate\Foundation\Http\FormRequest;
+use PHPUnit\Framework\Constraint\IsTrue;
 
-class StoreShopRequest extends FormRequest
+class UpdateProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +14,7 @@ class StoreShopRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return True;
     }
 
     /**
@@ -26,13 +26,10 @@ class StoreShopRequest extends FormRequest
     {
         return [
             'name' => 'required|min:5|max:255', // rule: not null, minumum: 5, maximum: 255
-            'name_shop' => 'required|min:5|max:255', // rule: not null, minumum: 10
-            'address_shop' => 'required',
-            'image_shop'=> 'required',
-            'email' => 'unique:users,email',
-            'password'=> 'required|min:8|max:255',
-            'time_open'=> 'required',
-            'time_close'=> 'required'
+            'phone' => 'required|min:10', // rule: not null, minumum: 10
+            'address'=>'required',
+            'birthday'=>'required',
+            'gender'=>'required', 
         ];
     }
 }

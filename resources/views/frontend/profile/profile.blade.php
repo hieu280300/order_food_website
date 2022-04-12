@@ -4,86 +4,84 @@
     @push('css')
     @endpush
 @section('content')
-    <style>
-        .emp-profile {
-            padding: 3%;
-            margin-top: 3%;
-            margin-bottom: 3%;
 
-            border-radius: 0.5rem;
-            background: #818182;
-        }
-
-        .profile-img {
-            text-align: center;
-        }
-
-        .profile-img img {
-            width: 70%;
-            height: 100%;
-        }
-
-        .profile-img .file {
-            position: relative;
-            overflow: hidden;
-            margin-top: -20%;
-            width: 70%;
-            border: none;
-            border-radius: 0;
-            font-size: 15px;
-            background: #212529b8;
-        }
-
-        .profile-img .file input {
-            position: absolute;
-            opacity: 0;
-            right: 0;
-            top: 0;
-        }
-
-        .profile-head h5 {
-            color: #333;
-        }
-        .change-password-btn{
-            border: none;
-            border-radius: 1.5rem;
-            width: auto;
-            padding: 10%;
-            font-weight: 600;
-            color: black;
-            cursor: pointer;
-        }
-        .profile-edit-btn {
-            border: none;
-            border-radius: 1.5rem;
-            width: auto;
-            padding: 10%;
-     
-            font-weight: 600;
-            color: black;
-            cursor: pointer;
-        }
-
-        .proile-rating {
-            font-size: 12px;
-            color: #818182;
-            margin-top: 5%;
-        }
-        .info{
-          font-size: 20px;
-          color: #fff;
-        }
-        .bn{
-            padding-top:20px;
-            padding-left: 150px;
-        }
-        p{
-            color: white;
-        }
-
-    </style>
-    <div class="container emp-profile">
-        {{-- <form method="post"> --}}
+<section class="vh-100" style="background-color: #f4f5f7;">
+    <div class="container">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-lg-8 mb-4 mb-lg-0">
+          <div class="card mb-3" style="border-radius: .5rem;">
+            <div class="row g-0">
+                @if (!empty($infoUsers))
+                @foreach ($infoUsers as $info)
+              <div class="col-md-4 gradient-custom text-center text-white" style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+               @if ($info->avatar == null)
+               <img
+               src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+               alt="Avatar"
+               class="img-fluid my-5"
+               style="  clip-path: circle(50%);
+                width: 150px; height: 150px""
+             />
+             @else
+                <img
+                src="{{$info->avatar}}"
+                alt="Avatar"
+                class="img-fluid my-5"
+                style="  clip-path: circle(50%);
+                width: 150px; height: 150px"
+              />
+              @endif
+                <h5>{{ $info->name }}</h5>
+          
+              </div>
+              <div class="col-md-8">
+                <div class="card-body p-4">
+                  <h6>Information</h6>
+                  <hr class="mt-0 mb-4">
+                  <div class="row pt-1">
+                    <div class="col-6 mb-3">
+                      <h6>Email</h6>
+                      <p class="text-muted">{{ $info->email }}</p>
+                    </div>
+                    <div class="col-6 mb-3">
+                      <h6>Phone</h6>
+                      <p class="text-muted">{{$info->phone }}</p>
+                    </div>
+                  </div>
+                  <div class="row pt-1">
+                    <div class="col-6 mb-3">
+                      <h6>Gender</h6>
+                      @if ( $info->gender  == \App\Models\User::GENDER[0])
+                      <p class="text-muted">Male</p>
+                      @elseif ($info->gender == \App\Models\User::GENDER[1])
+                      <p class="text-muted">Female</p>
+                      @endif
+                    </div>
+                    <div class="col-6 mb-3">
+                      <h6>Adress</h6>
+                      <p class="text-muted">{{$info->address}}</p>
+                    </div>
+                  </div>
+                  <div class="edit">
+                  <div class="edit_profile">
+                    <a href="{{ route('edit-profile',['id' => $info->id])}}"><input type="submit" class="btn btn-outline-secondary" name="btnAddMore" value="Edit Profile" /></a>
+                  </div>
+                  <div class="edit_profile">
+                    <a href=""><input type="submit" class="btn btn-outline-secondary" name="btnAddMore" value="Purchase History " /></a>
+                  </div>
+            
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  @endforeach
+  @endif
+    {{-- <div class="container emp-profile">
+         <form method="post">
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-img">
@@ -124,7 +122,7 @@
                                         <p>{{ $info->email }}</p>
                                     </div>
                                 </div>
-                                {{-- <div class="row">
+                                <div class="row">
                                     <div class="col-md-6">
                                         <label>Phone</label>
                                     </div>
@@ -138,7 +136,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <p>{{$info->address}}</p>
-                                    </div>--}}
+                                    </div>
                                 </div> 
                    
             </div>
@@ -161,4 +159,4 @@
     </div>
     </form>
     </div>
-@endsection
+@endsection --}}

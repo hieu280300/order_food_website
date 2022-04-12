@@ -6,7 +6,6 @@
 @section('title', 'Create user')
 @section('content')
     <h1>Create User</h1>
-    @include('errors.error')
     <br>
     <form action="{{ route('admin.user.store') }}" method="post">
         @csrf

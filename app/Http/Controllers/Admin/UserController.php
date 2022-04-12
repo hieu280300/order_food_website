@@ -17,11 +17,6 @@ use Illuminate\Support\Facades\Log;
 class UserController extends Controller
 {
     private const FOLDER_UPLOAD_USER_THUMBNAIL = 'users/thumbnails';
-   /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $data = [];
@@ -42,13 +37,6 @@ class UserController extends Controller
     {
         return view('admin.auth.users.create');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreUserRequest $request)
     {
         $thumbnailPath = null;
@@ -60,27 +48,28 @@ class UserController extends Controller
             $image = $request->file('avatar');
             $extension = $request->avatar->extension();
             $extension = strtolower($extension); // convert string to lowercase
-            $fileName = 'avatar_' . time() . '.' . $extension;
-
+            $fileName = 'image_shop_' . time() . '.' . $extension;
             // upload file to server
             $image->move(self::FOLDER_UPLOAD_USER_THUMBNAIL, $fileName);
 
             // set filename
             $thumbnailPath = self::FOLDER_UPLOAD_USER_THUMBNAIL . '/' . $fileName;
         }
+dd($thumbnailPath);
         $userInsert=[
             'name'=>$request->name,
             'email'=>$request->email,
             'password'=>Hash::make('$request->password'),
             'role'=>0,
             'gender'=>$request->gender,
-            'avatar'=> $thumbnailPath
+            'avatar'=> $request->avatar,
         ];
+        dd($userInsert);
       
-    
+        $user = User::create($userInsert);
         DB::beginTransaction();
         try{
-            $user = User::create($userInsert);
+          
             DB::commit();
             return redirect()->route('admin.user.index')->with('sucess', 'Insert into data to User Sucessful.');
         }catch(\Exception $ex){

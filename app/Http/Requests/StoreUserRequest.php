@@ -4,7 +4,8 @@ namespace App\Http\Requests;
 
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
 class StoreUserRequest extends FormRequest
 {
     /**
@@ -25,11 +26,11 @@ class StoreUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:5|max:255', // rule: not null, minumum: 5, maximum: 255
-            'email' => 'required|min:5|max:255', // rule: not null, minumum: 10
+            'name' => 'required|min:5|max:255', // rule: not null, minumum: 5, maximum: 255// rule: not null, minumum: 10
             'password' => 'required',
             'gender'=> 'required',
             'avatar' => 'required',
+            'email' => 'unique:users,email'
         ];
     }
 }
