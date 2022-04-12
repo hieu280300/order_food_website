@@ -55,6 +55,7 @@ class ShopController extends Controller
             // set filename
             $thumbnailPath = self::FOLDER_UPLOAD_SHOP_THUMBNAIL . '/' . $fileName;
         }
+
         $userInsert=[
             'name'=>$request->name,
             'email'=>$request->email,
