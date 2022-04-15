@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Mockery\Matcher\Type;
-use File;
+use Illuminate\Support\Facades\File;
 use Symfony\Component\Routing\Route;
 use Illuminate\Support\Facades\Log;
 class HomeController extends Controller
@@ -115,55 +115,63 @@ class HomeController extends Controller
     {
         $data = [];
         $id = Auth::user()->id;
-        $infoUsers = User::where('id', $id)->get();
+        $infoUsers = User::with('shops')->where('id', $id)->get();
         $data['infoUsers'] = $infoUsers;
+        foreach ($infoUsers as $info)
+        {
+        if($info->role == 1)
+        {
+            return view('frontend.shop.home_shop',$data);
+        }
+        else
+        {
         return view('frontend.profile.profile', $data);
+        }
+    }
     }
     public function editProfile($id)
     {
        $data = [];
        $user = User::find($id);
+    
       $data['user'] = $user;
       return view('frontend.profile.edit_profile',$data);
     }
     public function updateProfile(UpdateProfileRequest $request,$id)
     {
         $user = User::find($id);
-        $thumbnailOld = $user->avatar;
         $user->name = $request->name;
         $user->phone = $request->phone;
         $user->address = $request->address;
         $user->birthday = $request->birthday;
         $user->gender = $request->gender;
-        $thumbnailPath = $user->avatar;
-        if (
-            $request->hasFile('avatar')
-            && $request->file('avatar')->isValid()
-        )
+        if($request->hasFile('avatar'))
         {
-            // Nếu có thì thục hiện lưu trữ file vào public/thumbnail
-            $image = $request->file('avatar');
-            $extension = $request->avatar->extension();
-            $fileName = 'avatar_' . time() . '.' . $extension;
-            $thumbnailPath = $image->move('users/thumbnails'. '/' . $fileName);
-            $user->avatar = $thumbnailPath;
-            Log::info('thumbnailPath: ' . $thumbnailPath);
-        }
+            $destination = 'users/thumbnails/' . $user->avatar;
+            if(File::exists($destination))
+            {
+                File::delete($destination);
+            }
+            $file = $request->file('avatar');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $filename=$file ->move('users/thumbnails/',$filename);
+            $user->avatar = $filename;
 
+        }
         DB::beginTransaction();
- 
- 
+
         try {
             // update data for table posts
-            $user->save();
+            $user->update();
+          
             // create or update data for table post_details
+         
             DB::commit();
             // SAVE OK then delete OLD file
-            if (File::exists(public_path($thumbnailOld))) {
-                File::delete(public_path($thumbnailOld));
-            }
+
             // success
-            return redirect()->route('frontend.profile.profile',$user->id)->with('mess', 'Update successful!');
+            return redirect()->route('info-user',$user->id)->with('hihi', 'Update successful!');
         } catch (\Exception $ex) {
             DB::rollback();
             

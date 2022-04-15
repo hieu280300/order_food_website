@@ -26,7 +26,7 @@ class Shop extends Model
     public function order(){
         return $this->belongsTo(Order::class);
     }
-    public function users(){
-        return $this->hasOne(User::class);
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 }

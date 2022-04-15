@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\CategoryController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -39,10 +40,32 @@ Route::post('cart_quantity_delete.post',[CartController::class,'destroy']);
 Route::get('/edit_profile/{id}',[App\Http\Controllers\Frontend\HomeController::class,'editProfile'])->name('edit-profile');
 Route::put('/update_profile/{id}',[HomeController::class,'updateProfile'])->name('updateProfile');
 
+Route::group(['prefix' => 'category', 'as' => 'category.'], function () {
+    Route::get('/list', [CategoryController::class, 'index'])->name('index');
+    Route::get('/create', [CategoryController::class, 'create'])->name('create');
+    Route::post('/store', [CategoryController::class, 'store'])->name('store');
+    Route::get('/show/{id}', [CategoryController::class, 'show'])->name('show');
+    Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('edit');
+    Route::put('/update/{id}', [CategoryController::class, 'update'])->name('update');
+    Route::delete('/delete/{id}', [CategoryController::class, 'destroy'])->name('destroy');
+});
+Route::group(['prefix' => 'product', 'as' => 'product.'], function () {
+    Route::get('/list', [ProductController::class, 'index'])->name('index');
+    Route::get('/create', [ProductController::class, 'create'])->name('create');
+    Route::post('/store', [ProductController::class, 'store'])->name('store');
+    Route::get('/show/{id}', [ProductController::class, 'show'])->name('show');
+    Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('edit');
+    Route::put('/update/{id}', [ProductController::class, 'update'])->name('update');
+    Route::delete('/delete/{id}', [ProductController::class, 'destroy'])->name('destroy');
+});
+
+
 Route::get('/product_detail', function () {
     return view('frontend.home.product_detail');
 });
 Route::get('info-user',[App\Http\Controllers\Frontend\HomeController::class,'infoUser'])->name('info-user');
+
+Route::get('info-shop',[HomeController::class,'infoShop'])->name('info-shop');
 Route::get('/dashboard', function () {
     return view('admin/dashboard');
 });
