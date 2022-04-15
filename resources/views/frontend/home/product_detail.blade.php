@@ -196,8 +196,12 @@
             <li class="nav-item">
               <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">Description</a>
             </li>
+            @php
+            $resultCMT = json_decode($cmt, true);
+            $amountCMT = count($resultCMT);
+        @endphp
             <li class="nav-item">
-              <a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="false">Reviews (0)</a>
+              <a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="false">Reviews ({{$amountCMT}})</a>
             </li>
         </ul>
         <div class="tab-content" id="myTabContent">
@@ -206,38 +210,63 @@
             </div>
             <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
               <div class="review-heading">REVIEWS</div>
-              {{-- <p class="mb-20">There are no reviews yet.</p> --}}
+
+
+              <p class="mb-20">{{$amountCMT}} Reviews</p>
               <section class='tabs-content'>
                 <div class="row">
-                    <div class="col-md-8 contact-form">
-                        <h4>Comments</h4>
+                    <div class="col-md-6 contact-form">
+                        {{-- <h4>Comments</h4> --}}
                         <ul class="features-items">
-                            <li>
-                                <div class="feature-item" style="margin-bottom:15px;">
-                                    <div class="left-icon">
-                                        <img src="{{asset('frontend/assets/images/features-first-icon.png')}}" alt="First One">
-                                    </div>
-                                    <div class="right-content">
-                                        <h4>John Doe <small>27.07.2020 10:10</small></h4>
-                                        <p><em>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta numquam maxime voluptatibus, impedit sed! Necessitatibus repellendus sed deleniti id et!"</em></p>
-                                        <button type="submit" id="form-submit" class="main-button">Replay</button>
-                                    </div>
 
-                                </div>
-
-                                <div class="tabs-content">
+                            @foreach ($resultCMT as $value_cmt)
+                                @if($value_cmt['level']==0)
+                                <li>
                                     <div class="feature-item" style="margin-bottom:15px;">
                                         <div class="left-icon">
                                             <img src="{{asset('frontend/assets/images/features-first-icon.png')}}" alt="First One">
                                         </div>
                                         <div class="right-content">
-                                            <h4>John Doe <small>27.07.2020 11:10</small></h4>
-                                            <p><em>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta numquam maxime voluptatibus, impedit sed! Necessitatibus repellendus sed deleniti id et!"</em></p>
+                                            <input type="hidden" class ="id_cmt" value="{{$value_cmt['id']}}">
+                                            <?php
+                                                        $date = date_create($value_cmt['created_at']);
+                                                        // echo $data;
+
+                                                    ?>
+                                            <h4>{{$value_cmt['name']}} <small> {{date_format($date,"d.m.Y")}}</small></h4>
+                                            <p><em>" {{$value_cmt['comment']}} "</em>
+
+                                            </p>
+                                            <a  class="add_cmt" id="form-submit" href="#comment" class="main-button">Replay</a>
                                         </div>
+
                                     </div>
-                                </div>
-                            </li>
-                            <li class="feature-item" style="margin-bottom:15px;">
+
+                                    @foreach ($resultCMT as $repcmt)
+                                        @if($value_cmt['id']==$repcmt['level'])
+
+                                        <div class="tabs-content">
+                                            <div class="feature-item" style="margin-bottom:15px;">
+                                                <div class="left-icon">
+                                                    <img src="{{asset('frontend/assets/images/features-first-icon.png')}}" alt="First One">
+                                                </div>
+                                                <div class="right-content">
+                                                    <?php
+                                                            $date = date_create($repcmt['created_at']);
+
+
+                                                        ?>
+                                                    <h4>{{$repcmt['name']}} <small> {{date_format($date,"d.m.Y")}}</small></h4>
+                                                    <p><em>" {{$repcmt['comment']}} "</em></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @endif
+                                    @endforeach
+                                </li>
+                                @endif
+                            @endforeach
+                            {{-- <li class="feature-item" style="margin-bottom:15px;">
                                 <div class="left-icon">
                                     <img src="{{asset('frontend/assets/images/features-first-icon.png')}}" alt="second one">
                                 </div>
@@ -246,7 +275,7 @@
                                     <p><em>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta numquam maxime voluptatibus, impedit sed! Necessitatibus repellendus sed deleniti id et!"</em></p>
                                     <button type="submit" id="form-submit" class="main-button">Replay</button>
                                 </div>
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>
 
@@ -284,14 +313,11 @@
             </section>
                 <div class="form-group">
                     <h4>Leave a comment</h4>
-                    <p>{{$dem}} Reviews</p>
 
-                    <form class="review-form" method="POST" action="{{url('blog-single/post')}}">
-                    @csrf
+
 
                     <div class="reviews-counter">
-                        <input class="id_cmt" type="hidden" name="level" value="0">
-                        <input type="hidden" name="id" value="{{$product['id']}}">
+
                         {{-- <div class="rate">
                             <input type="radio" id="star5" name="rate" value="5" />
                             <label for="star5" title="text">5 stars</label>
@@ -307,11 +333,17 @@
 
                     </div>
                 </div>
-                  <div class="form-group">
+
+                <form class="review-form" method="POST" action="{{url('product-detail/post')}}">
+                    @csrf
+                  <div class="form-group" id="comment">
+                    {{-- <input type="hidden" class ="id_cmt" value="{{$value['id']}}"> --}}
+                    <input class="id_cmt" type="hidden" name="level" value="0">
+                    <input type="hidden" name="id" value="{{$product['id']}}">
                     <label>Your message</label>
-                    <textarea  name="message" class="form-control" rows="10"></textarea>
+                    <textarea  name="message" class="form-control" rows="2"></textarea>
                   </div>
-                  <div class="row">
+                  {{-- <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
                         <input type="text" name="" class="form-control" placeholder="Name*">
@@ -322,8 +354,8 @@
                         <input type="text" name="" class="form-control" placeholder="Email Id*">
                       </div>
                     </div>
-                  </div>
-                  <button class="round-black-btn" name="submit">Submit Review</button>
+                  </div> --}}
+                  <button class="round-black-btn comment" name="submit">Review</button>
                 </form>
             </div>
         </div>
@@ -331,6 +363,26 @@
       {{-- <div style="text-align:center;font-size:14px;padding-bottom:20px;">Get free icon packs for your next project at <a href="http://iiicons.in/" target="_blank" style="color:#ff5e63;font-weight:bold;">www.iiicons.in</a></div> --}}
     </div>
   </div>
+  <script>
+    $(document).ready(function(){
+        // $("id_cmt").val(0);
+        $('.add_cmt').click(function(){
+            var id_cmt=$(this).closest('.right-content').find('.id_cmt').val();
+            // alert(id_cmt);
+            $(".id_cmt").val(id_cmt);
+        });
+        $('.comment').click(function(){
+            var checkLogin = "{{Auth::check()}}";
+            if(checkLogin==1){
+                return true;
+            }
+            else {
+                alert (" Vui long dang nhap!");
+                return false;
+            }
+        });
+    });
+</script>
  <script type="text/javascript">
  $(document).ready(function() {
 		    var slider = $("#slider");

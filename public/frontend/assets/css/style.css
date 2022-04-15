@@ -850,6 +850,7 @@ Our Classes
     font-size: 14px;
     color: #7a7a7a;
     margin-bottom: 28px;
+    min-width: 300px;
 }
 
 
@@ -1136,14 +1137,34 @@ contact
     border: none;
     outline: none;
     margin-top: -8px;
-    float: right;
+    float: left;
+    margin-left: 130px;
 }
 
 .contact-form button:hover {
     background-color: #f9735b;
 }
+.contact-form a {
+    display: inline-block;
+    font-size: 13px;
+    padding: 4px 14px;
+    background-color: #ed563b;
+    color: #fff !important;
+    text-align: center;
+    font-weight: 400;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    border: none;
+    outline: none;
+    margin-top: -8px;
+    float: left;
+    margin-left: 130px;
+    cursor: pointer;
 
-
+}
+.contact-form a:hover {
+    background-color: #f9735b;
+}
 /*
 ---------------------------------------------
 footer

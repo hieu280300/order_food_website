@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Product;
 use App\Models\Rate;
 use Illuminate\Http\Request;
 use Illuminate\Queue\Middleware\RateLimited;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 // use Symfony\Component\Routing\Route;
 use Illuminate\Support\Facades\Route;
 
@@ -58,9 +60,15 @@ class ProductController extends Controller
         else{
             $stars = round($sum/$dem,1);
         }
+        $cmt = DB::table('users')
+                    ->join('comments','users.id','=','comments.user_id')
+                    ->where('comments.product_id','=',$id)
+                    ->get();
+
         $data['product'] = $product;
         $data['stars'] = $stars;
         $data['dem'] = $dem;
+        $data['cmt'] = $cmt;
         // dd($data);
         return view('frontend.home.product_detail', $data);
     }
@@ -90,5 +98,16 @@ class ProductController extends Controller
         else{
             return redirect()->back();
         }
+    }
+    public function PostCmt(Request $request)
+    {
+        // dd($request->all());
+        $cmt = Comment::create([
+            'user_id' => Auth::user()->id,
+            'product_id' => $request->id,
+            'comment'    => $request->message,
+            'level' => $request->level,
+        ]);
+        return redirect()->back();
     }
 }
