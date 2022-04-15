@@ -93,7 +93,8 @@ class HomeController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role_id' => '1'
+            'role_id' => '1',
+            'avatar' =>'frontend/assets/images/features-first-icon.png'
         ]);
 
         event(new Registered($user));
@@ -151,8 +152,8 @@ class HomeController extends Controller
         }
 
         DB::beginTransaction();
- 
- 
+
+
         try {
             // update data for table posts
             $user->save();
@@ -166,12 +167,12 @@ class HomeController extends Controller
             return redirect()->route('frontend.profile.profile',$user->id)->with('mess', 'Update successful!');
         } catch (\Exception $ex) {
             DB::rollback();
-            
+
             return redirect()->back()->with('error', $ex->getMessage());
         }
     }
 
-    
+
 
     /**
      * Store a newly created resource in storage.
@@ -198,7 +199,7 @@ class HomeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
- 
+
 
     /**
      * Update the specified resource in storage.
