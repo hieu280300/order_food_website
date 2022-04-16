@@ -4,7 +4,18 @@
     @push('css')
     @endpush
 @section('content')
+@if(session()->has('hihi'))
+<div class="alert alert-success">
+    {{ session()->get('hihi') }}
+</div>
 
+@endif
+@if(session()->has('error'))
+<div class="alert alert-success">
+{{ session()->get('error') }}
+</div>
+
+@endif
 <section class="vh-100" style="background-color: #f4f5f7;">
     <div class="container">
       <div class="row d-flex justify-content-center align-items-center h-100">
@@ -45,7 +56,7 @@
                     </div>
                     <div class="col-6 mb-3">
                       <h6>Phone</h6>
-                      <p class="text-muted">{{$info->phone }}</p>
+                      <p class="text-muted">{{$info->name }}</p>
                     </div>
                   </div>
                   <div class="row pt-1">

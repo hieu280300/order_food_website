@@ -7,7 +7,9 @@
         /* body{margin-top:20px;}		 */
 
     </style>
-
+    <div>
+        
+    </div>
     <div class="container bootstrap snippets bootdey">
 
         <h1 class="text-primary"><span class="glyphicon glyphicon-user"></span>Edit Profile</h1>
