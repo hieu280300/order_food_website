@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Product;
 use App\Models\Rate;
 use Illuminate\Http\Request;
@@ -20,6 +21,7 @@ use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
+    private const FOLDER_UPLOAD_PRODUCT_THUMBNAIL = 'product/thumbnails';
 
     public function getProductsShop(request $request)
     {
@@ -63,9 +65,15 @@ class ProductController extends Controller
         else{
             $stars = round($sum/$dem,1);
         }
+        $cmt = DB::table('users')
+                    ->join('comments','users.id','=','comments.user_id')
+                    ->where('comments.product_id','=',$id)
+                    ->get();
+
         $data['product'] = $product;
         $data['stars'] = $stars;
         $data['dem'] = $dem;
+        $data['cmt'] = $cmt;
         // dd($data);
         return view('frontend.home.product_detail', $data);
     }
@@ -96,7 +104,7 @@ class ProductController extends Controller
             return redirect()->back();
         }
     }
-    private const FOLDER_UPLOAD_PRODUCT_THUMBNAIL = 'product/thumbnails';
+   
     /**
      * Display a listing of the resource.
      *
@@ -303,5 +311,16 @@ class ProductController extends Controller
             // have error so will show error message
             return redirect()->back()->with('error', $ex->getMessage());
         }
+    }
+    public function PostCmt(Request $request)
+    {
+        // dd($request->all());
+        $cmt = Comment::create([
+            'user_id' => Auth::user()->id,
+            'product_id' => $request->id,
+            'comment'    => $request->message,
+            'level' => $request->level,
+        ]);
+        return redirect()->back();
     }
 }

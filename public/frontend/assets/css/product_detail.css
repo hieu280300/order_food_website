@@ -223,19 +223,19 @@
 
 .round-black-btn {
     border-radius: 4px;
-    background: #212529;
+    background: #f9735b;
     color: #fff;
     padding: 7px 45px;
     display: inline-block;
     margin-top: 20px;
-    border: solid 2px #212529;
+    border: solid 2px #f9735b;
     transition: all 0.5s ease-in-out 0s;
 }
 
 .round-black-btn:hover,
 .round-black-btn:focus {
     background: transparent;
-    color: #212529;
+    color: #f9735b;
     text-decoration: none;
 }
 
@@ -265,8 +265,9 @@
 .product-info-tabs .nav-tabs .nav-link.active,
 .product-info-tabs .nav-tabs .nav-link.active:hover {
     border: none;
-    border-bottom: 2px solid #d8d8d8;
+    border-bottom: 2px solid #f9735b;
     font-weight: bold;
+    color: #f9735b;
 }
 
 .product-info-tabs .tab-content .tab-pane {

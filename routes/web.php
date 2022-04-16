@@ -29,6 +29,7 @@ Route::get('/member-logout', [HomeController::class,'Logout'])->name('member-log
 
 Route::get('product-detail/{id}', [ProductController::class,'getProductDetail'])->name('product-detail');
 Route::post('product-detail/stars/rate', [ProductController::class,'postRate'])->name('ajax.rate');
+Route::post('product-detail/post',[ProductController::class,'PostCmt']);
 
 Route::get('/cart',[CartController::class,'index']);
 Route::post('/addToCard',[App\Http\Controllers\Frontend\CartController::class,'addToCart'])->name('addToCart');
