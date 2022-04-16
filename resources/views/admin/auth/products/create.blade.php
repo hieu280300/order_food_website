@@ -8,8 +8,8 @@
         .color_id {
             width: 500px;
         }
-
     </style>
+            
     <h1>Create Product</h1>
     <br>
     <form action="{{ route('admin.product.store') }}" method="post" enctype="multipart/form-data">
@@ -87,7 +87,7 @@
         </div>
         <div class="form-group mb-5" class="form-control">
             <label for="">Shop Name</label>
-            <select name="shop_id" class="form-control">
+            <select name="shop_id" class="form-control"> 
             <option value="{{ $product->shop_id }}" {{ old('shop_id') == $product->shop_id ? 'selected' : ' ' }}>
                 {{ $product->shop_name }}</option>
         </select>
@@ -108,4 +108,6 @@
             <button class="btn btn-primary" type="submit">create</button>
         </div>
     </form>
-@endsection
+
+   
+@endsection 
