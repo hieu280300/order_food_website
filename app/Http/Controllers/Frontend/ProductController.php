@@ -135,7 +135,18 @@ class ProductController extends Controller
         ->join('categories','categories.shop_id','=','shops.id')
         ->where('shops.id',$id)->select('categories.name as category_name','categories.id as category_id','shops.id as shop_id','shops.name as shop_name')->paginate(5);
         $dataInsert['products'] = $products;
-        return view('frontend.shop.products.create', $dataInsert);
+        foreach ($products as $product)
+        {
+            if ($product->category_id ==null)
+            {
+                return view('frontend.shop.products.no_create');
+            }
+            else
+            {
+                return view('frontend.shop.products.create', $dataInsert);
+            }
+        }
+       
     }
 
     /**

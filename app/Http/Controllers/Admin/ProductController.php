@@ -67,7 +67,21 @@ class ProductController extends Controller
         ->join('categories','categories.shop_id','=','shops.id')
         ->where('shops.id',$id)->select('categories.name as category_name','categories.id as category_id','shops.id as shop_id','shops.name as shop_name')->paginate(5);
         $dataInsert['products'] = $products;
-        return view('admin.auth.products.create', $dataInsert);
+        foreach ($products as $product)
+        {
+          
+            if (empty($product->category_name))
+            {
+                return view('admin.auth.products.create', $dataInsert);
+               
+            }
+            else
+            {
+             return view('admin.auth.products.no_create',$dataInsert);
+            }
+        }
+       
+       
     }
 
     /**

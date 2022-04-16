@@ -80,8 +80,12 @@
         <div class="form-group px-5" class="form-control">
             <label for="">Shop Name</label>
             <select name="shop_id" class="form-control">
+                @if (!empty($products))
+                @foreach ($products as $product)
             <option value="{{ $product->shop_id }}" {{ old('shop_id') == $product->shop_id ? 'selected' : ' ' }}>
                 {{ $product->shop_name }}</option>
+                @endforeach
+                @endif
         </select>
         @error('shop_id')
         <div class="alert alert-danger">{{ $message }}</div>
