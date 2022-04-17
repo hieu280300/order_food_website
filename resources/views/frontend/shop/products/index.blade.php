@@ -1,6 +1,9 @@
 @extends('frontend.shop.master_shop')
 @section('title', 'Login')
 @section('content')  
+<div  class="table  table-striped">
+
+    
     <table id="post"  class="table table-bordered table-hover table-striped">
         <thead class="thead-dark">
             <tr>

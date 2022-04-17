@@ -4,6 +4,7 @@
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CategoryController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\OrderController;
 use App\Http\Controllers\Frontend\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -60,6 +61,14 @@ Route::group(['prefix' => 'product', 'as' => 'product.'], function () {
     Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('edit');
     Route::put('/update/{id}', [ProductController::class, 'update'])->name('update');
     Route::delete('/delete/{id}', [ProductController::class, 'destroy'])->name('destroy');
+});
+Route::group(['prefix' => 'order', 'as' => 'order.'], function () {
+    Route::get('/list', [OrderController::class, 'index'])->name('index');
+    
+    Route::get('/show/{id}', [OrderController::class, 'show'])->name('show');
+    Route::get('/edit/{id}', [OrderController::class, 'edit'])->name('edit');
+    Route::put('/update/{id}', [OrderController::class, 'update'])->name('update');
+    Route::delete('/delete/{id}', [OrderController::class, 'destroy'])->name('destroy');
 });
 
 
