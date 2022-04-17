@@ -131,7 +131,9 @@
             </script>
             <div class="col-md-6">
               <div class="product-dtl">
-
+                {{-- @php
+                    {{dd($product->id);}}
+                @endphp --}}
                 <div class="product-info">
                   <div class="product-name">{{$product->name}}</div>
                   <div class="reviews-counter">
@@ -161,15 +163,15 @@
                 </div>
                 <p>{{$product->description}}</p>
                 <div class="row">
-                  <div class="col-md-6">
+                  {{-- <div class="col-md-6">
                     <label for="size">Size</label>
-                <select id="size" name="size" class="form-control">
-                  <option>S</option>
-                  <option>M</option>
-                  <option>L</option>
-                  <option>XL</option>
-                </select>
-                  </div>
+                    <select id="size" name="size" class="form-control">
+                    <option>S</option>
+                    <option>M</option>
+                    <option>L</option>
+                    <option>XL</option>
+                    </select>
+                  </div> --}}
                   {{-- <div class="col-md-6">
                     <label for="color">Color</label>
                 <select id="color" name="color" class="form-control">
@@ -183,10 +185,10 @@
                   <label for="size">Quantity</label>
                   <form action="#" class="display-flex">
                   <div class="qtyminus">-</div>
-                  <input type="text" name="quantity" value="1" class="qty">
+                  <input type="text" name="quantity" class="qty" value="1" class="qty">
                   <div class="qtyplus">+</div>
               </form>
-              <a href="#" class="round-black-btn">Add to Cart</a>
+              <a id = "{{$product->id}}" href="" class="round-black-btn detail-add-to-cart">Add to Cart</a>
                 </div>
               </div>
             </div>
@@ -253,8 +255,6 @@
                                                 <div class="right-content">
                                                     <?php
                                                             $date = date_create($repcmt['created_at']);
-
-
                                                         ?>
                                                     <h4>{{$repcmt['name']}} <small> {{date_format($date,"d.m.Y")}}</small></h4>
                                                     <p><em>" {{$repcmt['comment']}} "</em></p>
@@ -363,6 +363,45 @@
       {{-- <div style="text-align:center;font-size:14px;padding-bottom:20px;">Get free icon packs for your next project at <a href="http://iiicons.in/" target="_blank" style="color:#ff5e63;font-weight:bold;">www.iiicons.in</a></div> --}}
     </div>
   </div>
+  <script>
+    $(document).ready(function(){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $(".detail-add-to-cart").click(function(){
+
+            var id = parseInt($(this).attr('id'));
+            var gia = $(this).closest('.menu_item').find('.price_product_item span').text();
+            var qty = $('.qty').val();
+            var sum_cart = $('span.sum_cart').text()*1;
+            // sum_cart++;
+            // $('span.sum_cart').text(sum_cart);
+            // id= $(".id").val();
+            // console.log(qty);
+            $.ajax({
+                type:'POST',
+                url:"{{ url('product-detail/addToCard')}}",
+                data:{
+                    id:id,
+                    qty:qty,
+                },
+                success:function(data){
+                    alert(data.success);
+                    $('span.sum_cart').html(data.sum_cart);
+
+                    // $('span.total').text(data.success.total);
+
+                }
+            // console.log(data.success);
+
+            });
+            return false;   
+            // $('span.total').text(23);
+        });
+    });
+</script>
   <script>
     $(document).ready(function(){
         // $("id_cmt").val(0);

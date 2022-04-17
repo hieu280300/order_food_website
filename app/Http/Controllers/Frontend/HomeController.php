@@ -70,7 +70,7 @@ class HomeController extends Controller
         $remember = false;
         if ($request->remeber_me)
             $remember = true;
-        if (Auth::attempt($login)) {
+        if (Auth::attempt($login,$remember)) {
             return redirect('/')->with('login_success', __('You are successfully logged in.'));
         } else {
             return redirect('member-login')->withErrors('Your email or password are wrong.');
@@ -105,11 +105,12 @@ class HomeController extends Controller
     }
     public function Logout(Type $var = null)
     {
-        Auth::logout();
+
         $getSession = session()->get('cart');
-        if (empty($getSession)) {
+        if (!empty($getSession)) {
             session()->forget('cart');
         }
+        Auth::logout();
         return redirect('member-login');
     }
     public function infoUser()
