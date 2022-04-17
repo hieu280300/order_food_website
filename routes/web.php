@@ -34,6 +34,7 @@ Route::post('product-detail/post',[ProductController::class,'PostCmt']);
 
 Route::get('/cart',[CartController::class,'index']);
 Route::post('/addToCard',[App\Http\Controllers\Frontend\CartController::class,'addToCart'])->name('addToCart');
+Route::post('/product-detail/addToCard',[App\Http\Controllers\Frontend\CartController::class,'detail_addToCart']);
 Route::post('cart_quantity_up.post', [CartController::class,'plusProduct']);
 Route::post('cart_quantity_down.post',[CartController::class,'minusProduct']);
 Route::post('cart_quantity_delete.post',[CartController::class,'destroy']);
