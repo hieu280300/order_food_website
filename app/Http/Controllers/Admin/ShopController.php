@@ -23,7 +23,7 @@ class ShopController extends Controller
         ->leftJoin('shops', 'users.id', '=', 'shops.user_id')
         ->where('users.role','=','1')
         ->select('users.name as user_name','shops.name as shop_name','shops.image as shop_image','shops.id as shop_id','shops.address as shop_address','users.role as user_role','users.email as user_email')->paginate(5);
-    
+
         $data['shops'] = $shops;
         return view('admin.auth.shops.index', $data);
     }
@@ -60,7 +60,7 @@ class ShopController extends Controller
             'name'=>$request->name,
             'email'=>$request->email,
             'password'=>Hash::make($request->password),
-            'role'=>1, 
+            'role'=>1,
         ];
         $user=User::create($userInsert);
             $shopInsert=[
@@ -70,12 +70,12 @@ class ShopController extends Controller
                 'time_open'=>$request->time_open.':00',
                 'time_close'=>$request->time_close.':00',
                 'user_id'=>$user->id
-    
+
             ];
             $shop = Shop::create($shopInsert);
         DB::beginTransaction();
         try{
-           
+
             $categoryInsert=[
                 'shop_id'=>$shop->id
             ];
@@ -91,6 +91,6 @@ class ShopController extends Controller
             Log::error($ex->getMessage());
 
             return redirect()->back()->with('error', $ex->getMessage());
-        } 
+        }
      }
 }

@@ -335,7 +335,6 @@
                 // }
             });
 			return false;
-
 		})
         $('a.cart_quantity_delete').click(function(){
 			var getId = $(this).closest('tr').find('td input.id').attr('id')*1;

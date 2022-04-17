@@ -38,8 +38,8 @@ class HomeController extends Controller
         // dd($route);
         return view('frontend.home.shop', $data);
 
-
     }
+
     public function postSearchShop(Request $request)
     {
         $shops = Shop::where('name', 'like', '%' . $request->name_shop . '%')
@@ -70,7 +70,7 @@ class HomeController extends Controller
         $remember = false;
         if ($request->remeber_me)
             $remember = true;
-        if (Auth::attempt($login, $remember)) {
+        if (Auth::attempt($login,$remember)) {
             return redirect('/')->with('login_success', __('You are successfully logged in.'));
         } else {
             return redirect('member-login')->withErrors('Your email or password are wrong.');
@@ -93,7 +93,7 @@ class HomeController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role_id' => '1',
+            'role' => '0',
             'avatar' =>'frontend/assets/images/features-first-icon.png'
         ]);
 
@@ -105,11 +105,12 @@ class HomeController extends Controller
     }
     public function Logout(Type $var = null)
     {
-        Auth::logout();
+
         $getSession = session()->get('cart');
-        if (empty($getSession)) {
+        if (!empty($getSession)) {
             session()->forget('cart');
         }
+        Auth::logout();
         return redirect('member-login');
     }
     public function infoUser()
@@ -134,7 +135,7 @@ class HomeController extends Controller
     {
        $data = [];
        $user = User::find($id);
-    
+
       $data['user'] = $user;
       return view('frontend.profile.edit_profile',$data);
     }
@@ -164,9 +165,9 @@ class HomeController extends Controller
         try {
             // update data for table posts
             $user->update();
-          
+
             // create or update data for table post_details
-         
+
             DB::commit();
             // SAVE OK then delete OLD file
 

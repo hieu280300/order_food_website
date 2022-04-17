@@ -89,7 +89,22 @@
                             <p>Địa chỉ: {{$shop['address']}}</p>
 
                             <div class="main-button">
-                                <a href="{{url('products')}}/{{$shop['id']}}">View Product</a>
+                            @if ($shop['time_open']>$shop['time_close'])
+                                @if (($shop['time_open']< $time+24) && ( $time< $shop['time_close']))
+                                    <a href="{{url('products')}}/{{$shop['id']}}">Xem sản phẩm</a>
+
+                                @else
+                                    <a href="{{url('shopclose')}}/{{$shop['id']}}">Đóng cửa</a>
+                                @endif
+                            @else
+                                @if (($shop['time_open']< $time) && ( $time< $shop['time_close']))
+                                    <a href="{{url('products')}}/{{$shop['id']}}">Xem sản phẩm</a>
+
+                                @else
+                                    <a href="{{url('shopclose')}}/{{$shop['id']}}">Đóng cửa</a>
+                                @endif
+                            @endif
+
                             </div>
                         </div>
                     </div>

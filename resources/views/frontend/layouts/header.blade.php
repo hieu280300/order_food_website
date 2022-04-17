@@ -17,7 +17,7 @@
                     <ul class="nav">
                         <li><a href="{{ url('/') }}"
                             @php if ($route == '/') { echo ('class="active"'); } @endphp >Home</a></li>
-                        <li><a href="{{ url('products') }}"
+                        <li><a href="{{ url('/') }}"
                             @php if ($route == 'products/{id}') { echo ('class="active"'); } @endphp>Products</a></li>
                         {{-- <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"

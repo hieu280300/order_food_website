@@ -28,15 +28,45 @@ class CartController extends Controller
     public function addToCart(Request $request)
     {
         $id = $request->id;
+        $qty = $request->qty;
         $array = [];
         $array['id'] = $id;
-        $array['qty'] = 1;
+        $array['qty'] = $qty;
         if (session()->has('cart')) {
             $getSession = session()->get('cart');
             $flag = 1;
             foreach ($getSession as $key => $value) {
                 if ($id == $value['id']) {
-                    $getSession[$key]['qty']++;
+                    $getSession[$key]['qty']=$getSession[$key]['qty']+$qty;
+                    session()->put('cart', $getSession);
+                    $flag = 0;
+                }
+            }
+            if ($flag == 1) {
+                session()->push('cart', $array);
+            }
+        } else {
+            session()->push('cart', $array);
+        }
+        $getSession = session()->get('cart');
+        $sum_cart=count($getSession);
+        return response()->json(['success' => 'Đặt hàng thành công !!!',
+                                'sum_cart' => $sum_cart
+                                ]);
+    }
+    public function detail_addToCart(Request $request)
+    {
+        $id = $request->id;
+        $qty = $request->qty;
+        $array = [];
+        $array['id'] = $id;
+        $array['qty'] = $qty;
+        if (session()->has('cart')) {
+            $getSession = session()->get('cart');
+            $flag = 1;
+            foreach ($getSession as $key => $value) {
+                if ($id == $value['id']) {
+                    $getSession[$key]['qty']=$getSession[$key]['qty']+$qty;
                     session()->put('cart', $getSession);
                     $flag = 0;
                 }
