@@ -137,7 +137,7 @@ class ProductController extends Controller
         $dataInsert['products'] = $products;
         foreach ($products as $product)
         {
-            if ($product->category_id ==null)
+            if (empty($product->category_name))
             {
                 return view('frontend.shop.products.no_create');
             }

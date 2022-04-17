@@ -59,7 +59,7 @@ class ShopController extends Controller
         $userInsert=[
             'name'=>$request->name,
             'email'=>$request->email,
-            'password'=>Hash::make('$request->password'),
+            'password'=>Hash::make($request->password),
             'role'=>1, 
         ];
         $user=User::create($userInsert);

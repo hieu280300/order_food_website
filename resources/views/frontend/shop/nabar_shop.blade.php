@@ -24,7 +24,7 @@
                     <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">business_center</i></span><span class="pc-mtext">Orders</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                     <ul class="pc-submenu">
      
-                        <li class="pc-item"><a class="pc-link {{ Route::currentRouteName() == 'admin.shop.index' ? 'active' : '' }}" href="{{ route('admin.shop.index') }}">List Products</a></li>
+                        <li class="pc-item"><a class="pc-link {{ Route::currentRouteName() == 'order.index' ? 'active' : '' }}" href="{{ route('order.index') }}">List Order</a></li>
                     </ul>
                 </li>
             
