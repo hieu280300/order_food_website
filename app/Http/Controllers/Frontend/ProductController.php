@@ -40,7 +40,24 @@ class ProductController extends Controller
 
         return view('frontend.home.product', $data);
     }
+    public function getShopClose(request $request)
+    {
+        $shop_id = $request->id;
+        $data = [];
+        $products = Product::where('shop_id', $shop_id)
+            ->with('category')
+            ->get();
+        // ->toArray();;
+        $categories = Category::where('shop_id', $shop_id)
+            ->pluck('name', 'id')
+            ->toArray();
+        // $categories = Category::pluck('name','id')->toArray();
+        $data['products'] = $products;
+        $data['categories'] = $categories;
 
+        return view('frontend.home.shopclose', $data);
+
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -104,7 +121,7 @@ class ProductController extends Controller
             return redirect()->back();
         }
     }
-   
+
     /**
      * Display a listing of the resource.
      *
@@ -209,7 +226,7 @@ class ProductController extends Controller
      */
     public function show($id,request $request)
     {
-      
+
         $data = [];
         $products = DB::table('products')
         ->join('shops','shops.id','=','products.shop_id')
@@ -219,7 +236,7 @@ class ProductController extends Controller
         //  $categories = Category::pluck('name', 'id')
         //  ->toArray();
         // $data['categories'] = $categories;
-        $data['shop_id']=$id;
+        $data['shop_id'] = $id;
         $data['products'] = $products;
 
         return view('admin.auth.products.index', $data);
@@ -261,7 +278,7 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, $id)
     {
- 
+
         $product = Product::find($id);
         $product->name = $request->name;
         $product->slug = $request->slug;
@@ -282,21 +299,20 @@ class ProductController extends Controller
             $filename = time() . '.' . $extension;
             $filename=$file ->move('product/updates/',$filename);
             $product->thumbnail = $filename;
-
         }
         DB::beginTransaction();
 
         try {
             // update data for table posts
             $product->update();
-          
+
             // create or update data for table post_details
-         
+
             DB::commit();
             return redirect()->route('product.index')->with('mess', 'Update successful!');
         } catch (\Exception $ex) {
             DB::rollback();
-            
+
             return redirect()->back()->with('error', $ex->getMessage());
         }
     }

@@ -21,6 +21,7 @@ Route::get('/', [HomeController::class ,'getShop']);
 Route::post('/', [HomeController::class ,'postSearchShop']);
 
 Route::get('/products/{id}', [App\Http\Controllers\Frontend\ProductController::class ,'getProductsShop'])->name('shop');
+Route::get('/shopclose/{id}',[ProductController::class,'getShopClose']);
 Route::get('/member-login',[HomeController::class,'getLogin'])->name('member-login');
 Route::post('/member-login',[HomeController::class,'postLogin']);
 Route::get('/member-register',[HomeController::class,'getRegister'])->name('member-register');
