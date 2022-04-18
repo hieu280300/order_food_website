@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateProductRequest;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Shop;
 use App\Models\User;
@@ -178,6 +179,25 @@ class HomeController extends Controller
 
             return redirect()->back()->with('error', $ex->getMessage());
         }
+    }
+    public function manage_order()
+    {
+        $data=[];
+        $id = Auth::user()->id;
+        $manage_orders=Order::where('user_id',$id)->with('orderDetails')->with('user')->with('shop')->get();
+        $data['manage_orders']=$manage_orders;
+        return view('frontend.profile.manager_order',$data);
+    }
+    public function order_detail($id)
+    {
+        $order_details = DB::table('order_details')
+        ->join('products', 'order_details.product_id', '=', 'products.id')
+        ->join('orders', 'order_details.order_id', '=', 'orders.id')
+        ->where('order_id',$id)->select('products.thumbnail','products.name as product_name','order_details.quantity as quantity','order_details.money','orders.created_at as date_order')
+        ->get();
+        $data['order_id']=$id;
+        $data['order_details']=$order_details;
+        return view('frontend.profile.order_detail',$data);
     }
 
 

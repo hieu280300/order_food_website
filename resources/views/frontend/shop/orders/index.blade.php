@@ -7,8 +7,6 @@
             <tr>
                 <th>#</th>
                 <th>Fullname</th>
-                <th>Product</th>
-                <th>Thumbnail</th>
                 <th>Total Quantity</th>
                 <th>Total Money</th>
                 <th>Status</th>
@@ -19,24 +17,22 @@
         <tbody>
             @if (!empty($orders))
                 @foreach ($orders as $key => $order)
-                @foreach ($order_details as $order_detail)
-                    @php
-                        $totalQuantity = 0;
-                        $totalMoney = 0;
-                        if (!empty($order->orderDetails)) {
-                            foreach ($order->orderDetails as $od) {
-                                $totalQuantity = $od->quantity;
-                                $totalMoney = $od->money;
-                            }
-                        }
-                    @endphp
+                @php
+                $totalQuantity = 0;
+                $totalMoney = 0;
+                if (!empty($order->orderDetails)) {
+                    foreach ($order->orderDetails as $od) {
+                        // get quantity
+                        $totalQuantity += $od->quantity;
+                        // get price
+                        $productPrice = $od->money;
+                        $totalMoney += $od->quantity * $productPrice;
+                    }
+                }
+            @endphp
                     <tr>
                         <td>{{ $key + 1 }}</td>
                         <td>{{ $order->user->name }}</td>
-                        <td>{{$order_detail->product_name}}</td>
-                        <td>
-                            <img src="{{ asset($order_detail->product_thumbnail) }}" alt="{{ $order_detail->product_name }}" class="img-flid" style="width:100px">
-                           </td>
                         <td>
                             {{ $totalQuantity}}
                         </td>
@@ -70,7 +66,6 @@
                             </form>
                         </td>
                     </tr>
-                @endforeach
                 @endforeach
             @endif
         </tbody>
