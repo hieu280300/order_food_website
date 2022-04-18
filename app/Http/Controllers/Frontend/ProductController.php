@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Product;
 use App\Models\Rate;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Queue\Middleware\RateLimited;
 use Illuminate\Support\Facades\Auth;
@@ -131,10 +132,15 @@ class ProductController extends Controller
     {
         $data = [];
         $id = Auth::user()->id;
+        $shop = User::with('shops')->where('id', $id)->get();
+        foreach ($shop as $hi)
+        {
+        $id_shop = $hi->shops->id;
+        }
         $products = DB::table('products')
         ->join('shops','shops.id','=','products.shop_id')
         ->join('categories','products.category_id','=','categories.id')
-        ->where('shops.id',$id)->select('products.id as product_id','products.name as product_name','products.slug as product_slug','products.code as product_code','products.thumbnail as product_thumbnail','products.description as product_description','products.content as product_content','products.money as product_money','products.quantity as product_quantity','products.category_id','categories.name as category_name','categories.slug as category','products.shop_id as shop_id')->paginate(5);
+        ->where('shops.id',$id_shop)->select('products.id as product_id','products.name as product_name','products.slug as product_slug','products.code as product_code','products.thumbnail as product_thumbnail','products.description as product_description','products.content as product_content','products.money as product_money','products.quantity as product_quantity','products.category_id','categories.name as category_name','categories.slug as category','products.shop_id as shop_id')->paginate(5);
         $data['shop_id']=$id;
         $data['products'] = $products;
         return view('frontend.shop.products.index', $data);
