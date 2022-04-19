@@ -7,171 +7,201 @@
 <link rel="stylesheet" type="text/css" href="{{asset('frontend/assets/css/order.css')}}">
 <main>
     <div class="container">
-        <div class="row">
-            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                <div class="xacnhan-herder">
-                    <p>1. Xác nhận thông tin đơn hàng</p>
-                </div>
-                <div class="xacnhan">
-                    <form>
-                        <div class="form-group">
-                          <input type="text" class="form-control" id="formGroupExampleInput"  placeholder="Nhập địa chỉ giao hàng">
+        <form action="" method="post" >
+            @csrf
+            <div class="row">
+
+                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                    <div class="xacnhan-herder">
+                        <p>1. Xác nhận thông tin đơn hàng</p>
+                    </div>
+                    <div class="xacnhan">
+                        <form>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="formGroupExampleInput" name="diachi"  placeholder="Nhập địa chỉ giao hàng" value="{{ old('diachi') }}" required >
+                                @error('diachi')
+                                    <div class="alert-error alert-text-error">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="formGroupExampleInput2" name="name" placeholder="Người nhận" value="{{ old('name') }}" required>
+                                @error('name')
+                                    <div class="alert-error alert-text-error">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="formGroupExampleInput3" name="sdt" placeholder="Số điện thoại " value="{{ old('sdt') }}" required>
+                                @error('sdt')
+                                    <div class="alert-error alert-text-error">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="formGroupExampleInput4" name="note" placeholder="Ghi chú" value="{{ old('note') }}" >
+                            </div>
+                        </form>
+                    </div>
+                    <div class="xacnhan-herder">
+                        <p>2. Hình thức thanh toán</p>
+                    </div>
+                    <div class="xacnhan">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                            <label class="form-check-label" for="exampleRadios1">
+                                <img  src="{{asset('icon_cart/cash.png')}}" width="25px">
+                            Thanh toán khi giao hàng
+                            </label>
                         </div>
-                        <div class="form-group">
-                          <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Người nhận">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                            <label class="form-check-label" for="exampleRadios2">
+                                <img  src="{{asset('icon_cart/visa.png')}}" width="25px">
+                                Visa/Master/JCB
+                            </label>
                         </div>
-                        <div class="form-group">
-                          <input type="text" class="form-control" id="formGroupExampleInput3" placeholder="Số điện thoại ">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3">
+                            <label class="form-check-label" for="exampleRadios3">
+                                <img  src="{{asset('icon_cart/atm.png')}}" width="25px">
+                                Thẻ ATM nội địa
+                            </label>
                         </div>
-                        <div class="form-group">
-                          <input type="text" class="form-control" id="formGroupExampleInput4" placeholder="Ghi chú">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios4" value="option4">
+                            <label class="form-check-label" for="exampleRadios4">
+                                <img  src="{{asset('icon_cart/momo.png')}}" width="25px">
+                            MoMo
+                            </label>
                         </div>
-                      </form>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios5" value="option5">
+                            <label class="form-check-label" for="exampleRadios5">
+                                <img  src="{{asset('icon_cart/zalo.png')}}" width="25px">
+                            ZaloPay
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios6" value="option6">
+                            <label class="form-check-label" for="exampleRadios6">
+                            <img  src="{{asset('icon_cart/airpay.png')}}" width="25px">
+                            AirPay
+                            </label>
+                        </div>
+                    </div>
                 </div>
-                <div class="xacnhan-herder">
-                    <p>2. Hình thức thanh toán</p>
-                </div>
-                <div class="xacnhan">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                        <label class="form-check-label" for="exampleRadios1">
-                            <img  src="{{asset('icon_cart/cash.png')}}" width="25px">
-                          Thanh toán khi giao hàng
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                        <label class="form-check-label" for="exampleRadios2">
-                            <img  src="{{asset('icon_cart/visa.png')}}" width="25px">
-                            Visa/Master/JCB
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3">
-                        <label class="form-check-label" for="exampleRadios3">
-                            <img  src="{{asset('icon_cart/atm.png')}}" width="25px">
-                            Thẻ ATM nội địa
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios4" value="option4">
-                        <label class="form-check-label" for="exampleRadios4">
-                            <img  src="{{asset('icon_cart/momo.png')}}" width="25px">
-                          MoMo
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios5" value="option5">
-                        <label class="form-check-label" for="exampleRadios5">
-                            <img  src="{{asset('icon_cart/zalo.png')}}" width="25px">
-                          ZaloPay
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios6" value="option6">
-                        <label class="form-check-label" for="exampleRadios6">
-                          <img  src="{{asset('icon_cart/airpay.png')}}" width="25px">
-                          AirPay
-                        </label>
-                      </div>
-                </div>
-            </div>
 
-            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                <div class="dathang">
-                  <a id="button-clear" class="dat_hang"> ĐẶT HÀNG </a>
-                </div>
-                <div class="thanhtoan" >
-                    <table  id="ul-products">
-                        <thead>
-                            <tr class="bang">
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if(!empty($product))
-                                @php
-                                // dd($product);
-                                @endphp
-                                @foreach ($product as $value)
-                                    <tr class="cart">
+                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
 
-                                        <td><span class='soluong'>{{$value['qty']}}</span>
-                                            <input class='id' id ="{{$value['id']}}" type = "text" hidden>
-                                            <input class="img" src="{{$value['thumbnail']}}" hidden>
-                                        </td>
+                    <button class="dathang" type="submit" name="submit">
 
-                                        {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                            Launch demo modal
-                                          </button> --}}
-                                        <td class="show_product"> <span> <label  data-toggle="modal" data-target="#exampleModal" class='tenmon'>{{$value['name']}}</lable> </span> </td>
+                            ĐẶT HÀNG
 
-                                        {{-- <td> <span> <label  for='modal_input' class='tenmon'>{{$value['name']}}</lable> </span> </td> --}}
-                                        <td class='giamon' ><span class="gia">{{($value['money'])/1000}}</span><span class="vnd">,000₫</span></td>
+                    </button>
+
+
+                    <div class="thanhtoan" >
+                        <table  id="ul-products">
+                            <thead>
+                                <tr class="bang">
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if(!empty($product))
+                                    @php
+                                    // dd($product);
+                                    @endphp
+                                    @foreach ($shops as $shop)
+                                        <tr class="cart shop-cart" >
+                                            <td colspan="6"><div class="shop-herder">
+                                                <p>{{$shop['name']}}</p>
+                                            </div></td>
+                                        </tr>
+                                        @foreach ($product as $value)
+                                            @if ($shop['id']==$value['shop_id'])
+                                            <tr class="cart">
+
+                                                <td><span class='soluong'>{{$value['qty']}}</span>
+                                                    <input class='id' id ="{{$value['id']}}" type = "text" hidden>
+                                                    <input class="img" src="{{$value['thumbnail']}}" hidden>
+                                                    <input class="shop_name" id="{{$shop['name']}}" hidden>
+                                                    <input class="note" id="note{{$value['id']}}" value="{{$value['note']}}" hidden>
+                                                </td>
+
+                                                {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                                    Launch demo modal
+                                                </button> --}}
+                                                <td class="show_product"> <span> <label  data-toggle="modal" data-target="#exampleModal" class='tenmon'>{{$value['name']}}</lable> </span> </td>
+
+                                                {{-- <td> <span> <label  for='modal_input' class='tenmon'>{{$value['name']}}</lable> </span> </td> --}}
+                                                <td class='giamon' ><span class="gia">{{($value['money'])/1000}}</span><span class="vnd">,000₫</span></td>
 
 
 
-                                                {{-- <div data-v-6eb2f7d4="" aria-hidden="true" class="minus card-product-decrease btn btn--orange-1 quantity-product add-to-cart p-0 active">
-                                                    <svg class="bi bi-dash-circle" width="2em" height="2em" viewBox="0 0 16 16"fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        {{-- <div data-v-6eb2f7d4="" aria-hidden="true" class="minus card-product-decrease btn btn--orange-1 quantity-product add-to-cart p-0 active">
+                                                            <svg class="bi bi-dash-circle" width="2em" height="2em" viewBox="0 0 16 16"fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z" clip-rule="evenodd"/>
+                                                                <path fill-rule="evenodd" d="M3.5 8a.5.5 0 01.5-.5h8a.5.5 0 010 1H4a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
+                                                            </svg>
+                                                        </div> --}}
+
+
+                                                <td style="text-align: end">
+                                                    {{-- <div data-v-6eb2f7d4="" class=" plus btn btn--orange-1 card-product-increase quantity-product active add-to-cart p-0">
+                                                        <svg class="bi bi-plus-circle" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                            <path fill-rule="evenodd" d="M8 3.5a.5.5 0 01.5.5v4a.5.5 0 01-.5.5H4a.5.5 0 010-1h3.5V4a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
+                                                            <path fill-rule="evenodd" d="M7.5 8a.5.5 0 01.5-.5h4a.5.5 0 010 1H8.5V12a.5.5 0 01-1 0V8z" clip-rule="evenodd"/>
+                                                            <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z" clip-rule="evenodd"/>
+                                                        </svg>
+                                                    </div> --}}
+
+                                                    <a href="" class='minus cart_quantity_down'>
+                                                        <svg class="bi bi-dash-circle" width="2em" height="2em" viewBox="0 0 16 16"fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                            <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z" clip-rule="evenodd"/>
+                                                            <path fill-rule="evenodd" d="M3.5 8a.5.5 0 01.5-.5h8a.5.5 0 010 1H4a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
+                                                        </svg></a>
+
+                                                </td>
+                                                <td style="text-align: center">
+                                                    <a href="" class='plus cart_quantity_up'><svg class="bi bi-plus-circle" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" d="M8 3.5a.5.5 0 01.5.5v4a.5.5 0 01-.5.5H4a.5.5 0 010-1h3.5V4a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
+                                                        <path fill-rule="evenodd" d="M7.5 8a.5.5 0 01.5-.5h4a.5.5 0 010 1H8.5V12a.5.5 0 01-1 0V8z" clip-rule="evenodd"/>
                                                         <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z" clip-rule="evenodd"/>
-                                                        <path fill-rule="evenodd" d="M3.5 8a.5.5 0 01.5-.5h8a.5.5 0 010 1H4a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
-                                                    </svg>
-                                                </div> --}}
+                                                    </svg></a>
+                                                </td>
+                                                <td style="text-align: center"> <a class='delete cart_quantity_delete' href="" >Xóa</a></td>
 
+                                            </tr>
+                                            @endif
 
-                                        <td style="text-align: end">
-                                            {{-- <div data-v-6eb2f7d4="" class=" plus btn btn--orange-1 card-product-increase quantity-product active add-to-cart p-0">
-                                                <svg class="bi bi-plus-circle" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" d="M8 3.5a.5.5 0 01.5.5v4a.5.5 0 01-.5.5H4a.5.5 0 010-1h3.5V4a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
-                                                    <path fill-rule="evenodd" d="M7.5 8a.5.5 0 01.5-.5h4a.5.5 0 010 1H8.5V12a.5.5 0 01-1 0V8z" clip-rule="evenodd"/>
-                                                    <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z" clip-rule="evenodd"/>
-                                                </svg>
-                                            </div> --}}
-
-                                            <a href="" class='minus cart_quantity_down'>
-                                                <svg class="bi bi-dash-circle" width="2em" height="2em" viewBox="0 0 16 16"fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z" clip-rule="evenodd"/>
-                                                    <path fill-rule="evenodd" d="M3.5 8a.5.5 0 01.5-.5h8a.5.5 0 010 1H4a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
-                                                </svg></a>
-
-                                        </td>
-                                        <td style="text-align: center">
-                                            <a href="" class='plus cart_quantity_up'><svg class="bi bi-plus-circle" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" d="M8 3.5a.5.5 0 01.5.5v4a.5.5 0 01-.5.5H4a.5.5 0 010-1h3.5V4a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
-                                                <path fill-rule="evenodd" d="M7.5 8a.5.5 0 01.5-.5h4a.5.5 0 010 1H8.5V12a.5.5 0 01-1 0V8z" clip-rule="evenodd"/>
-                                                <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z" clip-rule="evenodd"/>
-                                            </svg></a>
-                                        </td>
-                                        <td style="text-align: center"> <a class='delete cart_quantity_delete' href="cart/delete/{{$value['id']}}" >Xóa</a></td>
-
-                                    </tr>
-                                @endforeach
-
-                            @endif
-                        </tbody>
-<!-- <div class="div_modal"></div> -->
-                        <thead>
-                            <tr>
-                                @if (!empty($total))
-                                <td colspan="3" class="tenmon">TỔNG CỘNG:
-                                </td>
-                                <td  colspan="3" class="giatongcong">
-                                    <span id="price_total" >
-
-                                        {{$total/1000}}
-
-                                    </span>
-                                    <span class="vnd">,000₫</
-                                </td>
-                                @else
-                                <td colspan="6" class="tenmon">Không có sản phẩm nào!!
+                                        @endforeach
+                                    @endforeach
                                 @endif
-                            </tr>
-                        </thead>
-                    </table>
+                            </tbody>
+    <!-- <div class="div_modal"></div> -->
+                            <thead>
+                                <tr>
+                                    @if (!empty($total))
+                                    <td colspan="3" class="tenmon">TỔNG CỘNG:
+                                    </td>
+                                    <td  colspan="3" class="giatongcong">
+                                        <span id="price_total" >
+
+                                            {{$total/1000}}
+
+                                        </span>
+                                        <span class="vnd">,000₫</
+                                    </td>
+                                    @else
+                                    <td colspan="6" class="tenmon">Không có sản phẩm nào!!
+                                    @endif
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+
                 </div>
 
             </div>
-        </div>
+        </form>
     </div>
 </main>
 
@@ -189,7 +219,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <p  id="size_text"></p>
+                <p id="size_text"></p>
 
                 <p id="modal_topping_text"></p>
             </div>
@@ -214,7 +244,7 @@
                 {{-- <div class="Topping"></div>
                 <hr> --}}
                 <div class="form-group" style="margin: 0px;">
-                    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Thêm ghi chú món này">
+                    <input type="text" class="form-control show_note" id="formGroupExampleInput" placeholder="Thêm ghi chú món này" value="">
                 </div>
             </div>
             <div class="footer_modal">
@@ -239,7 +269,7 @@
                     <div id="price_modal"></div>
                 </div>
                 <div style="float: right; width: 50%;">
-                    <button class="modal_tien" style="max-width: 300px; float: right; color:fff" data-dismiss="modal"><span class="total_product"></span><span>,000đ</span></button>
+                    <a class="modal_tien" href="" style="max-width: 300px; float: right; color:fff; cursor: pointer;" data-dismiss="modal"><span class="total_product"></span><span>,000đ</span></a>
                 </div>
             </div>
         </div>
@@ -257,14 +287,18 @@
             var name = $(this).find('label.tenmon').text();
             var sl = $(this).closest('tr').find('td span.soluong').text()*1;
             var gia = $(this).closest('tr').find('td span.gia').text()*1;
+            var shop_name = $(this).closest('tr').find('td input.shop_name').attr('id');
+            var note = $(this).closest('tr').find('td input.note').val();
+
             var sum_gia = gia*sl;
             $('#modal_name').text(name);
             $('.total_product').text(sum_gia);
             $('span.card-product-quantity').text(sl);
             var getImg = $(this).closest('tr').find('td input.img').attr('src');
             $('.img_modal').attr("src",getImg);
-            // $("#my_image").attr("src","second.jpg");
-            // console.log(getImg);
+            $('#modal_topping_text').text(shop_name);
+            $('.show_note').val(note);
+            $('.show_note').attr('id',getId);
         })
 
         $('.cart_quantity_down').click(function(){
@@ -283,6 +317,7 @@
                 $(this).closest('table').find('#price_total').text(total);
 
 			}else {
+                sl=sl-1;
 				total  = total-sum;
                 sum_cart--;
                 $('span.sum_cart').text(sum_cart);
@@ -311,7 +346,13 @@
                 //     alert(data.success);
                 // }
             });
-			return false;
+            if(sl==0){
+                return true;
+            }
+            else{
+                return false;
+            }
+            // return true;
 		})
 
 		$('.cart_quantity_up').click(function(){
@@ -336,7 +377,7 @@
             });
 			return false;
 		})
-        $('a.cart_quantity_delete').click(function(){
+        $('.cart_quantity_delete').click(function(){
 			var getId = $(this).closest('tr').find('td input.id').attr('id')*1;
 			var sl = $(this).closest('tr').find('td span.soluong').text()*1;
 			var gia = $(this).closest('tr').find('td span.gia').text()*1;
@@ -366,11 +407,35 @@
                 //     alert(data.success);
                 // }
             });
-			return false;
+			return true;
 
 		})
+        $('.modal_tien').click(function(){
+
+			var getId = $(this).closest('.modal-content').find('.show_note').attr('id')*1;
+			var note = $(this).closest('.modal-content').find('.show_note').val();
+            $('#note'+getId).val(note);
+            $.ajax({
+                type:'POST',
+                url:"{{ url('edit_note.post')}}",
+                data:{
+                    id:getId,
+                    note:note,
+                },
+
+            });
+			// return false;
+		})
+
         $('.dathang').click(function(){
-            alert("Đặt hàng thành công!!!");
+            var checkLogin = "{{Auth::check()}}";
+            if(checkLogin==1){
+                return true;
+            }
+            else {
+                alert ("Vui long dang nhap!");
+                return false;
+            }
         })
 
     });

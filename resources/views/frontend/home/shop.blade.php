@@ -116,7 +116,7 @@
     </section>
     <!-- ***** Cars Ends ***** -->
 
-    <section class="section section-bg" id="schedule" style="background-image: url(assets/images/about-fullscreen-1-1920x700.jpg)">
+    {{-- <section class="section section-bg" id="schedule" style="background-image: url(assets/images/about-fullscreen-1-1920x700.jpg)">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">
@@ -195,6 +195,6 @@
               </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- ***** Blog End ***** -->
 @endsection

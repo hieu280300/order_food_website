@@ -38,7 +38,10 @@ Route::post('/addToCard',[App\Http\Controllers\Frontend\CartController::class,'a
 Route::post('/product-detail/addToCard',[App\Http\Controllers\Frontend\CartController::class,'detail_addToCart']);
 Route::post('cart_quantity_up.post', [CartController::class,'plusProduct']);
 Route::post('cart_quantity_down.post',[CartController::class,'minusProduct']);
-Route::post('cart_quantity_delete.post',[CartController::class,'destroy']);
+Route::post('cart_quantity_delete.post',[CartController::class,'deleteProduct']);
+Route::post('edit_note.post',[CartController::class,'edit']);\
+
+Route::post('/cart',[OrderController::class,'store']);
 
 
 Route::get('/edit_profile/{id}',[App\Http\Controllers\Frontend\HomeController::class,'editProfile'])->name('edit-profile');
@@ -64,7 +67,6 @@ Route::group(['prefix' => 'product', 'as' => 'product.'], function () {
 });
 Route::group(['prefix' => 'order', 'as' => 'order.'], function () {
     Route::get('/list', [OrderController::class, 'index'])->name('index');
-    
     Route::get('/show/{id}', [OrderController::class, 'show'])->name('show');
     Route::get('/edit/{id}', [OrderController::class, 'edit'])->name('edit');
     Route::put('/update/{id}', [OrderController::class, 'update'])->name('update');
