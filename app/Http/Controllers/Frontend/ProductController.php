@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Product;
 use App\Models\Rate;
+use App\Models\Shop;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Queue\Middleware\RateLimited;
@@ -28,6 +29,8 @@ class ProductController extends Controller
     {
         $shop_id = $request->id;
         $data = [];
+        $shop = Shop::where('id', $shop_id)->get()->toArray();
+
         $products = Product::where('shop_id', $shop_id)
             ->with('category')
             ->get();
@@ -38,7 +41,8 @@ class ProductController extends Controller
         // $categories = Category::pluck('name','id')->toArray();
         $data['products'] = $products;
         $data['categories'] = $categories;
-
+        $data['shop']=$shop;
+        // dd($data);
         return view('frontend.home.product', $data);
     }
     public function getShopClose(request $request)
@@ -169,7 +173,7 @@ class ProductController extends Controller
                 return view('frontend.shop.products.create', $dataInsert);
             }
         }
-       
+
     }
 
     /**

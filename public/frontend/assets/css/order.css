@@ -313,6 +313,18 @@ main {
     font-size: 20px;
     margin-bottom: 0px;
 }
+.shop-herder{
+    padding: 13px 20px;
+    /* border-bottom: 1px solid #e5e5e5 ; */
+    background-color: #fff;
+    margin-top: 10px;
+}
+.shop-herder p{
+    font-size: 20px;
+    margin-bottom: 0px;
+    color: #ed563b;
+    font-weight: 700;
+}
 .xacnhan{
     padding: 13px 20px;
     background-color: #fff ;
@@ -326,7 +338,11 @@ main {
     text-align: center;
     padding-bottom: 20px;
     color: #fff;
-    cursor:pointer
+    cursor:pointer;
+    border: none;
+    width: 100%;
+    font-weight: 700;
+    font-size: 14px;
 }
 .dathang a{
     font-weight: 700;
@@ -339,6 +355,13 @@ main {
     text-decoration: none;
     color: #fff;
     background-color: rgb(223, 65, 17);
+}
+.dathang button {
+    font-weight: 700;
+    color: #fff;
+    font-size: 14px;
+    /* background-color: #ed563b; */
+    min-width: 100%;
 }
 .thanhtoan{
     padding: 0 8px;
@@ -506,4 +529,16 @@ tr{
 .card-product-quantity {
     font-size: 24px;
     margin: auto 18px  12px  24px;
+}
+.alert-error {
+    position: relative;
+    padding: 0.75rem 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+}
+.alert-text-error {
+    color: red;
+    /* background-color: #f8d7da; */
+    /* border-color: #f5c6cb; */
 }

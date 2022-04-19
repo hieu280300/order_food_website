@@ -53,11 +53,14 @@
                 <div id="section1">
                     <h2><span class="menuhome">MÓN NỔI BẬT </h2>
                     <div class="list_product_related flex_wrap display_flex menu_lists">
-
+                        @php
+                            // dd($shop);
+                        @endphp
                         @foreach ($products as $product)
                             <a href="{{ route('product-detail', ['id' => $product->id]) }}">
-                            <div class="menu_item">
 
+                            <div class="menu_item">
+                                <input class="shop_id" id = "{{$product->shop_id}}" hidden value="{{$shop[0]['name']}}">
                                 <div class="menu_item_image">
                                     <img src="{{asset($product->thumbnail)}}">
                                 </div>
@@ -87,8 +90,9 @@
                         @foreach ($products as $product)
                         @if ($product->category_id == $categoryId)
                             <a href="{{ route('product-detail', ['id' => $product->id]) }}">
-                            <div class="menu_item">
 
+                            <div class="menu_item">
+                                <input class="shop_id" id = "{{$product->shop_id}}" hidden value="{{$shop[0]['name']}}">
                                 <div class="menu_item_image">
                                     <img src="{{asset($product->thumbnail)}}">
                                 </div>
@@ -121,7 +125,7 @@
 
     </div>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-md" role="document" >
+        <div class="modal-dialog modal-md" role="document" style="margin: 6.75rem auto;">
             <div class="modal-content" >
 
                 <div class="modal-header" style="display: block;" >
@@ -158,7 +162,7 @@
                     {{-- <div class="Topping"></div>
                     <hr> --}}
                     <div class="form-group" style="margin: 0px;">
-                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Thêm ghi chú món này">
+                        <input  class="form-control note" id="formGroupExampleInput" placeholder="Thêm ghi chú món này" value="">
                     </div>
                 </div>
                 <div class="footer_modal">
@@ -198,16 +202,22 @@
             });
             $('.show_product').click(function(){
                 var getId = parseInt($(this).attr('id'));
+                var getShop_id = $(this).closest('.menu_item').find('input.shop_id').attr('id')*1;
+                var getShop_name = $(this).closest('.menu_item').find('input.shop_id').val();
+                // console.log(getShop_name);
                 var name = $(this).closest('.menu_item').find('a.tenmon').text();
                 var sl = 1;
                 var gia = $(this).closest('.menu_item').find('span.gia').text()*1;
                 var getImg = $(this).closest('.menu_item').find('img').attr('src');
                 var sum_gia = gia*sl;
                 $('#modal_name').text(name);
+                $('#modal_topping_text').text(getShop_name);
                 $('.total_product').text(sum_gia);
                 $('span.card-product-quantity').text(sl);
                 $('.img_modal').attr("src",getImg);
                 $('button.add-to-cart').attr('id',getId);
+                $('#formGroupExampleInput').val('');
+
             })
             $('.add-to-cart-up').click(function(){
                 var sl = $(this).closest('.card-product-quantity-config').find('.card-product-quantity').text()*1;
@@ -222,6 +232,7 @@
             $('.add-to-cart-dow').click(function(){
                 var sl = $(this).closest('.card-product-quantity-config').find('.card-product-quantity').text()*1;
                 var gia = $(this).closest('.footer_modal').find('.total_product').text()*1;
+
                 gia=gia/sl;
                 sl=sl-1;
                 if (sl==0){
@@ -236,15 +247,19 @@
                 var id = parseInt($(this).attr('id'));
                 var sl = $(this).closest('.footer_modal').find('.card-product-quantity').text()*1;
                 var gia = $(this).closest('.footer_modal').find('.total_product').text()*1;
+                var getShop_id = $('input.shop_id').attr('id')*1;
+                var note = $(this).closest('.modal-content').find('#formGroupExampleInput').val();
                 $.ajax({
                     type:'POST',
                     url:"{{ url('addToCard')}}",
                     data:{
                         id:id,
                         qty:sl,
+                        shop_id:getShop_id,
+                        note:note,
                     },
                     success:function(data){
-                        alert(data.success);
+                        // alert(data.success);
                         $('span.sum_cart').html(data.sum_cart);
                     }
 

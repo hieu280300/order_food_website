@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Cart;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Frontend\CartPostRequest;
 use App\Models\Product;
+use App\Models\Shop;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -29,15 +31,22 @@ class CartController extends Controller
     {
         $id = $request->id;
         $qty = $request->qty;
+        $shop_id = $request->shop_id;
+        $note = $request->note;
+        // dd($note);
         $array = [];
+        $array['shop_id'] = $shop_id;
         $array['id'] = $id;
         $array['qty'] = $qty;
+        $array['note'] = $note;
+        // dd($array);
         if (session()->has('cart')) {
             $getSession = session()->get('cart');
             $flag = 1;
             foreach ($getSession as $key => $value) {
                 if ($id == $value['id']) {
                     $getSession[$key]['qty']=$getSession[$key]['qty']+$qty;
+                    $getSession[$key]['note']=$note;
                     session()->put('cart', $getSession);
                     $flag = 0;
                 }
@@ -90,14 +99,21 @@ class CartController extends Controller
         // session()->forget('cart');
         if (session()->has('cart')) {
             $getSession = session()->get('cart');
-            // dd($getSession);
+            $shop_ids=[];
             foreach ($getSession as $key => $value) {
                 $product[$key] = Product::find($value['id'])->toArray();
                 $product[$key]['qty'] = $value['qty'];
+                $product[$key]['note'] = $value['note'];
                 $total += $product[$key]['qty'] * $product[$key]['money'];
+                if(!in_array($product[$key]['shop_id'],$shop_ids)){
+                    $shop_ids[]=$product[$key]['shop_id'];
+                }
             }
-            // dd($product);
-            return view('frontend/carts/cart', compact('product', 'total'));
+            foreach ($shop_ids as $shop_id){
+                $shops[]= Shop::find($shop_id)->toArray();
+            }
+            // dd($shops);
+            return view('frontend/carts/cart', compact('shops','product', 'total'));
         } else {
             return view('frontend/carts/cart');
         }
@@ -125,10 +141,8 @@ class CartController extends Controller
         $id = $request->id;
         $qty = $request->qty;
 
-        // echo $id;
         if (session()->has('cart')) {
             $getSession = session()->get('cart');
-            // dd($getSession);
 
             foreach ($getSession as $key => $value) {
                 if ($id == $value['id']) {
@@ -161,9 +175,22 @@ class CartController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CartPostRequest $request)
     {
-        //
+
+        // if (session()->has('cart')) {
+        //     $getSession = session()->get('cart');
+        //     // dd($getSession);
+        //     foreach ($getSession as $key => $value) {
+        //         $product[$key] = Product::find($value['id'])->toArray();
+        //         $product[$key]['qty'] = $value['qty'];
+        //         $total += $product[$key]['qty'] * $product[$key]['money'];
+        //     }
+        //     // dd($product);
+        //     return view('frontend/carts/cart', compact('product', 'total'));
+        // } else {
+        //     return view('frontend/carts/cart');
+        // }
     }
 
     /**
@@ -183,9 +210,23 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+        $id = $request->id;
+        $note = $request->note;
+        // dd($note);
+        if (session()->has('cart')) {
+            $getSession = session()->get('cart');
+
+            foreach ($getSession as $key => $value) {
+                if ($id == $value['id']) {
+                    $getSession[$key]['note']=$note;
+                    session()->put('cart', $getSession);
+                }
+            }
+        }
+
+        return redirect()->action([CartController::class,'index']);
     }
 
     /**
@@ -206,7 +247,7 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function deleteProduct(Request $request)
     {
         $id = $request->id;
         if (session()->has('cart')) {

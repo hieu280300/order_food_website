@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\OrderDetail;
+use App\Models\Product;
+use App\Models\Shop;
+use Carbon\Carbon;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -20,7 +24,7 @@ class OrderController extends Controller
     public function index(request $request)
     {
         $data = [];
-        $id = Auth::user()->id; 
+        $id = Auth::user()->id;
         $shop = User::with('shops')->where('id', $id)->get();
         foreach ($shop as $hi)
         {
@@ -29,9 +33,11 @@ class OrderController extends Controller
        $orders= Order::with('orderDetails')->with('user')->with('shop')->where('orders.shop_id',$id_shop)->get();
         if (!empty($request->date)) {
             $orders = $orders->whereDate('created_at','=',$request->date);
-         
+
         }
         $data['orders'] = $orders;
+        // dd($orders);
+
         return view('frontend.shop.orders.index', $data);
     }
 
@@ -53,7 +59,49 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (session()->has('cart')) {
+            $getSession = session()->get('cart');
+            // dd($getSession);
+            $shop_ids=[];
+            foreach ($getSession as $key => $value) {
+                $product[$key] = Product::find($value['id'])->toArray();
+                // $product[$key]['qty'] = $value['qty'];
+                // $product[$key]['note'] = $value['note'];
+                // $total += $product[$key]['qty'] * $product[$key]['money'];
+                if(!in_array($product[$key]['shop_id'],$shop_ids)){
+                    $shop_ids[]=$product[$key]['shop_id'];
+                }
+            }
+            // dd($shop_ids);
+            // dd(Carbon::now('+07:00')->toDateTimeString());
+            foreach ($shop_ids as $shop_id){
+                echo $shop_id;
+                $order= Order::create([
+                    'shop_id' => $shop_id,
+                    'user_id' => Auth::user()->id,
+                    'comment' => $request->note,
+                    'order_date' =>Carbon::now('+07:00')->toDateTimeString(),
+                    'status' => 0,
+                ]);
+                // $shops[]= Shop::find($shop_id)->toArray();
+                $orderId=$order->id;
+
+                foreach ($getSession as $key => $value) {
+                    $orderdetail= OrderDetail::create([
+                        'product_id' => $value['id'],
+                        'order_id' => $orderId,
+                        'quantity' => $value['qty'],
+                        'money' => $product[$key]['money'],
+                        'note' => $value['note']
+                    ]);
+                }
+            }
+        }
+        $getSession = session()->get('cart');
+        if (!empty($getSession)) {
+            session()->forget('cart');
+        }
+        return redirect()->route('info-user')->with('hihi', 'Đặt hàng thành công!');
     }
 
     /**

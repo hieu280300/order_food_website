@@ -35,8 +35,6 @@ class HomeController extends Controller
         $shops = Shop::all()->toArray();
         $data['shops'] = $shops;
         $data['time']= $time['hour'];
-        $route=\Request::route()->getName();
-        // dd($route);
         return view('frontend.home.shop', $data);
 
     }
@@ -47,10 +45,10 @@ class HomeController extends Controller
             ->get()
             ->toArray();
         $data = [];
-        $time = Carbon::now()->toArray();
+        $time = Carbon::now('+07:00')->toArray();
 
         $data['shops'] = $shops;
-        $data['time'] = $time;
+        $data['time']= $time['hour'];
         return view('frontend.home.shop', $data);
     }
     public function getLogin()
@@ -67,7 +65,7 @@ class HomeController extends Controller
             'email' => $request->email,
             'password' => $request->password,
         ];
-        // dd($login);
+
         $remember = false;
         if ($request->remeber_me)
             $remember = true;
