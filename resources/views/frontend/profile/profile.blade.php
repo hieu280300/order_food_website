@@ -78,7 +78,7 @@
                     <a href="{{ route('edit-profile',['id' => $info->id])}}"><input type="submit" class="btn btn-outline-secondary" name="btnAddMore" value="Edit Profile" /></a>
                   </div>
                   <div class="edit_profile">
-                    <a href=""><input type="submit" class="btn btn-outline-secondary" name="btnAddMore" value="Purchase History " /></a>
+                    <a href="{{route('manage_order')}}"><input type="submit" class="btn btn-outline-secondary" name="btnAddMore" value="Purchase History " /></a>
                   </div>
             
                 </div>

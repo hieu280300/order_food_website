@@ -7,6 +7,7 @@ use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
 use App\Models\Shop;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -22,9 +23,14 @@ class CategoryController extends Controller
         // Method: GET
         $data = [];
         $id = Auth::user()->id;
+        $shop = User::with('shops')->where('id', $id)->get();
+        foreach ($shop as $hi)
+        {
+        $id_shop = $hi->shops->id;
+        }
         $categories = DB::table('shops')
         ->join('categories', 'shops.id', '=', 'categories.shop_id')
-        ->where('shops.id', $id)->select('categories.name as category_name', 'categories.slug as category_slug', 'categories.id as category_id')->get();
+        ->where('shops.id', $id_shop)->select('categories.name as category_name', 'categories.slug as category_slug', 'categories.id as category_id')->get();
         $data['categories'] = $categories;
         return view('frontend.shop.categories.index', $data);
         // return view('categories.index', compact('categories'));
