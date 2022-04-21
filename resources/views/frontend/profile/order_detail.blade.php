@@ -3,6 +3,12 @@
 @push('css')
 @endpush
 @section('content')
+<style>
+    .order-detail {
+        height: 80%;
+        padding-top:60px;
+    }
+</style>
 @if (!empty($order_details))
     <div class="order-detail container">
         <br>
@@ -10,13 +16,13 @@
         <table class="table table-bordered table-striped">
             <thead class="bg-info">
                 <tr>
-                    <th>#</th>
-                    <th>Name Product</th>
-                    <th>Thumbnail</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                    <th>Money</th>
-                    <th>Order date</th>
+                    <th>Số thứ tự</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Ảnh sản phẩm</th>
+                    <th>Số lượng</th>
+                    <th>Gía</th>
+                    <th>Thành tiền</th>
+                    <th>Ngày đặt hàng</th>
                 </tr>
             </thead>
             <tbody>
@@ -50,16 +56,16 @@
         
                 <tfoot class="bg-secondary">
                     <tr>
-                        <td colspan="2" class="text-right">Total Quantity</td>
+                        <td colspan="2" class="text-right">Tổng số lượng</td>
                         <td colspan="2"  class="text-bold">{{ number_format($totalQuantity) }}</td>
-                        <td colspan="2" class="text-right">Total Money</td>
+                        <td colspan="2" class="text-right">Tổng tiền</td>
                         <td colspan="3" class="text-bold">{{ number_format($totalMoney) }}</td>
                     </tr>
                 </tfoot>
             </tbody>
         </table>
         <div class="mb-2">
-            <a href="{{ route('manage_order') }}" class="btn btn-secondary">Back</a>
+            <a href="{{ route('manage_order') }}" class="btn btn-secondary">Quay lại</a>
         </div>
     </div>
 

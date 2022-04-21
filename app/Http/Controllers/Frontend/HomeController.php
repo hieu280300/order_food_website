@@ -128,8 +128,31 @@ class HomeController extends Controller
         {
         return view('frontend.profile.profile', $data);
         }
+    //     $data = [];
+    //     $id = Auth::user()->id;
+    //     $shop = User::with('shops')->where('id', $id)->get();
+    //     foreach ($shop as $hi)
+    //     {
+    //     $id_shop = $hi->shops->id;
+    //     dd($id_shop);
+    //     }
+    //    $order= Order::with('orderDetails')->with('user')->with('shop')->where('orders.shop_id',$id_shop)->count();
+    //    $orders= Order::with('orderDetails')->with('user')->with('shop')->where('orders.shop_id',$id_shop)->get();
+    //    $data['orders'] = $orders;
+    //    $data['hi'] = $order;
+    //     $data['infoUsers'] = $infoUsers;
+    //     foreach ($infoUsers as $info)
+    //     {
+    //     if($info->role == 1)
+    //     {
+    //          return view('frontend.shop.dashboard',$data);
+    //     }
+    //     else
+    //     {
+    //     return view('frontend.profile.profile', $data);
+    //     }
     }
-    }
+}
     public function editProfile($id)
     {
        $data = [];
@@ -197,8 +220,6 @@ class HomeController extends Controller
         $data['order_details']=$order_details;
         return view('frontend.profile.order_detail',$data);
     }
-
-
 
     /**
      * Store a newly created resource in storage.

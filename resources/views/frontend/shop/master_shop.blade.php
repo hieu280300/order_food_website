@@ -17,10 +17,10 @@
     <meta name="keywords" content="DashboardKit, Dashboard Kit, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Free Bootstrap Admin Template">
     <meta name="author" content="DashboardKit ">
 
-
     <!-- Favicon icon -->
     <link rel="icon" href="{{asset('admin/assets/images/favicon.svg')}}" type="image/x-icon">
-
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
     <!-- font css -->
     <link rel="stylesheet" href="{{asset('admin/assets/fonts/feather.css')}}">
     <link rel="stylesheet" href="{{asset('admin/assets/fonts/fontawesome.css')}}">
@@ -75,16 +75,16 @@
   <script src="{{asset('admin/assets/js/vendor-all.min.js')}}"></script>
   <script src="{{asset('admin/assets/js/plugins/bootstrap.min.js')}}"></script>
   <script src="{{asset('admin/assets/js/plugins/feather.min.js')}}"></script>
-  <script src="{{asset('admin/assets/js/pcoded.min.js')}}"></script>
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script> -->
-  <!-- <script src="assets/js/plugins/clipboard.min.js"></script> -->
-  <!-- <script src="assets/js/uikit.min.js"></script> -->
+  <script src="{{asset('admin/assets/js/pcoded.min.js')}}"></script> --}}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script> 
+  <script src="assets/js/plugins/clipboard.min.js"></script> 
+  <script src="assets/js/uikit.min.js"></script> 
 
 <!-- Apex Chart -->
 <script src="assets/js/plugins/apexcharts.min.js"></script>
-{{-- <script>
+<script>
   $("body").append('<div class="fixed-button active"><a href="https://gumroad.com/dashboardkit" target="_blank" class="btn btn-md btn-success"><i class="material-icons-two-tone text-white">shopping_cart</i> Upgrade To Pro</a> </div>');
-</script> --}}
+</script>
 
 <!-- custom-chart js -->
 <script src="{{asset('admin/assets/js/pages/dashboard-sale.js')}}"></script>
