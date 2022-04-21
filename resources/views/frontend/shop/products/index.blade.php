@@ -40,13 +40,14 @@
                         {{-- <td scope="col">{{$posts->}}</td> --}}
 
                         <td>
-                            <a href=""><input type="submit" name="submit" value="Detail" class="btn btn-info"></a></td>
-                        <td scope="col"><a href="{{route('product.edit',$product->product_id)}}"><input type="submit" name="submit" value="Edit" class="btn btn-success"></a> </td>
+                            <a href=""><i class="fa fa-info-circle"  style="padding:20px;font-size:20px;color:black" aria-hidden="true"></i></a></td>
+                        <td scope="col"><a href="{{route('product.edit',$product->product_id)}}"><i class="fa fa-pencil-square-o" style="padding:20px;font-size:20px;color:black" aria-hidden="true"></i></a> </td>
                         <td>
                             <form action="{{ route('product.destroy', $product->product_id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <input type="submit" name="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure DELETE Category?')">
+                                <button onclick="return confirm('Are you sure DELETE Category?')"><i class="fa fa-trash-o" aria-hidden="true" style="padding:20px;font-size:20px;color:black"></i></button>
+                               
                             </form>
                         </td>
                     </tr>

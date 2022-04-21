@@ -5,22 +5,24 @@
 @section('content')
     <style>
         .order_manader {
-            padding-top: 80px;
+            padding: 100px;
+            height:90%;
+            width:100%;
         }
     </style>
     <div class="container order_manader">
         <h1>Đơn hàng của tôi</h1>
         <table id="product-list" class="table table-bordered table-hover table-striped">
             @if (sizeof($manage_orders) > 0)
-                <thead>
+                <thead class="bg-info">
                     <tr>
                         <th>#</th>
-                        <th>shop</th>
-                        <th>thumbnail</th>
-                        <th>Total Quantity</th>
-                        <th>Total Money</th>
-                        <th>Status</th>
-                        <th>Detail</th>
+                        <th>Tên cửa hàng</th>
+                        <th>Ảnh sản phẩm</th>
+                        <th>Tổng số lượng</th>
+                        <th>Tổng tiền</th>
+                        <th>Trạng thái đơn hàng</th>
+                        <th>Chi tiết</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,9 +33,7 @@
                             $totalMoney = 0;
                             if (!empty($order->orderDetails)) {
                                 foreach ($order->orderDetails as $od) {
-                                    // get quantity
                                     $totalQuantity += $od->quantity;
-                                    // get price
                                     $productPrice = $od->money;
                                     $totalMoney += $od->quantity * $productPrice;
                                 }
@@ -51,15 +51,15 @@
                             </td>
                             <td>
                                 @if (empty($order->status) || $order->status == \App\Models\Order::STATUS[0])
-                                    <div class="alert alert-primary" role="alert">chờ xác nhận đơn hàng</div>
+                                    <div class="btn btn-primary" role="alert">chờ xác nhận đơn hàng</div>
                                 @elseif ($order->status == \App\Models\Order::STATUS[1])
-                                    <div class="alert alert-secondary" role="alert">đã xác nhận đơn</div>
+                                    <div class="btn btn-info" role="alert">Đã xác nhận đơn</div>
                                 @elseif ($order->status == \App\Models\Order::STATUS[2])
-                                    <div class="alert alert-primary" role="alert">shipper đi giao hàng</div>
+                                    <div class="btn btn-warning" role="alert">Shipper đi giao hàng</div>
                                 @elseif ($order->status == \App\Models\Order::STATUS[3])
-                                    <div class="alert alert-danger" role="alert">cancel đơn hàng</div>
+                                    <div class="btn btn-danger" role="alert">Đơn hàng đã hủy</div>
                                 @else
-                                    <div class="alert alert-success" role="alert">hoàn thành</div>
+                                    <div class="btn btn-success" role="alert">hoàn thành</div>
                                 @endif
                             <td><a href="{{ route('order_detail', $order->id) }}"><button type="button"
                                         class="btn btn-primary">Chi tiết</button></a></td>
@@ -70,5 +70,4 @@
             @endif
         </table>
     </div>
-    {{-- {{ $manage_orders->appends(request()->input())->links() }} --}}
 @endsection

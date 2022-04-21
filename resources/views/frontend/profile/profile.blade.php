@@ -47,7 +47,7 @@
               </div>
               <div class="col-md-8">
                 <div class="card-body p-4">
-                  <h6>Information</h6>
+                  <h6>Thông tin người dùng</h6>
                   <hr class="mt-0 mb-4">
                   <div class="row pt-1">
                     <div class="col-6 mb-3">
@@ -55,30 +55,30 @@
                       <p class="text-muted">{{ $info->email }}</p>
                     </div>
                     <div class="col-6 mb-3">
-                      <h6>Phone</h6>
+                      <h6>Số điện thoại</h6>
                       <p class="text-muted">{{$info->name }}</p>
                     </div>
                   </div>
                   <div class="row pt-1">
                     <div class="col-6 mb-3">
-                      <h6>Gender</h6>
+                      <h6>Giới tính</h6>
                       @if ( $info->gender  == \App\Models\User::GENDER[0])
-                      <p class="text-muted">Male</p>
+                      <p class="text-muted">Nam</p>
                       @elseif ($info->gender == \App\Models\User::GENDER[1])
-                      <p class="text-muted">Female</p>
+                      <p class="text-muted">Nữ</p>
                       @endif
                     </div>
                     <div class="col-6 mb-3">
-                      <h6>Adress</h6>
+                      <h6>Địa chỉ</h6>
                       <p class="text-muted">{{$info->address}}</p>
                     </div>
                   </div>
                   <div class="edit">
                   <div class="edit_profile">
-                    <a href="{{ route('edit-profile',['id' => $info->id])}}"><input type="submit" class="btn btn-outline-secondary" name="btnAddMore" value="Edit Profile" /></a>
+                    <a href="{{ route('edit-profile',['id' => $info->id])}}"><input type="submit" class="btn btn-outline-secondary" name="btnAddMore" value="Sửa thông tin" /></a>
                   </div>
                   <div class="edit_profile">
-                    <a href="{{route('manage_order')}}"><input type="submit" class="btn btn-outline-secondary" name="btnAddMore" value="Purchase History " /></a>
+                    <a href="{{route('manage_order')}}"><input type="submit" class="btn btn-outline-secondary" name="btnAddMore" value="Lịch sử đơn hàng" /></a>
                   </div>
             
                 </div>

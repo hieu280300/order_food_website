@@ -84,6 +84,7 @@ Route::get('info-shop',[HomeController::class,'infoShop'])->name('info-shop');
 Route::get('/dashboard', function () {
     return view('admin/dashboard');
 });
+Route::get('/filter-by-date',[HomeController::class,'filter_by_date']);
 // Route::get('/dashboard', function () {
 //     return view('admin/dashboard');
 // })->middleware(['auth'])->name('dashboard');
