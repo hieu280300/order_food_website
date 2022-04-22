@@ -61,29 +61,43 @@ class OrderController extends Controller
     {
         if (session()->has('cart')) {
             $getSession = session()->get('cart');
-            // dd($getSession);
             $shop_ids=[];
             foreach ($getSession as $key => $value) {
                 $product[$key] = Product::find($value['id'])->toArray();
-                // $product[$key]['qty'] = $value['qty'];
-                // $product[$key]['note'] = $value['note'];
+                $product[$key]['qty'] = $value['qty'];
+                $product[$key]['note'] = $value['note'];
                 // $total += $product[$key]['qty'] * $product[$key]['money'];
                 if(!in_array($product[$key]['shop_id'],$shop_ids)){
                     $shop_ids[]=$product[$key]['shop_id'];
                 }
+
             }
-            // dd($shop_ids);
-            // dd(Carbon::now('+07:00')->toDateTimeString());
             foreach ($shop_ids as $shop_id){
-                echo $shop_id;
+                $dem = 0;
+                $shop[$shop_id]=0;
+                foreach ($getSession as $key => $value) {
+                    if($product[$key]['shop_id']==$shop_id){
+                        $dem = $dem + $product[$key]['qty'];
+                        $shop[$shop_id] +=  $product[$key]['qty'] * $product[$key]['money'];
+                    }
+                }
+                if($dem<5){
+                    $shop[$shop_id] +=15000;
+                }
+            }
+            foreach ($shop_ids as $shop_id){
                 $order= Order::create([
                     'shop_id' => $shop_id,
                     'user_id' => Auth::user()->id,
                     'comment' => $request->note,
                     'order_date' =>Carbon::now('+07:00')->toDateTimeString(),
                     'status' => 0,
+                    'name' => $request->name,
+                    'phone' => $request ->sdt,
+                    'address' => $request -> diachi,
+                    'total' => $shop[$shop_id],
                 ]);
-                // $shops[]= Shop::find($shop_id)->toArray();
+                
                 $orderId=$order->id;
 
                 foreach ($getSession as $key => $value) {
@@ -92,7 +106,7 @@ class OrderController extends Controller
                         'order_id' => $orderId,
                         'quantity' => $value['qty'],
                         'money' => $product[$key]['money'],
-                        'note' => $value['note']
+                        'note' => $product[$key]['note'],
                     ]);
                 }
             }

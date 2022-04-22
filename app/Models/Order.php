@@ -22,7 +22,11 @@ class Order extends Model
         'status',
         'order_date',
         'comment',
-        'shop_id'
+        'shop_id',
+        'name',
+        'phone',
+        'address',
+        'total'
     ];
 
     /**

@@ -70,12 +70,14 @@ class CartController extends Controller
         $array = [];
         $array['id'] = $id;
         $array['qty'] = $qty;
+        $array['note'] = '';
         if (session()->has('cart')) {
             $getSession = session()->get('cart');
             $flag = 1;
             foreach ($getSession as $key => $value) {
                 if ($id == $value['id']) {
                     $getSession[$key]['qty']=$getSession[$key]['qty']+$qty;
+                    $getSession[$key]['note']='';
                     session()->put('cart', $getSession);
                     $flag = 0;
                 }
@@ -96,6 +98,7 @@ class CartController extends Controller
     public function index()
     {
         $total = 0;
+
         // session()->forget('cart');
         if (session()->has('cart')) {
             $getSession = session()->get('cart');
@@ -111,8 +114,17 @@ class CartController extends Controller
             }
             foreach ($shop_ids as $shop_id){
                 $shops[]= Shop::find($shop_id)->toArray();
+                $dem = 0;
+                foreach ($getSession as $key => $value) {
+                    if($product[$key]['shop_id']==$shop_id){
+                        $dem = $dem + $product[$key]['qty'];
+                    }
+                }
+                if($dem<5){
+                    $total +=15000;
+                }
             }
-            // dd($shops);
+            // dd($total);
             return view('frontend/carts/cart', compact('shops','product', 'total'));
         } else {
             return view('frontend/carts/cart');
