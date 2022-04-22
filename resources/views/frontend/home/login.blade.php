@@ -18,11 +18,12 @@
                         @endif --}}
 
 						<div class="wrap-login-item ">
-							{{-- @if(session()->has('message'))
+							@if(session()->has('pleaseLogin'))
 							<div class="alert alert-success">
-							  {{ session()->get('message') }}
+							  {{ session()->get('pleaseLogin') }}
 							</div>
-						  @endif --}}
+						  @endif
+
 
 							<div class="login-form form-item form-stl">
 								<h2 class="text-muted" style="text-align: center">Đăng nhập</h2>

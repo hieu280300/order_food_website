@@ -75,7 +75,6 @@ class OrderController extends Controller
             // dd($shop_ids);
             // dd(Carbon::now('+07:00')->toDateTimeString());
             foreach ($shop_ids as $shop_id){
-                echo $shop_id;
                 $order= Order::create([
                     'shop_id' => $shop_id,
                     'user_id' => Auth::user()->id,
