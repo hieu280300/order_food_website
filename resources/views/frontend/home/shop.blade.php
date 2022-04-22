@@ -65,7 +65,7 @@
                         </div>
                         <div class="down-content">
                             @if ($shop['time_open']>$shop['time_close'])
-                                @if (($shop['time_open']< $time+24) && ( $time< $shop['time_close']))
+                                @if (($shop['time_open']< $time+24) && ( $time-12< $shop['time_close']))
                                     <span class="fa fa-clock-o" style="color: green"> Đang mở cửa </span>
 
                                 @else
@@ -90,7 +90,7 @@
 
                             <div class="main-button">
                             @if ($shop['time_open']>$shop['time_close'])
-                                @if (($shop['time_open']< $time+24) && ( $time< $shop['time_close']))
+                                @if (($shop['time_open']< $time+24) && ( $time-12< $shop['time_close']))
                                     <a href="{{url('products')}}/{{$shop['id']}}">Xem sản phẩm</a>
 
                                 @else
