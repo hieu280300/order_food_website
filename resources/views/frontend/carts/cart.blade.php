@@ -125,34 +125,9 @@
                                                     <input class="shop_name" id="{{$shop['name']}}" hidden>
                                                     <input class="note" id="note{{$value['id']}}" value="{{$value['note']}}" hidden>
                                                 </td>
-
-                                                {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                                    Launch demo modal
-                                                </button> --}}
                                                 <td class="show_product"> <span> <label  data-toggle="modal" data-target="#exampleModal" class='tenmon'>{{$value['name']}}</lable> </span> </td>
-
-                                                {{-- <td> <span> <label  for='modal_input' class='tenmon'>{{$value['name']}}</lable> </span> </td> --}}
-                                                <td class='giamon' ><span class="gia">{{($value['money'])/1000}}</span><span class="vnd">,000₫</span></td>
-
-
-
-                                                        {{-- <div data-v-6eb2f7d4="" aria-hidden="true" class="minus card-product-decrease btn btn--orange-1 quantity-product add-to-cart p-0 active">
-                                                            <svg class="bi bi-dash-circle" width="2em" height="2em" viewBox="0 0 16 16"fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                                <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z" clip-rule="evenodd"/>
-                                                                <path fill-rule="evenodd" d="M3.5 8a.5.5 0 01.5-.5h8a.5.5 0 010 1H4a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
-                                                            </svg>
-                                                        </div> --}}
-
-
+                                                <td class='giamon' ><span class="gia">{{number_format($value['money'])}}đ</span></td>
                                                 <td style="text-align: end">
-                                                    {{-- <div data-v-6eb2f7d4="" class=" plus btn btn--orange-1 card-product-increase quantity-product active add-to-cart p-0">
-                                                        <svg class="bi bi-plus-circle" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" d="M8 3.5a.5.5 0 01.5.5v4a.5.5 0 01-.5.5H4a.5.5 0 010-1h3.5V4a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
-                                                            <path fill-rule="evenodd" d="M7.5 8a.5.5 0 01.5-.5h4a.5.5 0 010 1H8.5V12a.5.5 0 01-1 0V8z" clip-rule="evenodd"/>
-                                                            <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z" clip-rule="evenodd"/>
-                                                        </svg>
-                                                    </div> --}}
-
                                                     <a href="" class='minus cart_quantity_down'>
                                                         <svg class="bi bi-dash-circle" width="2em" height="2em" viewBox="0 0 16 16"fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                             <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z" clip-rule="evenodd"/>
@@ -183,12 +158,8 @@
                                     <td colspan="3" class="tenmon">TỔNG CỘNG:
                                     </td>
                                     <td  colspan="3" class="giatongcong">
-                                        <span id="price_total" >
-
-                                            {{$total/1000}}
-
-                                        </span>
-                                        <span class="vnd">,000₫</
+                                        <span id="price_total" >{{number_format($total)}}đ </span>
+                                      
                                     </td>
                                     @else
                                     <td colspan="6" class="tenmon">Không có sản phẩm nào!!
@@ -224,25 +195,6 @@
                 <p id="modal_topping_text"></p>
             </div>
             <div class="modal-body">
-                {{-- <div>
-                    <p> Loại</p>
-                </div>
-                <hr>
-                <p class="Size"></p>
-                <div class="form-check" style="float:left">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                    <label class="form-check-label" for="exampleRadios1">
-                      Nhỏ
-                    </label>
-                </div>
-                <div class="form-check" style="margin-left: 100px;">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                    <label class="form-check-label" for="exampleRadios2">
-                        Vừa (+5.000 ₫)
-                    </label>
-                </div> --}}
-                {{-- <div class="Topping"></div>
-                <hr> --}}
                 <div class="form-group" style="margin: 0px;">
                     <input type="text" class="form-control show_note" id="formGroupExampleInput" placeholder="Thêm ghi chú món này" value="">
                 </div>
@@ -403,9 +355,6 @@
                 data:{
                     id:getId,
                 },
-                // success:function(data){
-                //     alert(data.success);
-                // }
             });
 			return true;
 
@@ -424,19 +373,7 @@
                 },
 
             });
-			// return false;
 		})
-
-        $('.dathang').click(function(){
-            var checkLogin = "{{Auth::check()}}";
-            if(checkLogin==1){
-                return true;
-            }
-            else {
-                alert ("Vui long dang nhap!");
-                return false;
-            }
-        })
 
     });
  </script>
