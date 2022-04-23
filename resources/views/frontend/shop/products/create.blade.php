@@ -1,12 +1,12 @@
 @extends('frontend.shop.master_shop')
 @section('title', 'Login')
-@section('content')  
+@section('content')
     <form action="{{ route('product.store') }}"  class="table table-bordered table-hover table-striped" method="post" enctype="multipart/form-data">
         @csrf
         <div class="form-group mb-5 px-5  mt-5">
             <h2 for="">Create Product</h2>
         </div>
-        <div class="form-group mb-5 px-5  mt-5">
+        <div class="form-group px-5">
             <label for="">product Name</label>
             <input type="text" name="name" placeholder="product name" value="{{ old('name') }}" class="form-control">
             @error('name')
@@ -53,7 +53,7 @@
         <div class="form-group px-5">
                             <label for="">Money</label>
                             <input type="number" name="money" class="form-control" placeholder="">
-         </div>         
+         </div>
         <div class="form-group mb-5 px-5">
             <label for="">Quantity</label>
             <input type="number" name="quantity" placeholder="quanntity" value="{{ old('quantity') }}"

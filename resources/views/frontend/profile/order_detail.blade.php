@@ -5,7 +5,7 @@
 @section('content')
 <style>
     .order-detail {
-        height: 80%;
+        /* height: 80%; */
         padding-top:60px;
     }
 </style>
@@ -32,7 +32,7 @@
                 @endphp
                 @foreach ($order_details as $key => $orderDetail)
                     @php
-                     
+
                         $money = $orderDetail->quantity * $orderDetail->money;
                         $totalMoney += $money;
                         $quantity = $orderDetail->quantity;
@@ -53,7 +53,7 @@
                     </tr>
                 @endforeach
                 <br>
-        
+
                 <tfoot class="bg-secondary">
                     <tr>
                         <td colspan="2" class="text-right">Tổng số lượng</td>
