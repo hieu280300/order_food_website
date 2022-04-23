@@ -130,8 +130,9 @@ class OrderController extends Controller
         $order_details = DB::table('order_details')
         ->join('products', 'order_details.product_id', '=', 'products.id')
         ->join('orders', 'order_details.order_id', '=', 'orders.id')
-        ->where('order_id',$id)->select('products.thumbnail','products.name as product_name','products.money as price','order_details.quantity as quantity','order_details.money as money','orders.created_at as date_order')
+        ->where('order_id',$id)->select('products.thumbnail','products.name as product_name','products.money as price','order_details.quantity as quantity','order_details.money as money','orders.created_at as date_order','orders.total as total')
         ->get();
+
         $data['order_id']=$id;
         $data['order_details']=$order_details;
         return view('frontend.shop.orders.detail',$data);

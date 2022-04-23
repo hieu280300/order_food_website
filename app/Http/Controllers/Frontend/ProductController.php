@@ -352,6 +352,7 @@ class ProductController extends Controller
     public function PostCmt(Request $request)
     {
         // dd($request->all());
+        
         $cmt = Comment::create([
             'user_id' => Auth::user()->id,
             'product_id' => $request->id,

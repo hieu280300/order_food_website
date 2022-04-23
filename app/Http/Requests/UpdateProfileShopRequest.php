@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use PHPUnit\Framework\Constraint\IsTrue;
 
-class UpdateProfileRequest extends FormRequest
+class UpdateProfileShopRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,9 +28,8 @@ class UpdateProfileRequest extends FormRequest
             'name' => 'required|min:5|max:255', // rule: not null, minumum: 5, maximum: 255
             'phone' => 'required|min:10', // rule: not null, minumum: 10
             'address'=>'required',
-            'birthday'=>'required',
-            'gender'=>'required', 
-
+            'time_open'=>'required',
+            'time_close'=>'required',
         ];
     }
 }

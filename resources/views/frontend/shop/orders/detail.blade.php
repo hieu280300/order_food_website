@@ -6,13 +6,13 @@
         <table class="table table-bordered table-striped ">
             <thead class="bg-info ">
                 <tr>
-                    <th>#</th>
-                    <th>Product name</th>
-                    <th>Thumbnail</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Money</th>
-                    <th>Date order</th>
+                    <th>Số thứ tự</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Hình ảnh sản phẩm</th>
+                    <th>Gía</th>
+                    <th>Số lượng</th>
+                    <th>Thành tiền</th>
+                    <th>Ngày đặt hàng</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,11 +22,18 @@
                 @endphp
                 @foreach ($order_details as $key => $orderDetail)
                     @php
-                        
+                        $ship = "";
                         $money = $orderDetail->quantity * $orderDetail->money;
-                        $totalMoney += $money;
+                        $totalMoney = $orderDetail->total;
                         $quantity = $orderDetail->quantity;
                         $totalQuantity += $quantity;
+                        if($totalQuantity<4)
+                        {
+                            $ship = "15.000";
+                        }
+                        else {
+                            $ship = "free ship";
+                        }
                         $price = $orderDetail->money;
                         $thumbnail = $orderDetail->thumbnail;
                         $product_name = $orderDetail->product_name;
@@ -47,10 +54,12 @@
 
             <tfoot class="bg-secondary">
                 <tr>
-                    <td colspan="2" class="text-right">Total Quantity</td>
-                    <td colspan="2" class="text-bold"> {{ number_format($totalQuantity) }}</td>
-                    <td colspan="2" class="text-right">Total Money</td>
-                    <td colspan="3" class="text-bold"> {{ number_format($totalMoney) }}</td>
+                    <td colspan="1" class="text-right">Tổng số lượng</td>
+                    <td colspan="1" class="text-bold"> {{ number_format($totalQuantity) }}</td>
+                    <td colspan="1" class="text-right">Phí ship</td>
+                    <td colspan="1" class="text-bold"> {{ ($ship) }}</td>
+                    <td colspan="1" class="text-right">Tổng tiền</td>
+                    <td colspan="2" class="text-bold"> {{ number_format($totalMoney) }}</td>
 
                 </tr>
             </tfoot>
@@ -58,7 +67,7 @@
             </tbody>
         </table>
         <div class="mb-2">
-            <a href="{{ route('order.index') }}" class="btn btn-secondary">Back</a>
+            <a href="{{ route('order.index') }}" class="btn btn-secondary">Quay lại</a>
         </div>
     </div>
 

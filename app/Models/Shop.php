@@ -16,7 +16,8 @@ class Shop extends Model
         'time_open',
         'time_close',
         'user_id',
-        'image'
+        'image',
+        'phone'
     ];
     public function category(){
         return $this->belongsTo(Category::class);
