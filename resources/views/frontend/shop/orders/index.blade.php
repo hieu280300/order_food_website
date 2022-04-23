@@ -28,8 +28,6 @@
                 if (!empty($order->orderDetails)) {
                     foreach ($order->orderDetails as $od) {
                         $totalQuantity += $od->quantity;
-                        $productPrice = $od->money;
-                        $totalMoney += $od->quantity * $productPrice;
                     }
                 }
             @endphp
@@ -40,7 +38,7 @@
                             {{ $totalQuantity}}
                         </td>
                         <td>
-                            {{ number_format($totalMoney) }}
+                            {{ number_format($order->total) }}
                         </td>
                         <td>
                             @if (empty($order->status) || $order->status == \App\Models\Order::STATUS[0])
@@ -55,7 +53,7 @@
                                 <div class="alert alert-success" role="alert">hoàn thành</div>
                             @endif
                         </td>
-                        <td>{{date_format(date_create($order->created_at), 'Y-m-d')}}</td>
+                        <td>{{date_format(date_create($order->order_date), 'Y-m-d')}}</td>
                         <td><a href="{{ route('order.show', $order->id) }}"><i class="fa fa-info-circle"  style="padding:20px;font-size:20px;color:black" aria-hidden="true"></i></a></td>
                         <td><a href="{{ route('order.edit', $order->id) }}" ><i class="fa fa-pencil-square-o" style="padding:20px;font-size:20px;color:black" aria-hidden="true"></i></a> </td>
                     </tr>

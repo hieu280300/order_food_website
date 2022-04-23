@@ -8,7 +8,7 @@
     <div class="row ">
         <div class="col-md-12 ">
             @foreach ($infoShop as $info)
-            <form  action="{{ route('update-profile-shop', ['id' => $info->shops->id]) }}" method="post">
+            <form  enctype="multipart/form-data"  action="{{ route('update-profile-shop', ['id' => $info->shops->id]) }}" method="post">
                 @csrf
                 @method('PUT')
                 <div class="form-group">
@@ -61,8 +61,11 @@
                 </div>
                 <div class="form-group">
                     <label class="col-lg-3 control-label">Ảnh cửa hàng:</label>
-                    <img src="{{asset($info->shops->image)}}" alt="" class="img-fluid" style="width:100px">
-                        <input type="file" name="image" class="form-control">
+                    <img src="{{ asset($info->shops->image) }}" alt="{$$info->shops->name }" class="img-fluid" style="width:100px">
+                    <input type="file" name="image" class="form-control">
+                    @error('avatar')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <button class="btn btn-primary  pb-3" type="submit" style="margin-left:500px">Cập nhật</button>
             </form>

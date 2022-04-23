@@ -3,7 +3,7 @@
         <div class="navbar-content">
             <ul class="pc-navbar">
                 <li class="pc-item">
-                    <a href="index.html" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">home</i></span><span class="pc-mtext">Dashboard</span></a>
+                    <a href="{{route('info-user')}}" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">home</i></span><span class="pc-mtext">Dashboard</span></a>
                 </li>
                 <li class="pc-item pc-hasmenu">
                     <a class="pc-link {{ Route::currentRouteName() == 'info-shop' ? 'active' : '' }}" href="{{route('info-shop')}}" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">business_center</i></span><span class="pc-mtext">Hồ sơ cửa hàng</span></a>

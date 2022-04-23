@@ -24,25 +24,20 @@
                         <div class="col-sm-4">
                             <i class="material-icons-two-tone text-primary mb-1">language</i>
                         </div>
-                        @foreach ($orders as $order)
+                     
                         @php
-                        $totalQuantity = 0;
                         $total = 0;
                         $totalMoney = 0;
-                        $hi=0;
-                        if (!empty($order->orderDetails)) {
-                            foreach ($order->orderDetails as $od) {
-                                $totalMoney= $od->money;
-                                $totalQuantity += $od->quantity;
-                                $total += $od->quantity * $totalMoney;
-                            }
-                            $hi += $total;
-                        }
-                       
+                           foreach ($orders as $order)
+                           {
+                     
+                                $totalMoney= $order->total;
+                                $total += $totalMoney;
+                           }
                         @endphp
-                        @endforeach
+              
                         <div class="col-sm-8 text-md-center">
-                            <h5>{{number_format($hi)}} VNĐ</h5>
+                            <h5>{{number_format($total)}} VNĐ</h5>
                             <span>Tổng doanh thu</span>
                         </div>
                     </div>
@@ -54,12 +49,47 @@
                         </div>
                         <div class="col-sm-8 text-md-center">
                             <h5>{{$total_order}}</h5>
-                            <span>Đơn hàng</span>
+                            <span>Tổng đơn hàng</span>
                         </div>
                     </div>
                 </div>
             </div>
-   
+            <div class="card flat-card">
+                <div class="row-table">
+                    <div class="col-sm-6 card-body br">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <i class="material-icons-two-tone text-primary mb-1">group</i>
+                            </div>
+                            <div class="col-sm-8 text-md-center">
+                                <h5>{{$order_shipper}}</h5>
+                                <span>Đơn hàng đang đi giao</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 d-none d-md-table-cell d-lg-table-cell d-xl-table-cell card-body br">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <i class="material-icons-two-tone text-primary mb-1">language</i>
+                            </div>
+                            <div class="col-sm-8 text-md-center">
+                                <h5>{{$order_finish}}</h5>
+                                <span>Đơn hàng đã hoàn thành</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 card-body">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <i class="material-icons-two-tone text-primary mb-1">shopping_cart</i>
+                            </div>
+                            <div class="col-sm-8 text-md-center">
+                                <h5>{{$order_cancel}}</h5>
+                                <span>Đơn hàng đã hủy</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             
         </div>
         

@@ -126,6 +126,9 @@ class HomeController extends Controller
         {
             $id_shop = $info->shops->id;
            $order= Order::with('orderDetails')->with('user')->with('shop')->where('orders.shop_id',$id_shop)->count();
+           $order_cancel= Order::with('orderDetails')->with('user')->with('shop')->where('orders.status','=','3')->Where('orders.shop_id',$id_shop)->count();
+           $order_shipper= Order::with('orderDetails')->with('user')->with('shop')->where('orders.status','=','2')->Where('orders.shop_id',$id_shop)->count();
+           $order_finish= Order::with('orderDetails')->with('user')->with('shop')->where('orders.status','=','4')->Where('orders.shop_id',$id_shop)->count();
            $total_user = DB::table('orders')
            ->join('shops', 'shops.id', '=', 'orders.shop_id')
            ->join('users', 'users.id', '=', 'orders.user_id')
@@ -135,6 +138,9 @@ class HomeController extends Controller
             $data['total_user']= $total_user;
             $data['total_order'] = $order;
             $data['orders'] = $orders;
+            $data['order_cancel']=$order_cancel;
+            $data['order_shipper']=$order_shipper;
+            $data['order_finish']=$order_finish;
             return view('frontend.shop.dashboard',$data);
         }
         else
@@ -220,7 +226,7 @@ class HomeController extends Controller
         $shop->time_close = $request->time_close;
         if($request->hasFile('image'))
         {
-            $destination = 'shop/thumbnails/' . $shop->image;
+            $destination = 'shop_images/' . $shop->image;
             if(File::exists($destination))
             {
                 File::delete($destination);
@@ -228,16 +234,14 @@ class HomeController extends Controller
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extension;
-            $filename=$file ->move('shop/thumbnails/',$filename);
+            $filename=$file ->move('shop_images/',$filename);
             $shop->image = $filename;
         }
-        dd($shop);
         DB::beginTransaction();
         try {
-            dd($shop);
             $shop->update();
             DB::commit();
-            return redirect()->route('info-user',$shop->id)->with('hihi', 'Update successful!');
+            return redirect()->route('info-shop')->with('hihi', 'Update successful!');
         } catch (\Exception $ex) {
             DB::rollback();
 
@@ -257,7 +261,7 @@ class HomeController extends Controller
         $order_details = DB::table('order_details')
         ->join('products', 'order_details.product_id', '=', 'products.id')
         ->join('orders', 'order_details.order_id', '=', 'orders.id')
-        ->where('order_id',$id)->select('products.thumbnail','products.name as product_name','order_details.quantity as quantity','order_details.money','orders.created_at as date_order')
+        ->where('order_id',$id)->select('products.thumbnail','products.name as product_name','order_details.quantity as quantity','order_details.money','orders.created_at as date_order','orders.total as total')
         ->get();
         $data['order_id']=$id;
         $data['order_details']=$order_details;
