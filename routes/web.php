@@ -86,6 +86,9 @@ Route::put('/update_profile_shop/{id}',[App\Http\Controllers\Frontend\HomeContro
 Route::get('/dashboard', function () {
     return view('admin/dashboard');
 });
+Route::get('/email', function () {
+    return view('frontend/carts/email');
+});
 Route::get('/filter-by-date',[HomeController::class,'filter_by_date']);
 // Route::get('/dashboard', function () {
 //     return view('admin/dashboard');

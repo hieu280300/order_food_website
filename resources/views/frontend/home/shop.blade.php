@@ -66,17 +66,17 @@
                         <div class="down-content">
                             @if ($shop['time_open']>$shop['time_close'])
                                 @if (($shop['time_open']< $time+24) && ( $time-12< $shop['time_close']))
-                                    <span class="fa fa-clock-o" style="color: green"> Đang mở cửa </span>
+                                    <i class="fa fa-clock-o" style="color: green">  </i><span style="color: green; margin-left:5px"> Đang mở cửa </span>
 
                                 @else
-                                    <span class="fa fa-clock-o" style="color:#ed563b"> Đang đóng cửa </span>
+                                    <i class="fa fa-clock-o" style="color:#ed563b"></i><span style="color:#ed563b; margin-left:5px"> Đang đóng cửa </span>
                                 @endif
                             @else
                                 @if (($shop['time_open']< $time) && ( $time< $shop['time_close']))
-                                    <span class="fa fa-clock-o" style="color: green"> Đang mở cửa </span>
+                                    <i class="fa fa-clock-o" style="color: green">  </i><span style="color: green; margin-left:5px"> Đang mở cửa </span>
 
                                 @else
-                                    <span class="fa fa-clock-o" style="color:#ed563b"> Đang đóng cửa </span>
+                                    <i class="fa fa-clock-o" style="color:#ed563b"><span style="color:#ed563b; margin-left:5px"> Đang  cửa </span> </i><span> Đang đóng cửa </span>
                                 @endif
                             @endif
 

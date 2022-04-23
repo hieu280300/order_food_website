@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\SendEmail;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Product;
@@ -97,7 +98,7 @@ class OrderController extends Controller
                     'address' => $request -> diachi,
                     'total' => $shop[$shop_id],
                 ]);
-                
+
                 $orderId=$order->id;
 
                 foreach ($getSession as $key => $value) {
@@ -111,11 +112,21 @@ class OrderController extends Controller
                 }
             }
         }
+        $mail = Auth::user()->email;
+        $message = [
+            'type' => 'Create task',
+            'name' =>  $request->name,
+            'phone' => $request->sdt,
+            'diachi' => $request->diachi,
+            'email' => $mail,
+            'content' => 'has been created!',
+        ];
+        SendEmail::dispatch($message, $mail )->delay(now()->addMinute(1));
         $getSession = session()->get('cart');
         if (!empty($getSession)) {
             session()->forget('cart');
         }
-        return redirect()->route('info-user')->with('hihi', 'Đặt hàng thành công!');
+        return view('frontend.carts.checkout_complete');
     }
 
     /**
