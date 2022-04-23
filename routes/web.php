@@ -77,10 +77,12 @@ Route::group(['prefix' => 'order', 'as' => 'order.'], function () {
 Route::get('/product_detail', function () {
     return view('frontend.home.product_detail');
 });
-Route::get('info-user',[App\Http\Controllers\Frontend\HomeController::class,'infoUser'])->name('info-user');
+Route::get('info',[App\Http\Controllers\Frontend\HomeController::class,'infoUser'])->name('info-user');
 Route::get('manage_orders',[App\Http\Controllers\Frontend\HomeController::class,'manage_order'])->name('manage_order');
 Route::get('order-details/{id}',[App\Http\Controllers\Frontend\HomeController::class,'order_detail'])->name('order_detail');
-Route::get('info-shop',[HomeController::class,'infoShop'])->name('info-shop');
+Route::get('info-shop',[App\Http\Controllers\Frontend\HomeController::class,'infoShop'])->name('info-shop');
+Route::get('/edit_profile_shop/{id}',[App\Http\Controllers\Frontend\HomeController::class,'editProfileShop'])->name('edit-profile-shop');
+Route::put('/update_profile_shop/{id}',[App\Http\Controllers\Frontend\HomeController::class,'updateProfileShop'])->name('update-profile-shop');
 Route::get('/dashboard', function () {
     return view('admin/dashboard');
 });

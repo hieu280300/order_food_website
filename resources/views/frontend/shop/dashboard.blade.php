@@ -3,23 +3,9 @@
 @section('content')  
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <div  class="table  table-striped">
-<div class="row">
-<form action="">
-    @csrf
-    <div class="col-md-2">
-        <p>Từ ngày: <input type="text" id="datepicker" class="form-control"> </p>
-        <input type="button" id="btn-dashboard-filter" class="btn btn-primary btn-sm" value="Lọc kết quả">
-    </div>
-    <div class="col-md-2">
-        <p>Đến ngày: <input type="text" id="datepicker2" class="form-control"></p>
-    </div>
-</form>
-<div class="col-md-12">
- <div id="myfirstchart" style="height:250px;"></div>
-</div>
-</div>
+
   <!-- support-section start -->
-    <div class="col-xl-12 col-md-12">
+    <div class="col-xl-12 col-md-12 pt-5">
         <div class="card flat-card">
             <div class="row-table">
                 <div class="col-sm-6 card-body br">
@@ -28,8 +14,8 @@
                             <i class="material-icons-two-tone text-primary mb-1">group</i>
                         </div>
                         <div class="col-sm-8 text-md-center">
-                            <h5>1000</h5>
-                            <span>Customers</span>
+                            <h5>{{$total_user}}</h5>
+                            <span>Khách hàng</span>
                         </div>
                     </div>
                 </div>
@@ -41,56 +27,23 @@
                         @foreach ($orders as $order)
                         @php
                         $totalQuantity = 0;
-$total = 0;
-$totalMoney = 0;
-if (!empty($order->orderDetails)) {
-    foreach ($order->orderDetails as $od) {
-        $total= $od->money;
-        $totalQuantity += $od->quantity;
-        $totalMoney += $od->quantity * $total;
-    }
-$hi +=$totalMoney;
-}
-@endphp
-@endforeach
+                        $total = 0;
+                        $totalMoney = 0;
+                        $hi=0;
+                        if (!empty($order->orderDetails)) {
+                            foreach ($order->orderDetails as $od) {
+                                $totalMoney= $od->money;
+                                $totalQuantity += $od->quantity;
+                                $total += $od->quantity * $totalMoney;
+                            }
+                            $hi += $total;
+                        }
+                       
+                        @endphp
+                        @endforeach
                         <div class="col-sm-8 text-md-center">
                             <h5>{{number_format($hi)}} VNĐ</h5>
-                            <span>Revenue</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 card-body">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <i class="material-icons-two-tone text-primary mb-1">unarchive</i>
-                        </div>
-                        <div class="col-sm-8 text-md-center">
-                            <h5>600</h5>
-                            <span>Growth</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row-table">
-                <div class="col-sm-6 card-body br">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <i class="material-icons-two-tone text-primary mb-1">swap_horizontal_circle</i>
-                        </div>
-                        <div class="col-sm-8 text-md-center">
-                            <h5>3550</h5>
-                            <span>Returns</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 d-none d-md-table-cell d-lg-table-cell d-xl-table-cell card-body br">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <i class="material-icons-two-tone text-primary mb-1">cloud_download</i>
-                        </div>
-                        <div class="col-sm-8 text-md-center">
-                            <h5>3550</h5>
-                            <span>Downloads</span>
+                            <span>Tổng doanh thu</span>
                         </div>
                     </div>
                 </div>
@@ -100,12 +53,13 @@ $hi +=$totalMoney;
                             <i class="material-icons-two-tone text-primary mb-1">shopping_cart</i>
                         </div>
                         <div class="col-sm-8 text-md-center">
-                            <h5>{{$hi}}</h5>
-                            <span>Order</span>
+                            <h5>{{$total_order}}</h5>
+                            <span>Đơn hàng</span>
                         </div>
                     </div>
                 </div>
             </div>
+   
             
         </div>
         

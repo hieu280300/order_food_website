@@ -2,6 +2,11 @@
 @section('title', 'Login')
 @section('content')  
 <div  class="table  table-striped">
+    <div class="input-group input-daterange">
+        <input type="text" class="form-control" value="2012-04-05">
+        <div class="input-group-addon">to</div>
+        <input type="text" class="form-control" value="2012-04-19">
+    </div>
     <table id="product-list" class="table table-bordered table-hover table-striped">
         <thead>
             <tr>

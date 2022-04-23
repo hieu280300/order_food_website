@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateProductRequest;
 use App\Http\Requests\UpdateProfileRequest;
+use App\Http\Requests\UpdateProfileShopRequest;
 use App\Models\Category;
 use App\Models\Order;
 use App\Models\Product;
@@ -117,42 +118,33 @@ class HomeController extends Controller
         $data = [];
         $id = Auth::user()->id;
         $infoUsers = User::with('shops')->where('id', $id)->get();
+      
         $data['infoUsers'] = $infoUsers;
         foreach ($infoUsers as $info)
         {
         if($info->role == 1)
         {
-            return view('frontend.shop.home_shop',$data);
+            $id_shop = $info->shops->id;
+           $order= Order::with('orderDetails')->with('user')->with('shop')->where('orders.shop_id',$id_shop)->count();
+           $total_user = DB::table('orders')
+           ->join('shops', 'shops.id', '=', 'orders.shop_id')
+           ->join('users', 'users.id', '=', 'orders.user_id')
+           ->where('shop_id',$id_shop)->select('users.name')->distinct('users.name')->count();
+         
+           $orders= Order::with('orderDetails')->with('user')->with('shop')->where('orders.shop_id',$id_shop)->get();
+            $data['total_user']= $total_user;
+            $data['total_order'] = $order;
+            $data['orders'] = $orders;
+            return view('frontend.shop.dashboard',$data);
         }
         else
         {
         return view('frontend.profile.profile', $data);
         }
-    //     $data = [];
-    //     $id = Auth::user()->id;
-    //     $shop = User::with('shops')->where('id', $id)->get();
-    //     foreach ($shop as $hi)
-    //     {
-    //     $id_shop = $hi->shops->id;
-    //     dd($id_shop);
-    //     }
-    //    $order= Order::with('orderDetails')->with('user')->with('shop')->where('orders.shop_id',$id_shop)->count();
-    //    $orders= Order::with('orderDetails')->with('user')->with('shop')->where('orders.shop_id',$id_shop)->get();
-    //    $data['orders'] = $orders;
-    //    $data['hi'] = $order;
-    //     $data['infoUsers'] = $infoUsers;
-    //     foreach ($infoUsers as $info)
-    //     {
-    //     if($info->role == 1)
-    //     {
-    //          return view('frontend.shop.dashboard',$data);
-    //     }
-    //     else
-    //     {
-    //     return view('frontend.profile.profile', $data);
-    //     }
+       
     }
-}
+    }
+
     public function editProfile($id)
     {
        $data = [];
@@ -195,6 +187,57 @@ class HomeController extends Controller
 
             // success
             return redirect()->route('info-user',$user->id)->with('hihi', 'Update successful!');
+        } catch (\Exception $ex) {
+            DB::rollback();
+
+            return redirect()->back()->with('error', $ex->getMessage());
+        }
+    }
+    public function infoShop()
+    {
+        $data = [];
+        $id = Auth::user()->id;
+        $infoUsers = User::with('shops')->where('id', $id)->get();
+        $data['infoUsers'] = $infoUsers;
+        return view('frontend.shop.profile.index',$data);
+    }
+    public function editProfileShop($id)
+    {
+       $data = [];
+       $id = Auth::user()->id;
+        $infoShop = User::with('shops')->where('id', $id)->get();
+      $data['infoShop'] = $infoShop;
+
+      return view('frontend.shop.profile.edit',$data);
+    }
+    public function updateProfileShop(UpdateProfileShopRequest $request,$id)
+    {
+        $shop = Shop::find($id);
+        $shop->name = $request->name;
+        $shop->phone = $request->phone;
+        $shop->address = $request->address;
+        $shop->time_open = $request->time_open;
+        $shop->time_close = $request->time_close;
+        if($request->hasFile('image'))
+        {
+            $destination = 'shop/thumbnails/' . $shop->image;
+            if(File::exists($destination))
+            {
+                File::delete($destination);
+            }
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $filename=$file ->move('shop/thumbnails/',$filename);
+            $shop->image = $filename;
+        }
+        dd($shop);
+        DB::beginTransaction();
+        try {
+            dd($shop);
+            $shop->update();
+            DB::commit();
+            return redirect()->route('info-user',$shop->id)->with('hihi', 'Update successful!');
         } catch (\Exception $ex) {
             DB::rollback();
 
