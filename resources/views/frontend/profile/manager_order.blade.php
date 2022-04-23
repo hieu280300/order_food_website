@@ -6,7 +6,7 @@
     <style>
         .order_manader {
             padding: 100px;
-            height:90%;
+            /* height:90%; */
             width:100%;
         }
     </style>
