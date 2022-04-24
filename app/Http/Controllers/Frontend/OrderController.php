@@ -41,7 +41,25 @@ class OrderController extends Controller
 
         return view('frontend.shop.orders.index', $data);
     }
+    public function search(Request $request)
+    {
+        $formDate = $request->input('date_first');
+        $toDate = $request->input('date_second');
+        $data = [];
+        $id = Auth::user()->id;
+        $shop = User::with('shops')->where('id', $id)->get();
+        foreach ($shop as $hi)
+        {
+        $id_shop = $hi->shops->id;
+        }
+       $orders= Order::with('orderDetails')->with('user')->with('shop')->where('orders.shop_id',$id_shop)->where('orders.order_date','>=',$formDate)->where('orders.order_date','<=',$toDate)->get();
+       if (!empty($request->date)) {
+            $orders = $orders->whereDate('created_at','=',$request->date);
 
+        }
+        $data['orders'] = $orders;
+        return view('frontend.shop.orders.index', $data);
+    }
     /**
      * Show the form for creating a new resource.
      *

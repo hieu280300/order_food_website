@@ -15,8 +15,7 @@
                 alt="Avatar"
                 class="img-fluid my-5"
                 style="  clip-path: circle(50%);
-                width: 150px; height: 150px"
-              />
+                width: 150px; height: 150px"/>
       
                 <h5>{{ $info->shops->name }}</h5>
                 <p class="text-muted">{{$info->shops->address}}</p>

@@ -2,11 +2,27 @@
 @section('title', 'Login')
 @section('content')  
 <div  class="table  table-striped">
-    <div class="input-group input-daterange">
-        <input type="text" class="form-control" value="2012-04-05">
-        <div class="input-group-addon">to</div>
-        <input type="text" class="form-control" value="2012-04-19">
+    <form action="{{route('order.search')}}" method="POST" class="form-inline" role="form">
+        @csrf
+    <div class="container">
+        <div class="row">
+            <div class="col">
+        <input type="date" name="date_first" class="form-control" >
+            </div>
+            <div class="col text-center">
+        <div class="input-group-addon">đến</div>
     </div>
+    <div class="col">
+        <input type="date" name="date_second" class="form-control" >
+    </div>
+    <div class="col">
+       <button type="submit" class="btn btn-primary">
+        <i class="fas fa-search"></i>
+       </button>
+    </div>
+    </div>
+    </div>
+</form>
     <table id="product-list" class="table table-bordered table-hover table-striped">
         <thead>
             <tr>
