@@ -71,7 +71,6 @@
             </form>
             @endforeach
         </div>
-          
             </div>
         </div>
 @endsection

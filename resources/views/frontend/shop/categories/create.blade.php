@@ -4,8 +4,8 @@
     <form action="{{ route('category.store') }}" method="post" class="table table-bordered table-hover table-striped">
         @csrf
         <div class="form-group px-5  mt-5">
-            <label for="">Category Name</label>
-            <input type="text" name="category_name" placeholder="Category name" class="form-control">
+            <label for="">Tên Thể Loại</label>
+            <input type="text" name="category_name" placeholder="Tên Thể Loại   " class="form-control">
             @error('category_name')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
@@ -20,7 +20,7 @@
         </div>
         <br>
         <div class="form-group px-5">
-            <label for="">Shop Name</label>
+            <label for="">Tên Cửa Hàng</label>
             <select name="shop_id" class="form-control">
                 @foreach ($shop as $shop)
                 <option value="{{ $shop->id }}" {{ old('shop_id') == $shop->id ? 'selected' : ' ' }} >
@@ -32,8 +32,8 @@
         @enderror
         </div>
         <div class="form-group px-5 mt-5">
-            <a href="{{ route('category.index') }}" class="btn btn-secondary">List category</a>
-            <button class="btn btn-primary" type="submit">create</button>
+            <a href="{{ route('category.index') }}" class="btn btn-secondary">Danh sách thể loại</a>
+            <button class="btn btn-primary" type="submit">Tạo thể loại</button>
         </div>
     </form>
 @endsection

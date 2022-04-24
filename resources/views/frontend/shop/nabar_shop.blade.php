@@ -2,7 +2,7 @@
     <div class="navbar-wrapper">
         <div class="navbar-content">
             <ul class="pc-navbar">
-                <li class="pc-item">
+                <li class="pc-item pc-hasmenu">
                     <a href="{{route('info-user')}}" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">home</i></span><span class="pc-mtext">Dashboard</span></a>
                 </li>
                 <li class="pc-item pc-hasmenu">

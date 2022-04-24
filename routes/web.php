@@ -67,6 +67,7 @@ Route::group(['prefix' => 'product', 'as' => 'product.'], function () {
 });
 Route::group(['prefix' => 'order', 'as' => 'order.'], function () {
     Route::get('/list', [OrderController::class, 'index'])->name('index');
+    Route::post('/list', [OrderController::class, 'search'])->name('search');
     Route::get('/show/{id}', [OrderController::class, 'show'])->name('show');
     Route::get('/edit/{id}', [OrderController::class, 'edit'])->name('edit');
     Route::put('/update/{id}', [OrderController::class, 'update'])->name('update');
@@ -86,6 +87,7 @@ Route::put('/update_profile_shop/{id}',[App\Http\Controllers\Frontend\HomeContro
 Route::get('/dashboard', function () {
     return view('admin/dashboard');
 });
+
 Route::get('/email', function () {
     return view('frontend/carts/email');
 });
