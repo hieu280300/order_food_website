@@ -1,9 +1,9 @@
 @extends('frontend.shop.master_shop')
 @section('title', 'Login')
-@section('content')  
-<div  class="table  table-striped">
+@section('content')
+<div  class="table  table-striped" style="margin-bottom: 150px; min-height: 300px;">
 
-    
+
     <table id="post"  class="table table-bordered table-hover table-striped">
         <thead class="thead-dark">
             <tr>
@@ -36,7 +36,7 @@
                         <td scope="col">{{ $product->product_content }}</td>
                         <td scope="col">{{ $product->product_quantity }}</td>
                         <td scope="col">{{ $product->category_name }}</td>
-                       
+
                         {{-- <td scope="col">{{$posts->}}</td> --}}
 
                         <td>
@@ -47,14 +47,14 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit"><i class="fa fa-trash-o" aria-hidden="true" style="padding:20px;font-size:20px;color:black"></i></button>
-                               
+
                             </form>
                         </td>
                     </tr>
                 @endforeach
             @endif
         </tbody>
-        
+
     </table>
     <div>
         {{$products->links()}}

@@ -1,7 +1,7 @@
 @extends('frontend.shop.master_shop')
 @section('title', 'Login')
-@section('content')  
-<div  class="table  table-striped">
+@section('content')
+<div  class="table  table-striped" style="margin-bottom: 150px;min-height: 300px;">
     <form action="{{route('order.search')}}" method="POST" class="form-inline" role="form">
         @csrf
     <div class="container">

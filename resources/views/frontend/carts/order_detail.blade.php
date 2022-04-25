@@ -14,7 +14,7 @@
                     <th>Tên sản phẩm</th>
                     <th>Ảnh sản phẩm</th>
                     <th>Số lượng</th>
-                    <th>Gía</th>
+                    <th>Giá</th>
                     <th>Size</th>
                     <th>Color</th>
                     <th>Tiền</th>
@@ -28,7 +28,7 @@
                 @endphp
                 @foreach ($order_details as $key => $orderDetail)
                     @php
-                     
+
                         $money = $orderDetail->quantity * $orderDetail->price_id;
                         $totalMoney += $money;
                         $quantity = $orderDetail->quantity;
@@ -53,7 +53,7 @@
                     </tr>
                 @endforeach
                 <br>
-        
+
                 <tfoot class="bg-secondary">
                     <tr>
                         <td colspan="2" class="text-right">Tổng số lượng</td>
