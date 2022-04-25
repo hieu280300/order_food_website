@@ -3,9 +3,9 @@
 @section('content')
     {{-- @if (!empty($order->orderDetails)) --}}
     <div class="order-detail px-5">
-        <table class="table table-bordered table-striped ">
+        <table class="table table-bordered table-hover table-striped " style="min-height: 400px;">
             <thead class="bg-info ">
-                <tr>
+                <tr class="center">
                     <th>Số thứ tự</th>
                     <th>Tên sản phẩm</th>
                     <th>Hình ảnh sản phẩm</th>
