@@ -5,11 +5,11 @@
 @endpush
 @section('title', 'List Post')
 @section('content')
-@include('admin.auth.products.search')
+{{-- @include('admin.auth.products.search') --}}
 <p><a href="{{ route('admin.user.create') }}" class="btn btn-secondary" >Create</a></p>
-        
+
         {{-- show message --}}
-    
+
     <br>
     <table id="post"  class="table table-bordered table-hover table-striped">
         <thead class="thead-dark">

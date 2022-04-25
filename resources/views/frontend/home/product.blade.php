@@ -35,15 +35,14 @@
         <div class="row">
             <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 ">
                 <nav class="sticky" id="myScrollspy">
-                    <ul class="nav nav-pills flex-column " id="bar_menu">
+                    <ul class="nav nav-pills flex-column" id="bar_menu">
                         <li class="nav-item"><a href="#section1" class="nav-link active"> MÓN NỔI BẬT </a></li>
 
                         @foreach ($categories as $categoryId => $categoryName)
-                            <li class="nav-item"><a href="#{{$categoryId}}" class="nav-link">{{ $categoryName }} </a>
+                            <li class="nav-item"><a href="#sections{{$categoryId}}" class="nav-link">{{ $categoryName }} </a>
                             </li>
                         @endforeach
                     </ul>
-
                 </nav>
             </div>
             <!-- <div id="menu" class="col-lg-9 col-md-9 col-sm-8 col-xs-12 border_right_before"></div> -->
@@ -83,7 +82,7 @@
                     </div>
                 </div>
                 @foreach ($categories as $categoryId => $categoryName)
-                <div id="{{$categoryId}}">
+                <div id="sections{{$categoryId}}">
                     <h2><span class="menuhome">{{ $categoryName }} </h2>
                     <div class="list_product_related flex_wrap display_flex menu_lists">
 

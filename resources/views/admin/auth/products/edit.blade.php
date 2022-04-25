@@ -67,7 +67,7 @@
         <div class="form-group mb-5">
                             <label for="">Money</label>
                             <input type="number" name="money" class="form-control" value="{{$product->product_money}}" placeholder="">
-         </div>         
+         </div>
         <div class="form-group mb-5">
             <label for="">Quantity</label>
             <input type="number" name="quantity" placeholder="quanntity" value="{{$product->product_quantity}}"
@@ -101,7 +101,7 @@
         @endforeach
         @endif
         <br>
-        
+
         <div class="form-group">
             <a href="{{ route('admin.product.index') }}" class="btn btn-secondary">List Product</a>
             <button type="submit" class="btn btn-primary">Update</button>

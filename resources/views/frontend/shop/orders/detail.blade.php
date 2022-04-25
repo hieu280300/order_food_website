@@ -9,7 +9,7 @@
                     <th>Số thứ tự</th>
                     <th>Tên sản phẩm</th>
                     <th>Hình ảnh sản phẩm</th>
-                    <th>Gía</th>
+                    <th>Giá</th>
                     <th>Số lượng</th>
                     <th>Thành tiền</th>
                     <th>Ngày đặt hàng</th>

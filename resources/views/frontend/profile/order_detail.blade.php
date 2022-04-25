@@ -20,7 +20,7 @@
                     <th>Tên sản phẩm</th>
                     <th>Ảnh sản phẩm</th>
                     <th>Số lượng</th>
-                    <th>Gía</th>
+                    <th>Giá</th>
                     <th>Thành tiền</th>
                     <th>Ngày đặt hàng</th>
                 </tr>

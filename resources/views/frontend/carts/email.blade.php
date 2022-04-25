@@ -25,13 +25,13 @@
                 <div class="form-group">
                     <div class="col-md-12"><strong>Số điện thoại:</strong></div>
                     {{$info['phone_number']}}
-                   
+
                 </div>
                 <div class="form-group">
                     <div class="col-md-12"><strong>Email Address:</strong></div>
                     {{$info['email_address']}}
                 </div>
-                
+
             </div>
         </div>
     <table class="table">
@@ -43,7 +43,7 @@
             <th scope="col">Số lượng</th>
             <th scope="col">Size</th>
             <th scope="col">Màu</th>
-            <th scope="col">Gía</th>
+            <th scope="col">Giá</th>
           </tr>
         </thead>
         <tbody>
@@ -61,4 +61,3 @@
         </tbody>
       </table>
       </form>
-   

@@ -9,16 +9,16 @@
         </div>
         <div class="navbar-content">
             <ul class="pc-navbar">
-                <li class="pc-item pc-caption">
+                {{-- <li class="pc-item pc-caption">
                     <label>Navigation</label>
-                </li>
+                </li> --}}
                 <li class="pc-item">
-                    <a href="index.html" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">home</i></span><span class="pc-mtext">Dashboard</span></a>
+                    <a href="{{url('/admin/dashboard')}}" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">home</i></span><span class="pc-mtext">Dashboard</span></a>
                 </li>
-                <li class="pc-item pc-caption">
+                {{-- <li class="pc-item pc-caption">
                     <label>Elements</label>
                     <span>UI Components</span>
-                </li>
+                </li> --}}
                 <li class="pc-item pc-hasmenu">
                     <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">business_center</i></span><span class="pc-mtext">Users</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                     <ul class="pc-submenu">
@@ -33,8 +33,8 @@
                         <li class="pc-item"><a class="pc-link {{ Route::currentRouteName() == 'admin.shop.index' ? 'active' : '' }}" href="{{ route('admin.shop.index') }}">List Shops</a></li>
                     </ul>
                 </li>
-            
-                <li class="pc-item pc-caption">
+
+                {{-- <li class="pc-item pc-caption">
                     <label>Forms</label>
                 </li>
                 <li class="pc-item pc-hasmenu">
@@ -65,15 +65,15 @@
                 <li class="pc-item pc-caption">
                     <label>Pages</label>
                     <span>Redymade Pages</span>
-                </li>
-                <li class="pc-item pc-hasmenu">
+                </li> --}}
+                {{-- <li class="pc-item pc-hasmenu">
                     <a href="#!" class="pc-link"><span class="pc-micon"><i class="material-icons-two-tone">https</i></span><span class="pc-mtext">Authentication</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                     <ul class="pc-submenu">
                         <li class="pc-item"><a class="pc-link" href="auth-signup.html" target="_blank">Sign up</a></li>
                         <li class="pc-item"><a class="pc-link" href="auth-signin.html" target="_blank">Sign in</a></li>
                     </ul>
-                </li>
-                <li class="pc-item pc-caption">
+                </li> --}}
+                {{-- <li class="pc-item pc-caption">
                     <label>Other</label>
                     <span>Extra more things</span>
                 </li>
@@ -111,7 +111,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="pc-item"><a href="sample-page.html" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">storefront</i></span><span class="pc-mtext">Sample page</span></a></li>
+                <li class="pc-item"><a href="sample-page.html" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">storefront</i></span><span class="pc-mtext">Sample page</span></a></li> --}}
 
             </ul>
         </div>
