@@ -7,9 +7,9 @@
         <thead class="thead-dark">
             <tr>
                 <th>#</th>
-                <th>Category Name</th>
-                <th>Category Slug</th>
-                <th colspan="3">Action</th>
+                <th>Tên thể loại</th>
+                <th>Slug</th>
+                <th colspan="3">Hành động</th>
             </tr>
         </thead>
         <tbody>

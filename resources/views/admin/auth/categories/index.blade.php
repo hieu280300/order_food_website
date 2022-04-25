@@ -12,7 +12,7 @@
 
     {{-- create category link --}}
     {{-- case 1 --}}
-    <p><a href="{{ route('admin.category.create') }} " class="btn btn-secondary">Create</a></p>
+    <p><a href="{{ route('admin.category.create') }} " class="btn btn-secondary">Tạo</a></p>
     @if(session()->has('success'))
     <div class="alert alert-success">
         {{ session()->get('success') }}
@@ -22,9 +22,9 @@
         <thead class="thead-dark">
             <tr>
                 <th>#</th>
-                <th>Category Name</th>
-                <th>Category Slug</th>
-                <th colspan="3">Action</th>
+                <th>Tên thể loại</th>
+                <th>Slug</th>
+                <th colspan="3">Hành động</th>
             </tr>
         </thead>
         <tbody>

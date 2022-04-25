@@ -186,7 +186,7 @@
                         <div id="price_modal" ></div>
                     </div>
                     <div style="float: right; width: 50%;">
-                        <button class="modal_tien add-to-cart" style="max-width: 300px; float: right; color:fff" data-dismiss="modal"><span class="total_product "></span><span>,000đ</span></button>
+                        <button class="modal_tien add-to-cart" style="max-width: 300px; float: right; color:#fff" data-dismiss="modal"><span class="total_product "></span><span>,000đ</span></button>
                     </div>
                 </div>
             </div>

@@ -10,23 +10,23 @@
     <form action="{{ route('admin.category.store') }}" method="post">
         @csrf
         <div class="form-group mb-5">
-            <label for="">Category Name</label>
-            <input type="text" name="category_name" placeholder="Category name" class="form-control">
+            <label for="">Tên thể loại</label>
+            <input type="text" name="category_name" placeholder="Tên thể loại" class="form-control">
             @error('category_name')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
         </div>
         <div class="form-group mb-5">
             <br>
-            <label for="">Category Slug</label>
-            <input type="text" name="category_slug" placeholder="Category slug" class="form-control">
+            <label for="">Slug</label>
+            <input type="text" name="category_slug" placeholder="Slug" class="form-control">
             @error('category_slug')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
         </div>
         <br>
         <div class="form-group mb-5">
-            <label for="">Shop Name</label>
+            <label for="">Tên cửa hàng</label>
             <select name="shop_id" class="form-control">
                 <option value=""></option>
                 @if (!empty($shops))
@@ -41,8 +41,8 @@
             @enderror
         </div>
         <div class="form-group">
-            <a href="{{ route('admin.category.index') }}" class="btn btn-secondary">List category</a>
-            <button class="btn btn-primary" type="submit">create</button>
+            <a href="{{ route('admin.category.index') }}" class="btn btn-secondary">Danh sách thể loại</a>
+            <button class="btn btn-primary" type="submit">Tạo</button>
         </div>
     </form>
 @endsection
