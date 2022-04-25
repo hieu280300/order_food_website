@@ -182,7 +182,7 @@
                   </div> --}}
                 </div>
                 <div class="product-count">
-                  <label for="size">Quantity</label>
+                  <label for="size">Số lượng</label>
                   <form action="#" class="display-flex">
                   <div class="qtyminus">-</div>
                   <input type="text" name="quantity" class="qty" value="1" class="qty">
@@ -397,7 +397,7 @@
             // console.log(data.success);
 
             });
-            return false;   
+            return false;
             // $('span.total').text(23);
         });
     });

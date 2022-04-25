@@ -99,87 +99,87 @@
 
 
                     <div class="thanhtoan" >
-                        @if(!empty($product))
+
                             <table  id="ul-products">
                                 <thead>
                                     <tr class="bang">
                                     </tr>
                                 </thead>
+                                @if(!empty($product))
+                                    @foreach ($shops as $shop)
+                                        <tbody>
 
-                                @foreach ($shops as $shop)
-                                    <tbody>
+                                            <tr class="cart shop-cart" >
+                                                <td colspan="6">
+                                                    <div class="shop-herder">
+                                                        <p>{{$shop['name']}}</p>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            @php
+                                                $dem = 0;
+                                            @endphp
+                                            @foreach ($product as $value)
+                                                @if ($shop['id']==$value['shop_id'])
+                                                    @php
+                                                        $dem =$dem+$value['qty'];
+                                                    @endphp
+                                                    <tr class="cart">
 
-                                        <tr class="cart shop-cart" >
-                                            <td colspan="6">
-                                                <div class="shop-herder">
-                                                    <p>{{$shop['name']}}</p>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        @php
-                                            $dem = 0;
-                                        @endphp
-                                        @foreach ($product as $value)
-                                            @if ($shop['id']==$value['shop_id'])
-                                                @php
-                                                    $dem =$dem+$value['qty'];
-                                                @endphp
-                                                <tr class="cart">
+                                                        <td><span class='soluong'>{{$value['qty']}}</span>
+                                                            <input class='id' id ="{{$value['id']}}" type = "text" hidden>
+                                                            <input class="img" src="{{$value['thumbnail']}}" hidden>
+                                                            <input class="shop_name" id="{{$shop['name']}}" hidden>
+                                                            <input class="note" id="note{{$value['id']}}" value="{{$value['note']}}" hidden>
+                                                            <input class="shop_id" value="{{$shop['id']}}" hidden>
+                                                        </td>
+                                                        <td class="show_product"> <span> <label  data-toggle="modal" data-target="#exampleModal" class='tenmon'>{{$value['name']}}</lable> </span> </td>
+                                                            <td class='giamon' ><span class="gia">{{($value['money'])/1000}}</span><span class="vnd">,000₫</span></td>
+                                                        <td style="text-align: end">
+                                                            <a href="" class='minus cart_quantity_down'>
+                                                                <svg class="bi bi-dash-circle" width="2em" height="2em" viewBox="0 0 16 16"fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z" clip-rule="evenodd"/>
+                                                                    <path fill-rule="evenodd" d="M3.5 8a.5.5 0 01.5-.5h8a.5.5 0 010 1H4a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
+                                                                </svg></a>
 
-                                                    <td><span class='soluong'>{{$value['qty']}}</span>
-                                                        <input class='id' id ="{{$value['id']}}" type = "text" hidden>
-                                                        <input class="img" src="{{$value['thumbnail']}}" hidden>
-                                                        <input class="shop_name" id="{{$shop['name']}}" hidden>
-                                                        <input class="note" id="note{{$value['id']}}" value="{{$value['note']}}" hidden>
-                                                        <input class="shop_id" value="{{$shop['id']}}" hidden>
-                                                    </td>
-                                                    <td class="show_product"> <span> <label  data-toggle="modal" data-target="#exampleModal" class='tenmon'>{{$value['name']}}</lable> </span> </td>
-                                                        <td class='giamon' ><span class="gia">{{($value['money'])/1000}}</span><span class="vnd">,000₫</span></td>
-                                                    <td style="text-align: end">
-                                                        <a href="" class='minus cart_quantity_down'>
-                                                            <svg class="bi bi-dash-circle" width="2em" height="2em" viewBox="0 0 16 16"fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        </td>
+                                                        <td style="text-align: center">
+                                                            <a href="" class='plus cart_quantity_up'><svg class="bi bi-plus-circle" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill-rule="evenodd" d="M8 3.5a.5.5 0 01.5.5v4a.5.5 0 01-.5.5H4a.5.5 0 010-1h3.5V4a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
+                                                                <path fill-rule="evenodd" d="M7.5 8a.5.5 0 01.5-.5h4a.5.5 0 010 1H8.5V12a.5.5 0 01-1 0V8z" clip-rule="evenodd"/>
                                                                 <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z" clip-rule="evenodd"/>
-                                                                <path fill-rule="evenodd" d="M3.5 8a.5.5 0 01.5-.5h8a.5.5 0 010 1H4a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
                                                             </svg></a>
+                                                        </td>
+                                                        <td style="text-align: center"> <a class='delete cart_quantity_delete' href="" >Xóa</a></td>
 
-                                                    </td>
-                                                    <td style="text-align: center">
-                                                        <a href="" class='plus cart_quantity_up'><svg class="bi bi-plus-circle" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" d="M8 3.5a.5.5 0 01.5.5v4a.5.5 0 01-.5.5H4a.5.5 0 010-1h3.5V4a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
-                                                            <path fill-rule="evenodd" d="M7.5 8a.5.5 0 01.5-.5h4a.5.5 0 010 1H8.5V12a.5.5 0 01-1 0V8z" clip-rule="evenodd"/>
-                                                            <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z" clip-rule="evenodd"/>
-                                                        </svg></a>
-                                                    </td>
-                                                    <td style="text-align: center"> <a class='delete cart_quantity_delete' href="" >Xóa</a></td>
+                                                    </tr>
+                                                @endif
+                                            @endforeach
+                                            <tr class="cart ship-cart" >
+                                                <td colspan="6">
+                                                    <div class="">
 
-                                                </tr>
-                                            @endif
-                                        @endforeach
-                                        <tr class="cart ship-cart" >
-                                            <td colspan="6">
-                                                <div class="">
+                                                        <input class="ship_shop" value="{{$dem}}" hidden>
 
-                                                    <input class="ship_shop" value="{{$dem}}" hidden>
+                                                            <p class="text-ship ship_15k"
+                                                                <?php
+                                                                    if ($dem<5) echo("style='display: block;'");
+                                                                    else echo("style='display: none;'")
+                                                                ?>> Phí vận chuyển (Free trên 5 món) : 15,000 ₫ </p>
 
-                                                        <p class="text-ship ship_15k"
-                                                            <?php
-                                                                if ($dem<5) echo("style='display: block;'");
-                                                                else echo("style='display: none;'")
-                                                            ?>> Phí vận chuyển (Free trên 5 món) : 15,000 ₫ </p>
+                                                            <p class="text-ship ship_0k"
+                                                                <?php
+                                                                    if ($dem >=5) echo("style='display: block;'");
+                                                                    else echo("style='display: none;'")
+                                                                    ?>> Phí vận chuyển (Free trên 5 món) : 0 ₫ </p>
 
-                                                        <p class="text-ship ship_0k"
-                                                            <?php
-                                                                if ($dem >=5) echo("style='display: block;'");
-                                                                else echo("style='display: none;'")
-                                                                ?>> Phí vận chuyển (Free trên 5 món) : 0 ₫ </p>
+                                                    </div>
+                                                </td>
+                                            </tr>
 
-                                                </div>
-                                            </td>
-                                        </tr>
-
-                                    </tbody>
-                                @endforeach
-
+                                        </tbody>
+                                    @endforeach
+                                @endif
                                 <thead>
                                     <tr>
                                         @if (!empty($total))
@@ -200,7 +200,7 @@
                                     </tr>
                                 </thead>
                             </table>
-                        @endif
+
                     </div>
 
                 </div>
@@ -255,7 +255,7 @@
                     <div id="price_modal"></div>
                 </div>
                 <div style="float: right; width: 50%;">
-                    <a class="modal_tien" href="" style="max-width: 300px; float: right; color:fff; cursor: pointer;" data-dismiss="modal"><span class="total_product"></span><span>,000₫</span></a>
+                    <a class="modal_tien" href="" style="max-width: 300px; float: right; color:#fff; cursor: pointer;" data-dismiss="modal"><span class="total_product"></span><span>,000₫</span></a>
                 </div>
             </div>
         </div>
@@ -332,7 +332,6 @@
                 }
 
 			}
-
             $.ajax({
                 type:'POST',
                 url:"{{ url('cart_quantity_down.post')}}",

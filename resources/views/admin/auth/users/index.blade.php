@@ -6,7 +6,7 @@
 @section('title', 'List Post')
 @section('content')
 {{-- @include('admin.auth.products.search') --}}
-<p><a href="{{ route('admin.user.create') }}" class="btn btn-secondary" >Create</a></p>
+<p><a href="{{ route('admin.user.create') }}" class="btn btn-secondary" >Tạo</a></p>
 
         {{-- show message --}}
 
@@ -19,7 +19,7 @@
                 <th scope="col">Email</th>
                 <th scope="col">Gender</th>
                 <th scope="col">Avatar</th>
-                <th scope="col" colspan="3">Action</th>
+                <th scope="col" colspan="3">Hành động</th>
             </tr>
         </thead class="thead-light">
         <tbody>

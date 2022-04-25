@@ -2,14 +2,14 @@
 @section('title', 'Product Details')
 
 @push('css')
-    
+
 @endpush
 @push('js')
 <script>
     var AJAX_PRODUCT_CHECK_QUANTITY_URL = "{{ route('ajax.product.check-quantity', request()->route('id')) }}";
 </script>
     <script src="/js/frontend/check_quantity.js"></script>
-  
+
 @endpush
 @section('content')
 
@@ -23,7 +23,7 @@
                             <li><a href="{{route('shop')}}">Trang chủ<span>|</span></a></li>
                             <li><a href="{{route('shop')}}">Sản phẩm<span>|</span></a></li>
                             <li class="active"><a href="category-1.html">Chi tiết sản phẩm</a></li>
-                        
+
                         </ul>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class="single_product_image_tab">
                                     <div role="tabpanel">
-        
+
                                       <!-- Nav tabs -->
                                       <ul class="nav nav-tabs product_detail_zoom_tab" role="tablist">
                                           @foreach($images as $image)
@@ -51,18 +51,18 @@
                                         </a></li>
                                         @endforeach
                                       </ul>
-        
+
                                       <!-- Tab panes -->
                                       <div class="tab-content">
                                         <div role="tabpanel" class="tab-pane active" id="home">
-                                            <div class="single_p_image">      
+                                            <div class="single_p_image">
                                                 <a href="{{url('')}}/{{$product->thumbnail}}" data-lightbox="image-1" data-title="My caption" ><img src="/images/frontend/product-plus.png" alt="" style="" /></a>
                                                 <img id="zoom_02" src="{{url('')}}/{{$product->thumbnail}}" data-zoom-image="{{$product->thumbnail}}" alt="" style="height:450px;width:346px"/>
                                             </div>
                                         </div>
-                                      
+
                                       </div>
-        
+
                                     </div>
                                 </div>
                             </div>
@@ -77,7 +77,7 @@
                                             @endif
                                         </div>
                                     </div>
-                                  
+
                                 </div>
 
                                     <div class="panel panel-default product_default">
@@ -90,18 +90,18 @@
                                             </div>
                                         </div>
                                     </div>
-                                  
+
 
                                         <form action="{{ route('add_cart', $product->id) }}" method="post" id="frm-add-cart">
                                             @csrf
                                             <div class="">
                                                 <div class="">
                                                     <div class="color_size">
-                                                        <h5>Quantity</h5>
+                                                        <h5>Số lượng</h5>
                                                         <input type="number" size="4" class="input-text qty text product-size"
                                                             value="1"  name="quantity" min="1" step="1"  id="product-quantity" required>
                                                     </div>
-                                                    
+
                                                     <div class="">
                                                         <div class="color_size">
                                                         <h5>Size</h5>
@@ -112,7 +112,7 @@
                                                             @endforeach
                                                         </select>
                                                     </div>
-                                                    
+
                                                       <div class="color_size">
                                                         <h5 >Color</h5>
                                                         <select name="product_color" id="product-color" class="product-size">
@@ -124,9 +124,9 @@
                                                     </div>
                                                     </div>
                                                     <br>
-                                                 
+
                                             </div>
-                                            
+
                                         </div>
                                         <div class="action">
                                             <input type="hidden" name="pro_id">
@@ -135,7 +135,7 @@
                                             {{-- <button type="submit" class="size_cart">
                                                 Add to cart</i>
                                             </button> --}}
-                                            
+
                                         </form>
                                     </div>
 
@@ -156,7 +156,7 @@
         </div>
     </section>
 
-    
+
 
     <section class="main_category_area product_page_caro">
         <div class="container">
@@ -171,7 +171,7 @@
                                     @foreach($products as $product)
                                     <a href="{{route('shop_detail',['id'=>$product->id])}}">
                                     <div class="item">
-                                       
+
                                         <div class="item-img">
                                             <img src="{{$product->thumbnail }}" alt="" />
                                             {{-- <div class="tr-add-cart">
@@ -195,12 +195,12 @@
                                             <p> {{  number_format($product->latestPrice()->price) }} VNĐ</p>
                                             @endif
                                         </div>
-                                      
+
                                     </div>
                                     </a>
                                     @endforeach
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>

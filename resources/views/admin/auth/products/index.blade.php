@@ -11,22 +11,22 @@
     {{ session()->get('mess') }}
 </div>
 @endif
-        <p><a href="{{ route('admin.product.create',$shop_id) }}" class="btn btn-secondary" >Create</a></p>
+        <p><a href="{{ route('admin.product.create',$shop_id) }}" class="btn btn-secondary" >Tạo</a></p>
     <br>
     <table id="post"  class="table table-bordered table-hover table-striped">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Product Name</th>
-                <th scope="col">Product Slug</th>
+                <th scope="col">Tên sản phẩm</th>
+                <th scope="col">Slug</th>
                 <th scope="col">Code</th>
-                <th scope="col">Thumbnail</th>
-                <th scope="col">Money</th>
-                <th scope="col">Description</th>
-                <th scope="col">Content</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Category Name</th>
-                <th scope="col" colspan="3">Action</th>
+                <th scope="col">Ảnh</th>
+                <th scope="col">Giá</th>
+                <th scope="col">Mô tả</th>
+                <th scope="col">Nội dung</th>
+                <th scope="col">Số lượng</th>
+                <th scope="col">Tên thể loại</th>
+                <th scope="col" colspan="3">Hành động</th>
             </tr>
         </thead class="thead-light">
         <tbody>
@@ -45,7 +45,7 @@
                         <td scope="col">{{ $product->product_content }}</td>
                         <td scope="col">{{ $product->product_quantity }}</td>
                         <td scope="col">{{ $product->category_name }}</td>
-                       
+
                         {{-- <td scope="col">{{$posts->}}</td> --}}
 
                         <td>

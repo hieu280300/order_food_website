@@ -57,7 +57,7 @@
 
     <!-- ***** Header Area Start ***** -->
    @include('frontend.layouts.header')
-   
+
     <!-- ***** Header Area End ***** -->
 
     <!-- ***** Main Banner Area Start ***** -->

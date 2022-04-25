@@ -83,7 +83,7 @@
 
         <div class="form-group">
             <a href="{{ route('admin.shop.index') }}" class="btn btn-secondary">List Shops</a>
-            <button class="btn btn-primary" type="submit">create</button>
+            <button class="btn btn-primary" type="submit">Tạo</button>
         </div>
     </form>
 @endsection

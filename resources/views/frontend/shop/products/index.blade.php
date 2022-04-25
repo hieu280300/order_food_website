@@ -9,8 +9,8 @@
             <tr>
                 <th scope="col">Số thứ tự</th>
                 <th scope="col">Tên sản phẩm</th>
-                <th scope="col">Tên đường truyền</th>
-                <th scope="col">Mã</th>
+                {{-- <th scope="col">Tên đường truyền</th>
+                <th scope="col">Mã</th> --}}
                 <th scope="col">Ảnh</th>
                 <th scope="col">giá</th>
                 <th scope="col">Mô tả</th>
@@ -26,8 +26,8 @@
                     <tr>
                         <td scope="col">{{ $key+1 }}</td>
                         <td scope="col">{{ $product->product_name }}</td>
-                        <td scope="col">{{ $product->product_slug }}</td>
-                        <td scope="col">{{ $product->product_code}}</td>
+                        {{-- <td scope="col">{{ $product->product_slug }}</td>
+                        <td scope="col">{{ $product->product_code}}</td> --}}
                         <td>
                             <img src="{{ asset($product->product_thumbnail) }}" alt="{{ $product->product_name }}" class="img-flid" style="width:100px">
                         </td>
