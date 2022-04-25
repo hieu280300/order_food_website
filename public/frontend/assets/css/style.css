@@ -1417,3 +1417,7 @@ a:hover {
     position: fixed;
     /* background: azure; */
 }
+.center > th{
+    text-align: center !important;
+    vertical-align: middle !important;
+}

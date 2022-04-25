@@ -6,7 +6,7 @@
 
     <table id="post"  class="table table-bordered table-hover table-striped">
         <thead class="thead-dark">
-            <tr>
+            <tr class="center">
                 <th scope="col">Số thứ tự</th>
                 <th scope="col">Tên sản phẩm</th>
                 {{-- <th scope="col">Tên đường truyền</th>

@@ -5,7 +5,7 @@
 
     <table id="category-list" class="table table-bordered table-hover table-striped">
         <thead class="thead-dark">
-            <tr>
+            <tr class="center">
                 <th>#</th>
                 <th>Tên thể loại</th>
                 <th>Slug</th>
