@@ -1,15 +1,13 @@
 @extends('frontend.shop.master_shop')
 @section('title', 'Login')
 @section('content')  
-<div  class="table  table-striped">
-
-    
+<div  class="container">
     <table id="post"  class="table table-bordered table-hover table-striped">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">Số thứ tự</th>
                 <th scope="col">Tên sản phẩm</th>
-                <th scope="col">Tên đường truyền</th>
+                <th scope="col">Đường truyền</th>
                 <th scope="col">Mã</th>
                 <th scope="col">Ảnh</th>
                 <th scope="col">giá</th>
@@ -46,7 +44,7 @@
                             <form action="{{ route('product.destroy', $product->product_id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit"><i class="fa fa-trash-o" aria-hidden="true" style="padding:20px;font-size:20px;color:black"></i></button>
+                                <button type="submit" style="background: red"><i class="fa fa-trash-o" aria-hidden="true" style="padding:20px;font-size:20px;color:black"></i></button>
                                
                             </form>
                         </td>

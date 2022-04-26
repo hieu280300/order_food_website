@@ -19,8 +19,8 @@
                     <th>Số thứ tự</th>
                     <th>Tên sản phẩm</th>
                     <th>Ảnh sản phẩm</th>
-                    <th>Số lượng</th>
                     <th>Gía</th>
+                    <th>Số lượng</th>
                     <th>Thành tiền</th>
                     <th>Ngày đặt hàng</th>
                 </tr>
@@ -32,11 +32,18 @@
                 @endphp
                 @foreach ($order_details as $key => $orderDetail)
                     @php
-
+                          $ship = "";
                         $money = $orderDetail->quantity * $orderDetail->money;
-                        $totalMoney += $money;
+                        $totalMoney = $orderDetail->total;
                         $quantity = $orderDetail->quantity;
                         $totalQuantity += $quantity;
+                        if($totalQuantity<4)
+                        {
+                            $ship = "15.000";
+                        }
+                        else {
+                            $ship = "free ship";
+                        }
                         $price = $orderDetail->money;
                         $thumbnail = $orderDetail->thumbnail;
                         $product_name=$orderDetail->product_name;
@@ -56,10 +63,12 @@
 
                 <tfoot class="bg-secondary">
                     <tr>
-                        <td colspan="2" class="text-right">Tổng số lượng</td>
-                        <td colspan="2"  class="text-bold">{{ number_format($totalQuantity) }}</td>
-                        <td colspan="2" class="text-right">Tổng tiền</td>
-                        <td colspan="3" class="text-bold">{{ number_format($totalMoney) }}</td>
+                        <td colspan="1" class="text-right">Tổng số lượng</td>
+                    <td colspan="1" class="text-bold"> {{ number_format($totalQuantity) }}</td>
+                    <td colspan="1" class="text-right">Phí ship</td>
+                    <td colspan="1" class="text-bold"> {{ ($ship) }}</td>
+                    <td colspan="1" class="text-right">Tổng tiền</td>
+                    <td colspan="2" class="text-bold"> {{ number_format($totalMoney) }}VNĐ</td>
                     </tr>
                 </tfoot>
             </tbody>

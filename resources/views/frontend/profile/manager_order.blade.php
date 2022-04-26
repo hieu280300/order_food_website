@@ -23,6 +23,7 @@
                         <th>Tổng tiền</th>
                         <th>Trạng thái đơn hàng</th>
                         <th>Chi tiết</th>
+                        <th>Hủy đơn</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,7 +48,7 @@
                                 {{ number_format($totalQuantity) }}
                             </td>
                             <td>
-                                {{ number_format($totalMoney) }} VNĐ
+                                {{ number_format($order->total) }} VNĐ
                             </td>
                             <td>
                                 @if (empty($order->status) || $order->status == \App\Models\Order::STATUS[0])
@@ -61,8 +62,19 @@
                                 @else
                                     <div class="btn btn-success" role="alert">hoàn thành</div>
                                 @endif
-                            <td><a href="{{ route('order_detail', $order->id) }}"><button type="button"
+                                  <td><a href="{{ route('order_detail', $order->id) }}"><button type="button"
                                         class="btn btn-primary">Chi tiết</button></a></td>
+                                       @if(empty($order->status) || $order->status ==0)
+                                        <td>
+                                            <form action="{{ route('destroy_order', $order->id) }}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <input type="submit" name="submit" value="Hủy đơn" class="btn btn-danger" onclick="return confirm('Bạn có muốn hủy đơn hàng')">
+                                            </form>
+                                        </td>
+                                        @else
+                                            <td> <div class="btn btn-success" role="alert">Không được hủy đơn</div></td>
+                                        @endif 
                     @endforeach
                 </tbody>
             @else

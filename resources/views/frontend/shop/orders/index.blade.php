@@ -77,6 +77,9 @@
             @endif
         </tbody>
     </table>
+    <div>
+    {{ $orders->links() }}
 </div>
-    {{-- {{ $orders->links() }} --}}
+</div>
+
 @endsection

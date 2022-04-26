@@ -31,7 +31,7 @@ class OrderController extends Controller
         {
         $id_shop = $hi->shops->id;
         }
-       $orders= Order::with('orderDetails')->with('user')->with('shop')->where('orders.shop_id',$id_shop)->get();
+       $orders= Order::with('orderDetails')->with('user')->with('shop')->where('orders.shop_id',$id_shop)->paginate(5);
         if (!empty($request->date)) {
             $orders = $orders->whereDate('created_at','=',$request->date);
 
