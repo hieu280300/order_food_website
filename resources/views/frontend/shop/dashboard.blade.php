@@ -11,7 +11,7 @@
                 <div class="col-sm-6 card-body br">
                     <div class="row">
                         <div class="col-sm-4">
-                            <i class="material-icons-two-tone text-primary mb-1">group</i>
+                            <i class="material-icons-two-tone text-primary mb-1" style="background-color: #ed563b;">group</i>
                         </div>
                         <div class="col-sm-8 text-md-center">
                             <h5>{{$total_user}}</h5>
@@ -22,7 +22,7 @@
                 <div class="col-sm-6 d-none d-md-table-cell d-lg-table-cell d-xl-table-cell card-body br">
                     <div class="row">
                         <div class="col-sm-4">
-                            <i class="material-icons-two-tone text-primary mb-1">monetization_on</i>
+                            <i class="material-icons-two-tone text-primary mb-1" style="background-color: #ed563b;">monetization_on</i>
                         </div>
 
                         @php
@@ -45,7 +45,7 @@
                 <div class="col-sm-6 card-body">
                     <div class="row">
                         <div class="col-sm-4">
-                            <i class="material-icons-two-tone text-primary mb-1">shopping_cart</i>
+                            <i class="material-icons-two-tone text-primary mb-1" style="background-color: #ed563b;">shopping_cart</i>
                         </div>
                         <div class="col-sm-8 text-md-center">
                             <h5>{{$total_order}}</h5>
@@ -59,7 +59,7 @@
                     <div class="col-sm-6 card-body br">
                         <div class="row">
                             <div class="col-sm-4">
-                                <i class="material-icons-two-tone text-primary mb-1">card_giftcard</i>
+                                <i class="material-icons-two-tone text-primary mb-1" style="background-color: #ed563b;">card_giftcard</i>
                             </div>
                             <div class="col-sm-8 text-md-center">
                                 <h5>{{$order_shipper}}</h5>
@@ -70,7 +70,7 @@
                     <div class="col-sm-6 d-none d-md-table-cell d-lg-table-cell d-xl-table-cell card-body br">
                         <div class="row">
                             <div class="col-sm-4">
-                                <i class="material-icons-two-tone text-primary mb-1">language</i>
+                                <i class="material-icons-two-tone text-primary mb-1" style="background-color: #ed563b;">language</i>
                             </div>
                             <div class="col-sm-8 text-md-center">
                                 <h5>{{$order_finish}}</h5>
@@ -81,7 +81,7 @@
                     <div class="col-sm-6 card-body">
                         <div class="row">
                             <div class="col-sm-4">
-                                <i class="material-icons-two-tone text-primary mb-1">unarchive</i>
+                                <i class="material-icons-two-tone text-primary mb-1" style="background-color: #ed563b;">unarchive</i>
                             </div>
                             <div class="col-sm-8 text-md-center">
                                 <h5>{{$order_cancel}}</h5>

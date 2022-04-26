@@ -54,7 +54,7 @@ if (!empty($order->orderDetails)) {
 </div>
 <div class="mb-2">
     <a href="{{ route('order.index') }}" class="btn btn-secondary">Trở về</a>
-    <button type="submit" class="btn btn-success">Cập nhật</button>
+    <button type="submit" class="btn btn-primary">Cập nhật</button>
 </div>
 </form>
 @endforeach

@@ -1421,3 +1421,30 @@ a:hover {
     text-align: center !important;
     vertical-align: middle !important;
 }
+.btn-primary{
+    background-color: #ed563b !important;
+    border-color: #ed563b !important;
+    box-shadow: none !important;
+}
+
+.btn-outline-secondary:hover {
+    color: #fff;
+    background-color: #ed563b !important;
+    border-color: #ed563b !important;
+}
+.page-item.active .page-link {
+    z-index: 1;
+    color: #fff !important;
+    background-color: #ed563b !important;
+    border-color: #ed563b !important;
+}
+.page-link:hover {
+    color: #fff !important;
+    background-color: #ed563b !important;
+    border-color: #ed563b !important;
+}
+.page-link {
+    color: #ed563b !important;
+    background-color: #fff !important;
+    border: 1px solid #dee2e6;
+}
