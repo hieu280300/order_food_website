@@ -1,9 +1,9 @@
 @extends('frontend.shop.master_shop')
 @section('title', 'Login')
-@section('content')  
+@section('content')
 <div class="container bootstrap snippets bootdey">
 
-    <h1 class="text-primary text-center pt-3"><span class="glyphicon glyphicon-user"></span>Chỉnh sửa thông tin cửa hàng</h1>
+    <h1 class="text-primary text-center pt-3" style="color: #ed563b !important" >THÔNG TIN CỬA HÀNG</h1>
     <hr>
     <div class="row ">
         <div class="col-md-12 ">
@@ -50,7 +50,7 @@
                 <div class="col-lg-12"><input type="time" class="form-control" name="time_close" value="{{$info->shops->time_close}}" placeholder="state"></div>
                 @error('time_close')
                 <div class="alert alert-danger">{{ $message }}</div>
-            @enderror  
+            @enderror
             </div>
                 <div class="form-group">
                     <label class="col-lg-3 control-label">Email:</label>
