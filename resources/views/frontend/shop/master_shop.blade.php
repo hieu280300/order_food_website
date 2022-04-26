@@ -61,9 +61,15 @@
     <!-- ***** Header Area End ***** -->
 
     <!-- ***** Main Banner Area Start ***** -->
-    <div class="home">
+    <div class="container-xl home">
+      <div class="row">
+      <div class="col-3">
         @include('frontend.shop.nabar_shop')
+      </div>
+      <div class="col-9">
         @yield('content')
+      </div>
+    </div>
     </div>
     <!-- ***** Testimonials Item End ***** -->
 

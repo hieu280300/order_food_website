@@ -256,6 +256,24 @@ class HomeController extends Controller
         $data['manage_orders']=$manage_orders;
         return view('frontend.profile.manager_order',$data);
     }
+    public function destroy_order($id)
+    {
+        DB::beginTransaction();
+
+        try {
+            $order = Order::find($id);
+            $order->delete();
+
+            DB::commit();
+
+            return redirect()->route('manager_order')
+                ->with('success', 'Delete Category successful!');
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            // have error so will show error message
+            return redirect()->back()->with('error', $ex->getMessage());
+        }
+    }
     public function order_detail($id)
     {
         $order_details = DB::table('order_details')
