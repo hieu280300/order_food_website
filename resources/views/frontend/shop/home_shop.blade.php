@@ -1,7 +1,7 @@
 @extends('frontend.shop.master_shop')
 @section('title', 'Login')
-@section('content')  
-<div class="table  table-striped" >
+@section('content')
+<div class="table  table-striped" style="margin-bottom: 150px; min-height: 300px;" >
       <div class="row mt-5 justify-content-center align-items-center">
         <div class="col col-lg-8 mb-4 mb-lg-0">
           <div class="card mb-3" style="border-radius: .5rem;">
@@ -9,7 +9,7 @@
                 @if (!empty($infoUsers))
                 @foreach ($infoUsers as $info)
               <div class="col-md-4 gradient-custom text-center text-white" style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
-             
+
                 <img
                 src="{{$info->shops->image}}"
                 alt="Avatar"
@@ -17,7 +17,7 @@
                 style="  clip-path: circle(50%);
                 width: 150px; height: 150px"
               />
-      
+
                 <h5>{{ $info->shops->name }}</h5>
                 <p class="text-muted">{{$info->shops->address}}</p>
               </div>

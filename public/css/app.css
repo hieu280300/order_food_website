@@ -3609,7 +3609,7 @@ select {
 
 .hover\:bg-gray-700:hover {
   --tw-bg-opacity: 1;
-  background-color: rgba(55, 65, 81, var(--tw-bg-opacity));
+  background-color: #ed563b;
 }
 
 .hover\:bg-gray-800:hover {

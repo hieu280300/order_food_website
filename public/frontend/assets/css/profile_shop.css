@@ -14680,7 +14680,7 @@ pre[class*="language-"] > code {
 .pc-sidebar .pc-link {
     display: block;
     padding: 13px 20px;
-    color: #ed563b;
+    color: black;
     font-size: 13px;
     font-weight: 500;
 }
@@ -14748,7 +14748,7 @@ pre[class*="language-"] > code {
 }
 
 .pc-sidebar .pc-item.active > .pc-link, .pc-sidebar .pc-item:focus > .pc-link, .pc-sidebar .pc-item:hover > .pc-link {
-    color: black;
+    color: #ed563b;
 }
 /* .pc-sidebar .pc-micon i.material-icons-two-tone:hover{
     color: black;

@@ -1,6 +1,6 @@
 @extends('frontend.shop.master_shop')
 @section('title', 'Login')
-@section('content')  
+@section('content')
     <form action="{{ route('category.store') }}" method="post" class="table table-bordered table-hover table-striped">
         @csrf
         <div class="form-group px-5  mt-5">
@@ -12,8 +12,8 @@
         </div>
         <div class="form-group px-5">
             <br>
-            <label for="">Category Slug</label>
-            <input type="text" name="category_slug" placeholder="Category slug" class="form-control">
+            <label for="">Slug</label>
+            <input type="text" name="category_slug" placeholder="Slug" class="form-control">
             @error('category_slug')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror

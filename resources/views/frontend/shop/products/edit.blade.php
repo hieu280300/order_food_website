@@ -1,6 +1,6 @@
 @extends('frontend.shop.master_shop')
 @section('title', 'Login')
-@section('content')  
+@section('content')
 <style type="text/css">
     .color_id
     {
@@ -13,24 +13,24 @@
         @csrf
         @method('PUT')
         <div class="form-group  px-5  mt-5">
-            <label for="">product Name</label>
-            <input type="text" name="name" placeholder="product name" value="{{$product->product_name}}"class="form-control">
+            <label for="">Tên sản phẩm</label>
+            <input type="text" name="name" placeholder="Tên sản phẩm" value="{{$product->product_name}}"class="form-control">
             @error('name')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
         <br>
         <div class="form-group px-5">
-            <label for="">product Slug</label>
-            <input type="text" name="slug" placeholder="product slug" value="{{$product->product_slug}}" class="form-control">
+            <label for="">Slug sản phẩm</label>
+            <input type="text" name="slug" placeholder="Slug" value="{{$product->product_slug}}" class="form-control">
             @error('slug')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
         <br>
         <div class="form-group px-5">
-            <label for="">product Code</label>
-            <input type="text" name="code" placeholder="product code" value="{{$product->product_code}}" class="form-control">
+            <label for="">Code sản phẩm</label>
+            <input type="text" name="code" placeholder="Code" value="{{$product->product_code}}" class="form-control">
             @error('code')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
@@ -38,7 +38,7 @@
         <br>
 
         <div class="form-group px-5">
-            <label for="">Post Content</label>
+            <label for="">Nội dụng</label>
             <textarea name="content" rows="10" class="form-control">{{$product->product_description}}</textarea>
             @error('content')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -48,7 +48,7 @@
         <br>
 
         <div class="form-group px-5">
-            <label for="">Post Description</label>
+            <label for="">Mô tả</label>
             <textarea name="description" rows="10" class="form-control">{{$product->product_content}}</textarea>
             @error('content')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -57,11 +57,11 @@
         </div>
         <br>
         <div class="form-group px-5">
-                            <label for="">Money</label>
+                            <label for="">Giá</label>
                             <input type="number" name="money" class="form-control" value="{{$product->product_money}}" placeholder="">
-         </div>         
+         </div>
         <div class="form-group px-5">
-            <label for="">Quantity</label>
+            <label for="">Số lượng</label>
             <input type="number" name="quantity" placeholder="quanntity" value="{{$product->product_quantity}}"
                 class="form-control">
             @error('quantity')
@@ -69,23 +69,23 @@
             @enderror
         </div>
         <div class="form-group px-5" class="form-control">
-            <label for="">Category Name</label>
+            <label for="">Thể loại</label>
             <input type="text" name="category_id" value="{{ $product->category_name }} " class="form-control" disabled>
             @error('category_id')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
         <div class="form-group px-5">
-            <label for="">Shop Name</label>
+            <label for="">Tên cửa hàng</label>
             <input type="text" name="shop_id" value="{{ $product->shop_name }} " class="form-control" disabled>
             @error('shop_id')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
         <div class="form-group px-5">
-            <label for="">Product Thumbnail</label>
+            <label for="">Ảnh</label>
             <img src="{{ asset($product->thumbnail) }}" alt="{{ $product->product_name }}" class="img-fluid" style="width:100px">
-            <input type="file" name="thumbnail" placeholder="post thumbnail" class="form-control">
+            <input type="file" name="thumbnail" placeholder="Ảnh" class="form-control">
             @error('thumbnail')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
@@ -93,10 +93,10 @@
         @endforeach
         @endif
         <br>
-        
+
         <div class="form-group px-5">
-            <a href="{{ route('product.index') }}" class="btn btn-secondary">List Product</a>
-            <button type="submit" class="btn btn-primary">Update</button>
+            <a href="{{ route('product.index') }}" class="btn btn-secondary">Danh sách sản phẩm</a>
+            <button type="submit" class="btn btn-primary">Cập nhật</button>
         </div>
     </form>
 @endsection

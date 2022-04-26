@@ -1,15 +1,15 @@
 @extends('frontend.shop.master_shop')
 @section('title', 'Login')
-@section('content')  
-<div  class="table  table-striped">
- 
+@section('content')
+<div  class="table  table-striped" style="margin-bottom: 150px; min-height: 300px;">
+
     <table id="category-list" class="table table-bordered table-hover table-striped">
         <thead class="thead-dark">
-            <tr>
+            <tr class="center">
                 <th>#</th>
-                <th>Category Name</th>
-                <th>Category Slug</th>
-                <th colspan="3">Action</th>
+                <th>Tên thể loại</th>
+                <th>Slug</th>
+                <th colspan="3">Hành động</th>
             </tr>
         </thead>
         <tbody>

@@ -1,8 +1,8 @@
-<div class="mb-5 mt-5 border p-3">
+<div class="mb-5 border p-3">
     <form action="{{ route('admin.product.index') }}" method="GET">
         <div class="mb-3">
-            <label class="form-label">Product Name</label>
-            <input type="text" class="form-control" name="name" placeholder="Product name" value="{{ request()->get('name') }}">
+            <label class="form-label">Tên sản phẩm</label>
+            <input type="text" class="form-control" name="name" placeholder="Tên sản phẩm" value="{{ request()->get('name') }}">
         </div>
         <div class="mb-3">
             <label class="form-label">Category</label>

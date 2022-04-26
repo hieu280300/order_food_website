@@ -76,7 +76,7 @@
                                     <i class="fa fa-clock-o" style="color: green">  </i><span style="color: green; margin-left:5px"> Đang mở cửa </span>
 
                                 @else
-                                    <i class="fa fa-clock-o" style="color:#ed563b"><span style="color:#ed563b; margin-left:5px"> Đang  cửa </span> </i><span> Đang đóng cửa </span>
+                                    <i class="fa fa-clock-o" style="color:#ed563b"></i><span style="color:#ed563b; margin-left:5px"> Đang đóng cửa </span>
                                 @endif
                             @endif
 

@@ -13,7 +13,7 @@
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="bread_box">
                                     <ul class="breadcumb">
-                                        <li><a href="{{route('shop')}}">Trang chủ<span>|</span></a></li>                                   
+                                        <li><a href="{{route('shop')}}">Trang chủ<span>|</span></a></li>
                                         <li class=""><a href="{{route('show_cart')}}">Giỏ hàng<span>|</span></a></li>
                                         <li class="active"><a href="">Thanh Toán</a></li>
                                     </ul>
@@ -66,7 +66,7 @@
                                     @enderror
                                 </div>
                             </div>
-                         
+
                             <div class="form-group">
                                 <div class="col-md-12"><strong>Số điện thoại:</strong></div>
                                 <div class="col-md-12"><input type="text" name="phone_number" @error('phone_number')
@@ -104,7 +104,7 @@
                             </div>
                         </div>
                         <div class="panel-body">
-                        
+
                                 @foreach (Cart::content() as $item)
                                     <div class="form-group">
                                         <div class="col-sm-3 col-xs-3">
@@ -125,7 +125,7 @@
 
                                         <div class="col-sm-3 col-xs-3 text-right">
                                             <h6>
-                                                <h6>Gía: </h6>{{ number_format($item->price) }} VNĐ
+                                                <h6>Giá: </h6>{{ number_format($item->price) }} VNĐ
                                             </h6>
                                         </div>
                                     </div>
@@ -141,7 +141,7 @@
                                         <div class="pull-right"><span>{{ Cart::subTotal() }} VNĐ</span></div>
                                     </div>
                                 </div>
-                               
+
                         </div>
                     </div>
                 </div>
@@ -156,14 +156,14 @@
               </div>
               <br>
             @endif
-           
+
         </div>
         <!--CREDIT CART PAYMENT END-->
     </div>
 
-  
-   
-    
+
+
+
     </div>
 
 @endsection

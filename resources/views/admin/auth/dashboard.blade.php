@@ -173,11 +173,11 @@
                         <table class="table table-hover m-b-0">
                             <thead>
                                 <tr>
-                                    <th>Product Name</th>
+                                    <th>Tên sản phẩm</th>
                                     <th>Image</th>
                                     <th>Status</th>
                                     <th>Price</th>
-                                    <th>Action</th>
+                                    <th>Hành động</th>
                                 </tr>
                             </thead>
                             <tbody>

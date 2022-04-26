@@ -2,8 +2,8 @@
 {{-- <script src="https://code.jquery.com/jquery-3.6.0.js"></script>  --}}
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 <!-- Bootstrap -->
-<script src="{{asset('frontend/assets/js/popper.js')}}"></script>
- <script src="{{asset('frontend/assets/js/bootstrap.min.js')}}"></script>
+{{-- <script src="{{asset('frontend/assets/js/popper.js')}}"></script> --}}
+ {{-- <script src="{{asset('frontend/assets/js/bootstrap.min.js')}}"></script> --}}
 
 <!-- Plugins -->
 <script src="{{asset('frontend/assets/js/scrollreveal.min.js')}}"></script>

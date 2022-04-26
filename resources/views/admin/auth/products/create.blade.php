@@ -9,30 +9,30 @@
             width: 500px;
         }
     </style>
-            
-    <h1>Create Product</h1>
+
+    <h1>Tạo sản phẩm</h1>
     <br>
     <form action="{{ route('admin.product.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="form-group mb-5">
-            <label for="">product Name</label>
-            <input type="text" name="name" placeholder="product name" value="{{ old('name') }}" class="form-control">
+            <label for="">Tên sản phẩm</label>
+            <input type="text" name="name" placeholder="Tên sản phẩm" value="{{ old('name') }}" class="form-control">
             @error('name')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
         <br>
         <div class="form-group mb-5">
-            <label for="">product Slug</label>
-            <input type="text" name="slug" placeholder="product slug" value="{{ old('slug') }}" class="form-control">
+            <label for="">Slug</label>
+            <input type="text" name="slug" placeholder="Slug" value="{{ old('slug') }}" class="form-control">
             @error('name')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
         <br>
         <div class="form-group mb-5">
-            <label for="">product Code</label>
-            <input type="text" name="code" placeholder="product code" value="{{ old('code') }}" class="form-control">
+            <label for="">Code</label>
+            <input type="text" name="code" placeholder="Code" value="{{ old('code') }}" class="form-control">
             @error('name')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
@@ -40,7 +40,7 @@
         <br>
 
         <div class="form-group mb-5">
-            <label for="">Post Content</label>
+            <label for="">Nội dung</label>
             <textarea name="content" rows="10" class="form-control">{{ old('description') }}</textarea>
             @error('content')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -50,7 +50,7 @@
         <br>
 
         <div class="form-group mb-5">
-            <label for="">Post Description</label>
+            <label for="">Mô tả</label>
             <textarea name="description" rows="10" class="form-control">{{ old('description') }}</textarea>
             @error('content')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -59,11 +59,11 @@
         </div>
         <br>
         <div class="form-group mb-5">
-                            <label for="">Money</label>
+                            <label for="">Giá</label>
                             <input type="number" name="money" class="form-control" placeholder="">
-         </div>         
+         </div>
         <div class="form-group mb-5">
-            <label for="">Quantity</label>
+            <label for="">Số lượng</label>
             <input type="number" name="quantity" placeholder="quanntity" value="{{ old('quantity') }}"
                 class="form-control">
             @error('quantity')
@@ -71,7 +71,7 @@
             @enderror
         </div>
         <div class="form-group mb-5" class="form-control">
-            <label for="">Category Name</label>
+            <label for="">Tên thể loại</label>
             <select name="category_id" class="form-control">
                 <option value=""></option>
                 @if (!empty($products))
@@ -86,8 +86,8 @@
             @enderror
         </div>
         <div class="form-group mb-5" class="form-control">
-            <label for="">Shop Name</label>
-            <select name="shop_id" class="form-control"> 
+            <label for="">Tên cửa hàng</label>
+            <select name="shop_id" class="form-control">
             <option value="{{ $product->shop_id }}" {{ old('shop_id') == $product->shop_id ? 'selected' : ' ' }}>
                 {{ $product->shop_name }}</option>
         </select>
@@ -97,17 +97,17 @@
         </div>
         <br>
         <div class="form-group mb-5">
-            <label for="">Post Thumbnail</label>
-            <input type="file" name="thumbnail" placeholder="post thumbnail" class="form-control">
+            <label for="">Ảnh</label>
+            <input type="file" name="thumbnail" placeholder="Ảnh" class="form-control">
             @error('thumbnail')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
         <div class="form-group">
-            <a href="{{ route('admin.product.index') }}" class="btn btn-secondary">List Post</a>
-            <button class="btn btn-primary" type="submit">create</button>
+            <a href="{{ route('admin.product.index') }}" class="btn btn-secondary">Danh sách sản phẩm</a>
+            <button class="btn btn-primary" type="submit">Tạo</button>
         </div>
     </form>
 
-   
-@endsection 
+
+@endsection

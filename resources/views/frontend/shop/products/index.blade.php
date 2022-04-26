@@ -1,14 +1,16 @@
 @extends('frontend.shop.master_shop')
 @section('title', 'Login')
-@section('content')  
-<div  class="container">
+@section('content')
+<div  class="table  table-striped" style="margin-bottom: 150px; min-height: 300px;">
+
+
     <table id="post"  class="table table-bordered table-hover table-striped">
         <thead class="thead-dark">
-            <tr>
+            <tr class="center">
                 <th scope="col">Số thứ tự</th>
                 <th scope="col">Tên sản phẩm</th>
-                <th scope="col">Đường truyền</th>
-                <th scope="col">Mã</th>
+                {{-- <th scope="col">Tên đường truyền</th>
+                <th scope="col">Mã</th> --}}
                 <th scope="col">Ảnh</th>
                 <th scope="col">giá</th>
                 <th scope="col">Mô tả</th>
@@ -24,8 +26,8 @@
                     <tr>
                         <td scope="col">{{ $key+1 }}</td>
                         <td scope="col">{{ $product->product_name }}</td>
-                        <td scope="col">{{ $product->product_slug }}</td>
-                        <td scope="col">{{ $product->product_code}}</td>
+                        {{-- <td scope="col">{{ $product->product_slug }}</td>
+                        <td scope="col">{{ $product->product_code}}</td> --}}
                         <td>
                             <img src="{{ asset($product->product_thumbnail) }}" alt="{{ $product->product_name }}" class="img-flid" style="width:100px">
                         </td>
@@ -34,7 +36,7 @@
                         <td scope="col">{{ $product->product_content }}</td>
                         <td scope="col">{{ $product->product_quantity }}</td>
                         <td scope="col">{{ $product->category_name }}</td>
-                       
+
                         {{-- <td scope="col">{{$posts->}}</td> --}}
 
                         <td>
@@ -44,15 +46,15 @@
                             <form action="{{ route('product.destroy', $product->product_id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" style="background: red"><i class="fa fa-trash-o" aria-hidden="true" style="padding:20px;font-size:20px;color:black"></i></button>
-                               
+                                <button type="submit"><i class="fa fa-trash-o" aria-hidden="true" style="padding:20px;font-size:20px;color:black"></i></button>
+
                             </form>
                         </td>
                     </tr>
                 @endforeach
             @endif
         </tbody>
-        
+
     </table>
     <div>
         {{$products->links()}}
