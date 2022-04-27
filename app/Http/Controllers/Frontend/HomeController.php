@@ -258,11 +258,14 @@ class HomeController extends Controller
     }
     public function destroy_order($id)
     {
+        $order = Order::findOrFail($id);
         DB::beginTransaction();
 
         try {
-            $order = Order::find($id);
-            $order->delete();
+            $order->update([
+                'status' => 3,
+            ]);
+
 
             DB::commit();
 

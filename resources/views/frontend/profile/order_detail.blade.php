@@ -1,8 +1,15 @@
-@extends('frontend.shop.master_shop')
+@extends('frontend.layouts.master')
 @section('title', 'Login')
 @section('content')
     {{-- @if (!empty($order->orderDetails)) --}}
-    <div class="order-detail px-5">
+    <style>
+        .order_manader {
+            padding: 100px;
+            /* height:90%; */
+            width:100%;
+        }
+    </style>
+    <div class="order-detail px-5 order_manader ">
         <table class="table table-bordered table-hover table-striped " style="min-height: 400px;">
             <thead class="bg-info ">
                 <tr class="center">

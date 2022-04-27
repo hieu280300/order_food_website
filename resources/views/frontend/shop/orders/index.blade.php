@@ -9,7 +9,7 @@
             {{-- <div class="input-group-addon">đến</div> --}}
             <div class="col">
 
-        <input type="date" name="date_first" class="form-control" >
+        <input type="date"  name="date_first" class="form-control" >
             </div>
             <div class="col text-center">
         <div class="input-group-addon">đến</div>
@@ -67,12 +67,12 @@
                             @elseif ($order->status == \App\Models\Order::STATUS[2])
                                 <div class="alert alert-info" role="alert">Shipper đang đi giao hàng</div>
                             @elseif ($order->status == \App\Models\Order::STATUS[3])
-                                <div class="alert alert-danger" role="alert">Cancel đơn hàng</div>
+                                <div class="alert alert-danger" role="alert">Đơn hàng đã bị hủy</div>
                             @else
                                 <div class="alert alert-success" role="alert">Hoàn thành</div>
                             @endif
                         </td>
-                        <td>{{date_format(date_create($order->order_date), 'Y-m-d')}}</td>
+                        <td>{{date_format(date_create($order->order_date), 'd-m-Y')}}</td>
                         <td><a href="{{ route('order.show', $order->id) }}"><i class="fa fa-info-circle"  style="padding:20px;font-size:20px;color:black" aria-hidden="true"></i></a></td>
                         <td><a href="{{ route('order.edit', $order->id) }}" ><i class="fa fa-pencil-square-o" style="padding:20px;font-size:20px;color:black" aria-hidden="true"></i></a> </td>
                     </tr>
