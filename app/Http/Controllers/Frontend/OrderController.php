@@ -43,6 +43,8 @@ class OrderController extends Controller
     }
     public function search(Request $request)
     {
+        if($request->input('date_first')!=null and $request->input('date_second') !=null )
+        {
         $formDate = $request->input('date_first');
         $toDate = $request->input('date_second');
         $data = [];
@@ -52,13 +54,33 @@ class OrderController extends Controller
         {
         $id_shop = $hi->shops->id;
         }
-       $orders= Order::with('orderDetails')->with('user')->with('shop')->where('orders.shop_id',$id_shop)->where('orders.order_date','>=',$formDate)->where('orders.order_date','<=',$toDate)->get();
+       $orders= Order::with('orderDetails')->with('user')->with('shop')->where('orders.shop_id',$id_shop)->where('orders.order_date','>=',$formDate)->where('orders.order_date','<=',$toDate)->paginate(5);
        if (!empty($request->date)) {
             $orders = $orders->whereDate('created_at','=',$request->date);
 
         }
         $data['orders'] = $orders;
         return view('frontend.shop.orders.index', $data);
+    }
+    else
+    {
+        $data = [];
+        $id = Auth::user()->id;
+        $shop = User::with('shops')->where('id', $id)->get();
+        foreach ($shop as $hi)
+        {
+        $id_shop = $hi->shops->id;
+        }
+       $orders= Order::with('orderDetails')->with('user')->with('shop')->where('orders.shop_id',$id_shop)->paginate(5);
+        if (!empty($request->date)) {
+            $orders = $orders->whereDate('created_at','=',$request->date);
+
+        }
+        $data['orders'] = $orders;
+        // dd($orders);
+
+        return view('frontend.shop.orders.index', $data);
+    }
     }
     /**
      * Show the form for creating a new resource.

@@ -18,8 +18,8 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Tên sản phẩm</th>
-                <th scope="col">Slug</th>
-                <th scope="col">Code</th>
+                {{-- <th scope="col">Slug</th>
+                <th scope="col">Code</th> --}}
                 <th scope="col">Ảnh</th>
                 <th scope="col">Giá</th>
                 <th scope="col">Mô tả</th>
@@ -35,8 +35,8 @@
                     <tr>
                         <td scope="col">{{ $key+1 }}</td>
                         <td scope="col">{{ $product->product_name }}</td>
-                        <td scope="col">{{ $product->product_slug }}</td>
-                        <td scope="col">{{ $product->product_code}}</td>
+                        {{-- <td scope="col">{{ $product->product_slug }}</td>
+                        <td scope="col">{{ $product->product_code}}</td> --}}
                         <td>
                             <img src="{{ asset($product->product_thumbnail) }}" alt="{{ $product->product_name }}" class="img-flid" style="width:100px">
                         </td>

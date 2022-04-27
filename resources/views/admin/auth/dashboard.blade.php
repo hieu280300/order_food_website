@@ -1,5 +1,10 @@
 @extends('admin.layouts.app')
 @section('content')
+@if(session()->has('admin'))
+<div class="alert alert-success">
+    {{ session()->get('admin') }}
+</div>
+@endif
   <!-- support-section start -->
     <div class="col-xl-6 col-md-12">
         <div class="card flat-card">
