@@ -1,4 +1,4 @@
-<div class="mb-5 border p-3">
+{{-- <div class="mb-5 border p-3">
     <form action="{{ route('admin.product.index') }}" method="GET">
         <div class="mb-3">
             <label class="form-label">Tên sản phẩm</label>
@@ -19,4 +19,4 @@
             <button type="submit" class="btn btn-primary">Search</button>
         </div>
     </form>
-</div>
+</div> --}}

@@ -2,7 +2,13 @@
 @section('title', 'Login')
 @section('content')
 <div  class="table  table-striped" style="margin-bottom: 150px; min-height: 300px;">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <br>
+    @if(session()->has('success'))
+    <div class="alert alert-success">
+        {{ session()->get('success') }}
+    </div>
+@endif
+    
     <table id="category-list" class="table">
         <thead class="thead-dark">
             <tr class="center">
@@ -24,7 +30,7 @@
                             <form action="{{ route('category.destroy', $category->category_id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" style="border: none;background:none"><i class="fa fa-trash-o" aria-hidden="true" style="padding:20px;font-size:20px;color:black; "></i></button>
+                                <button type="submit" style="border: none;background:none"  onclick="return confirm('Bạn muốn xóa thể loại này?')"><i class="fa fa-trash-o" aria-hidden="true" style="padding:20px;font-size:20px;color:black; "></i></button>
 
                             </form>
                         </td>

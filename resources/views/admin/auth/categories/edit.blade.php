@@ -11,7 +11,7 @@
     <h1>Edit Category</h1>
     @if(!empty($categories))
     @foreach ($categories as $key => $category)
-    <form action="{{ route('admin.category.update', $category->category_id) }}" method="post">
+    <form action="{{ route('admin.category.update',['id'=>$category->category_id]) }}" method="post">
         @csrf
         @method('PUT')
         <div class="form-group mb-5">

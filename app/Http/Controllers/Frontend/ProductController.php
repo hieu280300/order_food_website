@@ -322,7 +322,7 @@ class ProductController extends Controller
             // create or update data for table post_details
 
             DB::commit();
-            return redirect()->route('product.index')->with('mess', 'Update successful!');
+            return redirect()->route('product.index')->with('mess', 'Cập nhật thành công');
         } catch (\Exception $ex) {
             DB::rollback();
 
@@ -344,8 +344,8 @@ class ProductController extends Controller
             $product = Product::find($id);
             $product->delete();
             DB::commit();
-            return redirect()->route('admin.product.index')
-                ->with('success', 'Delete Product successful!');
+            return redirect()->route('product.index')
+                ->with('mess', 'Xóa thành công');
         } catch (\Exception $ex) {
             DB::rollBack();
             // have error so will show error message

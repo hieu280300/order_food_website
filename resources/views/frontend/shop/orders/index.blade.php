@@ -2,8 +2,15 @@
 @section('title', 'Login')
 @section('content')
 <div  class="table  table-striped" style="margin-bottom: 150px;min-height: 300px;">
+    <br>
+    @if(session()->has('success'))
+    <div class="alert alert-success">
+        {{ session()->get('success') }}
+    </div>
+@endif
     <form action="{{route('order.search')}}" method="POST" class="form-inline" role="form">
         @csrf
+
     <div class="container">
         <div class="row">
             {{-- <div class="input-group-addon">đến</div> --}}
