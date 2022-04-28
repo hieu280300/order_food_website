@@ -74,7 +74,9 @@
             </tbody>
         </table>
         <div class="mb-2">
+
             <a href="{{ route('manage_order') }}" class="btn btn-secondary">Quay lại</a>
+
         </div>
     </div>
 
