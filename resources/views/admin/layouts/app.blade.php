@@ -17,7 +17,7 @@
     <meta name="keywords" content="DashboardKit, Dashboard Kit, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Free Bootstrap Admin Template">
     <meta name="author" content="DashboardKit ">
 
-   
+
     <!-- Favicon icon -->
     <link rel="icon" href="{{asset('admin/assets/images/favicon.svg')}}" type="image/x-icon">
 
@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     {{-- <link rel="stylesheet" href="{{asset('admin/assets/fonts/fontawesome.css')}}"> --}}
     <link rel="stylesheet" href="{{asset('admin/assets/fonts/material.css')}}">
- 
+
 
     <!-- vendor css -->
     <link rel="stylesheet" href="{{asset('admin/assets/css/style.css')}}" id="main-style-link">
@@ -99,16 +99,16 @@
     </div>
 </div>
 
-    {{-- <script src="{{asset('admin/assets/js/vendor-all.min.js')}}"></script> --}}
+   <script src="{{asset('admin/assets/js/vendor-all.min.js')}}"></script>
     <script src="{{asset('admin/assets/js/plugins/bootstrap.min.js')}}"></script>
     <script src="{{asset('admin/assets/js/plugins/feather.min.js')}}"></script>
-    {{-- <script src="{{asset('admin/assets/js/pcoded.min.js')}}"></script> --}}
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script> -->
-    <!-- <script src="assets/js/plugins/clipboard.min.js"></script> -->
-    <!-- <script src="assets/js/uikit.min.js"></script> -->
+   <script src="{{asset('admin/assets/js/pcoded.min.js')}}"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+   {{-- <script src="{{asset('admin/assets/js/plugins/clipboard.min.js')}}"></script>
+<script src="{{asset('admin/assets/js/uikit.min.js')}}"></script> --}}
 
 <!-- Apex Chart -->
-<script src="assets/js/plugins/apexcharts.min.js"></script>
+<script src="{{asset('admin/assets/js/plugins/apexcharts.min.js')}}"></script>
 {{-- <script src="{{asset('admin/assets/js/pages/dashboard-sale.js')}}"></script> --}}
 </body>
 
