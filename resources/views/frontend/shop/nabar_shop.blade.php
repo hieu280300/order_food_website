@@ -19,7 +19,7 @@
                     <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">storefront</i></span><span class="pc-mtext">Sản phẩm</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                     <ul class="pc-submenu">
                         <li class="pc-item"><a class="pc-link {{ Route::currentRouteName() == 'product.create' ? 'active' : '' }}" href="{{route('product.create')}}">Tạo sản phẩm</a></li>
-                        <li class="pc-item"><a class="pc-link {{ Route::currentRouteName() == 'product.index' ? 'active' : '' }}" href="{{ route('product.index') }}">Danh sách</a></li>
+                        <li class="pc-item"><a class="pc-link {{ Route::currentRouteName() == 'product.index' ? 'active' : '' }}" href="{{ route('product.index') }}">Danh sách sản phẩm</a></li>
                     </ul>
                 </li>
                 <li class="pc-item pc-hasmenu">

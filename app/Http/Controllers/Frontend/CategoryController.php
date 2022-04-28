@@ -68,7 +68,7 @@ class CategoryController extends Controller
         DB::beginTransaction();
         try {
             DB::commit();
-            return redirect()->route('category.index')->with('success', 'Create data to Category Sucessful.');
+            return redirect()->route('category.index')->with('success', 'Thêm mới thành công.');
         } catch (\Exception $ex) {
             // insert into data to table category (fail)
             DB::rollBack();
@@ -129,7 +129,7 @@ class CategoryController extends Controller
             $category->slug = $request->category_slug;
             $category->save();
             DB::commit();
-            return redirect()->route('category.index')->with('success', 'Update Category successful');
+            return redirect()->route('category.index')->with('success', 'Cập nhật thành công');
         } catch (\Throwable $ex) {
             DB::rollBack();
             return redirect()->back()->with('error', $ex->getMessage());
@@ -154,7 +154,7 @@ class CategoryController extends Controller
             DB::commit();
 
             return redirect()->route('category.index')
-                ->with('success', 'Delete Category successful!');
+                ->with('success', 'Xóa thành công');
         } catch (\Exception $ex) {
             DB::rollBack();
             // have error so will show error message
