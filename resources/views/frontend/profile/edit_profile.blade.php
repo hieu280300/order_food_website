@@ -61,7 +61,7 @@
                     <div class="form-group">
                         <label class="col-lg-3 control-label">Gender</label>
                         <div class="col-lg-12">
-                            <input type="radio" name="gender" value="0" checked id="gender>
+                            <input type="radio" name="gender" value="0" checked id="gender">
                     <label for=" price-status-0">Male</label>
                             <input type="radio" name="gender" value="1" id="gender">
                             <label for="price-status-1">Female</label>

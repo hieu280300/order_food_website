@@ -18,12 +18,11 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Tên sản phẩm</th>
-                {{-- <th scope="col">Slug</th>
-                <th scope="col">Code</th> --}}
+               <th scope="col">Slug</th>
+                 {{-- <th scope="col">Code</th> --}}
                 <th scope="col">Ảnh</th>
                 <th scope="col">Giá</th>
                 <th scope="col">Mô tả</th>
-                <th scope="col">Nội dung</th>
                 <th scope="col">Số lượng</th>
                 <th scope="col">Tên thể loại</th>
                 <th scope="col" colspan="3">Hành động</th>
@@ -35,27 +34,22 @@
                     <tr>
                         <td scope="col">{{ $key+1 }}</td>
                         <td scope="col">{{ $product->product_name }}</td>
-                        {{-- <td scope="col">{{ $product->product_slug }}</td>
-                        <td scope="col">{{ $product->product_code}}</td> --}}
+                        <td scope="col">{{ $product->product_slug }}</td>
+                         {{-- <td scope="col">{{ $product->product_code}}</td> --}}
                         <td>
                             <img src="{{ asset($product->product_thumbnail) }}" alt="{{ $product->product_name }}" class="img-flid" style="width:100px">
                         </td>
                         <td scope="col">{{ number_format($product->product_money)}} VNĐ</td>
                         <td scope="col">{{ $product->product_description }}</td>
-                        <td scope="col">{{ $product->product_content }}</td>
                         <td scope="col">{{ $product->product_quantity }}</td>
                         <td scope="col">{{ $product->category_name }}</td>
-
-                        {{-- <td scope="col">{{$posts->}}</td> --}}
-
-                        <td>
-                            <a href=""><input type="submit" name="submit" value="Detail" class="btn btn-info"></a></td>
-                        <td scope="col"><a href="{{route('admin.product.edit',$product->product_id)}}"><input type="submit" name="submit" value="Edit" class="btn btn-success"></a> </td>
+                        <td><a href="{{route('admin.product.edit',$product->product_id)}}"><i class="fa fa-pencil-square-o" style="padding:20px;font-size:20px;color:black" aria-hidden="true"></i></a></td>
                         <td>
                             <form action="{{ route('admin.product.destroy', $product->product_id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <input type="submit" name="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure DELETE Category?')">
+                                <button type="submit" style="border: none;background:none"  onclick="return confirm('Bạn muốn xóa thể loại này?')"><i class="fa fa-trash-o" aria-hidden="true" style="padding:20px;font-size:20px;color:black; "></i></button>
+
                             </form>
                         </td>
                     </tr>

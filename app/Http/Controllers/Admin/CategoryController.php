@@ -30,9 +30,7 @@ class CategoryController extends Controller
         $categories = Category::paginate(10);
 
         $data['categories'] = $categories;
-        //  dd($categories);
         return view('admin.auth.categories.index', $data);
-        // return view('categories.index', compact('categories'));
     }
 
     /**
@@ -68,7 +66,7 @@ class CategoryController extends Controller
         DB::beginTransaction();
         try {
             DB::commit();
-            return redirect()->route('admin.category.show', $category->shop_id)->with('success', 'Create data to Category Sucessful.');
+            return redirect()->route('admin.category.show', $category->shop_id)->with('success', 'Đã thêm mới thành công');
         } catch (\Exception $ex) {
             // insert into data to table category (fail)
             DB::rollBack();
@@ -129,7 +127,7 @@ class CategoryController extends Controller
             $category->slug = $request->category_slug;
             $category->save();
             DB::commit();
-            return redirect()->route('admin.category.show', $category->shop_id)->with('success', 'Update Category successful');
+            return redirect()->route('admin.category.show', $category->shop_id)->with('success', 'Đã cập nhật thành công');
         } catch (\Throwable $ex) {
             DB::rollBack();
             return redirect()->back()->with('error', $ex->getMessage());
@@ -145,19 +143,18 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         // Method: DELETE
+        $category = Category::find($id);
         DB::beginTransaction();
 
         try {
-            $category = Category::find($id);
+           
             $category->delete();
-
             DB::commit();
-
-            return redirect()->route('category.index')
-                ->with('success', 'Delete Category successful!');
+            return redirect()->route('admin.category.index')
+                ->with('success', 'Đã xóa thành công');
         } catch (\Exception $ex) {
             DB::rollBack();
-            // have error so will show error message
+            Log::error($ex->getMessage());
             return redirect()->back()->with('error', $ex->getMessage());
         }
     }

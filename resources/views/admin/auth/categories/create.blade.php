@@ -5,7 +5,7 @@
 @endpush
 @section('content')
 
-    <h1>Create Category</h1>
+    <h1>Tạo thể loại</h1>
     <br>
     <form action="{{ route('admin.category.store') }}" method="post">
         @csrf

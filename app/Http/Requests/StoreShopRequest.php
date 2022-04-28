@@ -28,6 +28,7 @@ class StoreShopRequest extends FormRequest
             'name' => 'required|min:5|max:255', // rule: not null, minumum: 5, maximum: 255
             'name_shop' => 'required|min:5|max:255', // rule: not null, minumum: 10
             'address_shop' => 'required',
+            'phone_shop'=>'required',
             'image_shop'=> 'required',
             'email' => 'unique:users,email',
             'password'=> 'required|min:8|max:255',

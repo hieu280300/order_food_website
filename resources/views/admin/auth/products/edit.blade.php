@@ -37,27 +37,8 @@
         </div>
         <br>
         <div class="form-group mb-5">
-            <label for="">Code</label>
-            <input type="text" name="code" placeholder="Code" value="{{$product->product_code}}" class="form-control">
-            @error('code')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-        </div>
-        <br>
-
-        <div class="form-group mb-5">
-            <label for="">Nội dung</label>
-            <textarea name="content" rows="10" class="form-control">{{$product->product_description}}</textarea>
-            @error('content')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-
-        </div>
-        <br>
-
-        <div class="form-group mb-5">
             <label for="">Mô tả</label>
-            <textarea name="description" rows="10" class="form-control">{{$product->product_content}}</textarea>
+            <textarea name="description" rows="10" class="form-control">{{$product->product_description}}</textarea>
             @error('content')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
