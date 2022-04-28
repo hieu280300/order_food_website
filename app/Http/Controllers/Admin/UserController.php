@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateProfileRequest;
+use App\Http\Requests\UpdateProfileShopRequest;
 use App\Models\Admin;
 use App\Models\Category;
 use App\Models\Role;
@@ -48,30 +50,28 @@ class UserController extends Controller
             $image = $request->file('avatar');
             $extension = $request->avatar->extension();
             $extension = strtolower($extension); // convert string to lowercase
-            $fileName = 'image_shop_' . time() . '.' . $extension;
+            $fileName = 'avatar_' . time() . '.' . $extension;
             // upload file to server
             $image->move(self::FOLDER_UPLOAD_USER_THUMBNAIL, $fileName);
 
             // set filename
             $thumbnailPath = self::FOLDER_UPLOAD_USER_THUMBNAIL . '/' . $fileName;
         }
-dd($thumbnailPath);
         $userInsert=[
             'name'=>$request->name,
             'email'=>$request->email,
-            'password'=>Hash::make('$request->password'),
+            'password'=>Hash::make($request->password),
             'role'=>0,
             'gender'=>$request->gender,
-            'avatar'=> $request->avatar,
+            'avatar'=> $thumbnailPath,
         ];
-        dd($userInsert);
-      
+
         $user = User::create($userInsert);
         DB::beginTransaction();
         try{
           
             DB::commit();
-            return redirect()->route('admin.user.index')->with('sucess', 'Insert into data to User Sucessful.');
+            return redirect()->route('admin.user.index')->with('sucess_create_user', 'Đã thêm thành công.');
         }catch(\Exception $ex){
             DB::rollBack();
             Log::error($ex->getMessage());
@@ -89,9 +89,7 @@ dd($thumbnailPath);
     public function show($id)
     {
         $data = [];
-        $user = DB::table('users')
-        ->leftJoin('shops', 'users.id', '=', 'shops.user_id')
-        ->where('users.id',$id)->select('users.name as user_name','shops.name as shop_name','shops.image as shop_image','shops.id as shop_id','shops.address as shop_address','users.role as user_role','users.email as user_email','users.password as user_password')->get();
+        $user = User::findOrFail($id);
         $data['user'] = $user;
         return view('admin.auth.users.detail', $data);
     }
@@ -105,10 +103,8 @@ dd($thumbnailPath);
     public function edit($id)
     {
         $data = [];
-        $user = Admin::findOrFail($id);
-        $roles = Role::where('id','>','1')->get();
-        $data['roles']=$roles;
-        
+        $user = User::findOrFail($id);
+        $data['user']=$user;
         return view('admin.auth.users.edit', $data);
     }
 
@@ -119,19 +115,44 @@ dd($thumbnailPath);
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(request $request, $id)
+    public function update(UpdateProfileRequest $request,$id)
     {
+     
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->birthday = $request->birthday;
+        $user->gender = $request->gender;
+        if($request->hasFile('avatar'))
+        {
+            $destination = 'users/thumbnails/' . $user->avatar;
+            if(File::exists($destination))
+            {
+                File::delete($destination);
+            }
+            $file = $request->file('avatar');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $filename=$file ->move('users/thumbnails/',$filename);
+            $user->avatar = $filename;
+
+        }
         DB::beginTransaction();
         try {
-            $user = Admin::find($id);
-            $user->password = $request->password;
-            $user->role_id = $request->role_id;
-            $user->status = $request->status;
-            $user->save();
+            // update data for table posts
+            $user->update();
+
+            // create or update data for table post_details
+
             DB::commit();
-            return redirect()->route('admin.user.index')->with('success', 'Insert User seccessful');
-        } catch (\Throwable $ex) {
-            DB::rollBack();
+            // SAVE OK then delete OLD file
+
+            // success
+            return redirect()->route('admin.user.index')->with('sucess_create_user', 'Đã cập nhật thành công');
+        } catch (\Exception $ex) {
+            DB::rollback();
+
             return redirect()->back()->with('error', $ex->getMessage());
         }
     }
@@ -147,13 +168,13 @@ dd($thumbnailPath);
         DB::beginTransaction();
 
         try {
-            $user = Admin::find($id);
+            $user = User::find($id);
             $user->delete();
 
             DB::commit();
 
             return redirect()->route('admin.user.index')
-                ->with('success', 'Delete User successful!');
+                ->with('success_delete_user', 'Đã xóa thành công');
         } catch (\Exception $ex) {
             DB::rollBack();
             // have error so will show error message

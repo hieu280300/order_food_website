@@ -8,20 +8,16 @@
     <h1>Detail User</h1>
     <form action="">
         <table id="post" class="table">
-            @foreach ($user as $shop)
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">User Name</th>
-                    @if($shop->user_role == 0)
+                    <th scope="col">Tên</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Password</th>
-                    <th scope="col">Hành động</th>
-                    @else
-                    <th scope="col">Name Shop</th>
-                    <th scope="col">Adress Shop</th>
-                    <th scope="col">Image Shop</th>
-                    <th scope="col" colspan="3">Hành động</th>
-                    @endif
+                    <th scope="col">Số điện thoại</th>
+                    <th scope="col">Giới tính</th>
+                    <th scope="col">Địa chỉ</th>
+                    <th scope="col">Ngày sinh</th>
+                    <th scope="col">Ảnh đại diện</th>
+                    
                 </tr>
 
                 </tr>
@@ -30,28 +26,23 @@
 
                 <tr>
 
-                    <td cope="col">{{$shop->user_name}}</td>
-                    @if($shop->user_role == 0)
-                        <td scope="col">{{$shop->user_email}}</td>
-                        <td scope="col">{{$shop->user_password}}</td>
-                        <td scope="col"><a href=""><input type="submit" name="submit" value="Orders" class="btn btn-danger"></a></td>
-                    @else
-                    <td scope="col">{{ $shop->shop_name }} </td>
-                    <td scope="col">{{ $shop->shop_address }}</td>
+                    <td cope="col">{{$user->name}}</td>
+                    <td cope="col">{{$user->email}}</td>
+                    <td cope="col">{{$user->phone}}</td>
+                    <td> @if ( $user->user_gender  == \App\Models\User::GENDER[0])
+                        <div class="alert alert-secondary" role="alert">Nam</div>
+                          @elseif ($user->user_gender == \App\Models\User::GENDER[1])
+                        <div class="alert alert-primary" role="alert">Nữ</div>
+                      @endif</td>
+                    <td cope="col">{{$user->address}}</td>
+                    <td cope="col">{{$user->birthday}}</td>
 
-                    <td scope="col">   <img src="{{ asset($shop->shop_image)}}" alt="" class="img-flid" style="width:100px"></td>
-                    <td>
-                        <a href="{{ route('admin.category.show', $shop->shop_id) }}" name="submit" class="btn btn-info">Categories</a></td>
-                    <td scope="col">  <a href="{{ route('admin.product.show', $shop->shop_id) }}" name="submit" class="btn btn-info">Products</a></td></td>
-                    <td scope="col"><a href=""><input type="submit" name="submit" value="User Orders" class="btn btn-danger"></a> </td>
-                    @endif
-
-                    @endforeach
+                    <td scope="col">   <img src="{{ asset($user->avatar)}}" alt="" class="img-flid" style="width:100px"></td>
                 </tr>
             </tbody>
         </table>
     </form>
     <div class="form-group">
-        <a href="{{ route('admin.user.index') }}" class="btn btn-secondary">List User</a>
+        <a href="{{ route('admin.user.index') }}" class="btn btn-secondary">Danh sách người dùng</a>
     </div>
     @endsection

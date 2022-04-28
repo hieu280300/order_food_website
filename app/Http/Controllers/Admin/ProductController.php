@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Http\Requests\UpdateProfileRequest;
 use File;
 use App\Models\Category;
 use App\Models\Product;
@@ -60,24 +61,23 @@ class ProductController extends Controller
      */
     public function create($id)
     {
-        //  $currentURL = url()->previous();;
-        // dd($currentURL);
         $dataInsert = [];
          $products = DB::table('shops')
         ->join('categories','categories.shop_id','=','shops.id')
         ->where('shops.id',$id)->select('categories.name as category_name','categories.id as category_id','shops.id as shop_id','shops.name as shop_name')->paginate(5);
         $dataInsert['products'] = $products;
+    
         foreach ($products as $product)
         {
           
-            if (empty($product->category_name))
+            if (!empty($product->category_name))
             {
                 return view('admin.auth.products.create', $dataInsert);
                
             }
             else
             {
-             return view('admin.auth.products.no_create',$dataInsert);
+             return view('admin.auth.products.no_create');
             }
         }
        
@@ -112,10 +112,8 @@ class ProductController extends Controller
         }
         $dataInsert = [
             'name' => $request->name,
-            'code' => $request->code,
             'slug' => $request->slug,
             'description' => $request->description,
-            'content' =>$request->content,
             'quantity' => $request->quantity,
             'money' => $request->money,
             'thumbnail' => $thumbnailPath,
@@ -149,11 +147,7 @@ class ProductController extends Controller
         $products = DB::table('products')
         ->join('shops','shops.id','=','products.shop_id')
         ->join('categories','products.category_id','=','categories.id')
-        ->where('shops.id',$id)->select('products.id as product_id','products.name as product_name','products.slug as product_slug','products.code as product_code','products.thumbnail as product_thumbnail','products.description as product_description','products.content as product_content','products.money as product_money','products.quantity as product_quantity','products.category_id','categories.name as category_name','categories.slug as category','products.shop_id as shop_id')->paginate(5);
-        // $products = Product::with('category');
-        //  $categories = Category::pluck('name', 'id')
-        //  ->toArray();
-        // $data['categories'] = $categories;
+        ->where('shops.id',$id)->select('products.id as product_id','products.name as product_name','products.slug as product_slug','products.thumbnail as product_thumbnail','products.description as product_description','products.money as product_money','products.quantity as product_quantity','products.category_id','categories.name as category_name','categories.slug as category','products.shop_id as shop_id')->paginate(5);
         $data['shop_id']=$id;
         $data['products'] = $products;
 
@@ -181,7 +175,7 @@ class ProductController extends Controller
         $products= DB::table('products')
         ->join('shops','shops.id','=','products.shop_id')
         ->join('categories','products.category_id','=','categories.id')
-        ->where('products.id',$id)->orWhere('products.shop_id','=','shops.id')->select('products.id as product_id','products.name as product_name','products.slug as product_slug','products.code as product_code','products.thumbnail as product_thumbnail','products.description as product_description','products.content as product_content','products.money as product_money','products.quantity as product_quantity','products.category_id','categories.name as category_name','categories.id as category_id','products.shop_id as shop_id','shops.name as shop_name','products.thumbnail as thumbnail')->get();
+        ->where('products.id',$id)->orWhere('products.shop_id','=','shops.id')->select('products.id as product_id','products.name as product_name','products.slug as product_slug','products.thumbnail as product_thumbnail','products.description as product_description','products.money as product_money','products.quantity as product_quantity','products.category_id','categories.name as category_name','categories.id as category_id','products.shop_id as shop_id','shops.name as shop_name','products.thumbnail as thumbnail')->get();
         $data['shop_id']=$id;
         $data['products'] = $products;
         return view('admin.auth.products.edit', $data);
@@ -196,46 +190,37 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, $id)
     {
- 
         $product = Product::find($id);
-        $thumbnailOld = $product->thumbnail;
         $product->name = $request->name;
         $product->slug = $request->slug;
-        $product->code = $request->code;
-        $product->content = $request->content;
         $product->description = $request->description;
         $product->quantity = $request->quantity;
         $product->money = $request->money;
-        $thumbnailPath = $product->thumbnail;
-        if (
-            $request->hasFile('thumbnail')
-            && $request->file('thumbnail')->isValid()
-        )
+        if($request->hasFile('thumbnail'))
         {
-            // Nếu có thì thục hiện lưu trữ file vào public/thumbnail
-            $image = $request->file('thumbnail');
-            $extension = $request->thumbnail->extension();
-            $fileName = 'thumbnail_' . time() . '.' . $extension;
-            $thumbnailPath = $image->move('product/thumbnails'. '/' . $fileName);
-            $product->thumbnail = $thumbnailPath;
-            Log::info('thumbnailPath: ' . $thumbnailPath);
+            $destination = 'product/updates/' . $product->thumbnail;
+            if(File::exists($destination))
+            {
+                File::delete($destination);
+            }
+            $file = $request->file('thumbnail');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $filename=$file ->move('product/updates/',$filename);
+            $product->thumbnail = $filename;
         }
         DB::beginTransaction();
 
         try {
             // update data for table posts
-            $product->save();
-          
+            $product->update();
+
             // create or update data for table post_details
-         
+
             DB::commit();
             // SAVE OK then delete OLD file
-            if (File::exists(public_path($thumbnailOld))) {
-                File::delete(public_path($thumbnailOld));
-            }
-
             // success
-            return redirect()->route('admin.product.show',$product->shop_id)->with('mess', 'Update successful!');
+            return redirect()->route('admin.product.show',$product->shop_id)->with('mess', 'Cập nhật thành công');
         } catch (\Exception $ex) {
             DB::rollback();
             
@@ -258,7 +243,7 @@ class ProductController extends Controller
             $product->delete();
             DB::commit();
             return redirect()->route('admin.product.index')
-                ->with('success', 'Delete Product successful!');
+                ->with('success', 'Đã xóa thành công');
         } catch (\Exception $ex) {
             DB::rollBack();
             // have error so will show error message

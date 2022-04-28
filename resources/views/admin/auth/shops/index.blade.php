@@ -7,6 +7,11 @@
 @section('content')
     <h1>Danh sách cửa hàng</h1>
     <form action="">
+        @if(session()->has('sucess_shop'))
+<div class="alert alert-success">
+    {{ session()->get('sucess_shop') }}
+</div>
+@endif
         <table id="post" class="table">
             <thead class="thead-dark">
                 <tr>   

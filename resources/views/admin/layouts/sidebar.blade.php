@@ -20,17 +20,17 @@
                     <span>UI Components</span>
                 </li> --}}
                 <li class="pc-item pc-hasmenu">
-                    <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">business_center</i></span><span class="pc-mtext">Users</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                    <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">business_center</i></span><span class="pc-mtext">Khách hàng</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                     <ul class="pc-submenu">
-                        <li class="pc-item"><a class="pc-link {{ Route::currentRouteName() == 'admin.user.create' ? 'active' : '' }}" href="{{route('admin.user.create')}}">Create Users</a></li>
-                        <li class="pc-item"><a class="pc-link {{ Route::currentRouteName() == 'admin.user.index' ? 'active' : '' }}" href="{{ route('admin.user.index') }}">List Users</a></li>
+                        <li class="pc-item"><a class="pc-link {{ Route::currentRouteName() == 'admin.user.create' ? 'active' : '' }}" href="{{route('admin.user.create')}}">Tạo khách hàng</a></li>
+                        <li class="pc-item"><a class="pc-link {{ Route::currentRouteName() == 'admin.user.index' ? 'active' : '' }}" href="{{ route('admin.user.index') }}">Danh sách khách hàng</a></li>
                     </ul>
                 </li>
                 <li class="pc-item pc-hasmenu">
-                    <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">business_center</i></span><span class="pc-mtext">Shops</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                    <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">business_center</i></span><span class="pc-mtext">Cửa hàng</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                     <ul class="pc-submenu">
-                        <li class="pc-item"><a class="pc-link {{ Route::currentRouteName() == 'admin.shop.create' ? 'active' : '' }}" href="{{route('admin.shop.create')}}">Create Shops</a></li>
-                        <li class="pc-item"><a class="pc-link {{ Route::currentRouteName() == 'admin.shop.index' ? 'active' : '' }}" href="{{ route('admin.shop.index') }}">List Shops</a></li>
+                        <li class="pc-item"><a class="pc-link {{ Route::currentRouteName() == 'admin.shop.create' ? 'active' : '' }}" href="{{route('admin.shop.create')}}">Tạo cửa hàng</a></li>
+                        <li class="pc-item"><a class="pc-link {{ Route::currentRouteName() == 'admin.shop.index' ? 'active' : '' }}" href="{{ route('admin.shop.index') }}">Danh sách cửa hàng</a></li>
                     </ul>
                 </li>
 

@@ -29,11 +29,6 @@ class ShopController extends Controller
     }
     public function create()
     {
-        // $data=[];
-        // $users=Admin::where('role_id','>','1')->get();
-        // $roles = Role::where('id','>','1')->get();
-        // $data['roles']=$roles;
-        // $data['users']=$users;
         return view('admin.auth.shops.create');
     }
     public function store(StoreShopRequest $request)
@@ -65,6 +60,7 @@ class ShopController extends Controller
         $user=User::create($userInsert);
             $shopInsert=[
                 'name'=>$request->name_shop,
+                'phone'=>$request->phone_shop,
                 'address'=>$request->address_shop,
                 'image'=>$thumbnailPath,
                 'time_open'=>$request->time_open.':00',
@@ -73,9 +69,9 @@ class ShopController extends Controller
 
             ];
             $shop = Shop::create($shopInsert);
+           
         DB::beginTransaction();
         try{
-
             $categoryInsert=[
                 'shop_id'=>$shop->id
             ];
@@ -85,7 +81,7 @@ class ShopController extends Controller
             Category::create($categoryInsert);
             Product::create($productInsert);
             DB::commit();
-            return redirect()->route('admin.shop.index')->with('sucess', 'Insert into data to User Sucessful.');
+            return redirect()->route('admin.shop.index')->with('sucess_shop', 'Đã tạo cửa hàng thành công.');
         }catch(\Exception $ex){
             DB::rollBack();
             Log::error($ex->getMessage());

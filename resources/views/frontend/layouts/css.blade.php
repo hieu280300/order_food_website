@@ -20,6 +20,3 @@
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"><div class="pd-wrap">
-
-    {{-- <link type="text/css" rel="stylesheet" href="{{asset('frontend/assets/css/rate.css')}}"> --}}
-    {{-- <script src="{{asset('frontend/assets/js/jquery-1.9.1.min.js')}}"></script> --}}

@@ -2,11 +2,11 @@
 @section('title', 'Login')
 @section('content')
 <div  class="table  table-striped" style="margin-bottom: 150px; min-height: 300px;">
-
-    <table id="category-list" class="table table-bordered table-hover table-striped">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <table id="category-list" class="table">
         <thead class="thead-dark">
             <tr class="center">
-                <th>#</th>
+                <th>Số thứ tự</th>
                 <th>Tên thể loại</th>
                 <th>Slug</th>
                 <th colspan="3">Hành động</th>
@@ -16,17 +16,16 @@
             @if(!empty($categories))
                 @foreach ($categories as $key => $category)
                     <tr>
-                        <td>{{ $key+1 }}</td>
-                        <td>{{ $category->category_name }}</td>
-                        <td>{{$category->category_slug}}</td>
-                        <td>
-                            <a href=""><i class="fa fa-info-circle"  style="padding:20px;font-size:20px;color:black" aria-hidden="true"></i></a></td>
-                        <td><a href="{{route('category.edit',$category->category_id)}}"><input type="submit" name="submit" value="Edit" class="btn btn-success"></a></td>
+                        <td scope="row">{{ $key+1 }}</td>
+                        <td scope="row">{{ $category->category_name }}</td>
+                        <td scope="row">{{$category->category_slug}}</td>
+                        <td scope="row"><a href="{{route('category.edit',$category->category_id)}}"><i class="fa fa-pencil-square-o" style="padding:20px;font-size:20px;color:black" aria-hidden="true"></i></a></td>
                         <td>
                             <form action="{{ route('category.destroy', $category->category_id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <input type="submit" name="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure DELETE Category?')">
+                                <button type="submit" style="border: none;background:none"><i class="fa fa-trash-o" aria-hidden="true" style="padding:20px;font-size:20px;color:black; "></i></button>
+
                             </form>
                         </td>
                     </tr>

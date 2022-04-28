@@ -28,10 +28,8 @@ class UpdateProductRequest extends FormRequest
             'name' => 'required|min:5|max:255', // rule: not null, minumum: 5, maximum: 255
             'description' => 'required|min:10', // rule: not null, minumum: 10
             'quantity'=>'required',
-            'content' => 'required|min:10',
             'money'=>'required',// 
             'slug'=>'required',
-             'code'=>'required',
         ];
     }
 }
