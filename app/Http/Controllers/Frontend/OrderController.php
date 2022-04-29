@@ -140,15 +140,17 @@ class OrderController extends Controller
                 ]);
 
                 $orderId=$order->id;
-
                 foreach ($getSession as $key => $value) {
-                    $orderdetail= OrderDetail::create([
-                        'product_id' => $value['id'],
-                        'order_id' => $orderId,
-                        'quantity' => $value['qty'],
-                        'money' => $product[$key]['money'],
-                        'note' => $product[$key]['note'],
-                    ]);
+                    if($shop_id==$value['shop_id']){
+                        $orderdetail= OrderDetail::create([
+                            'product_id' => $value['id'],
+                            'order_id' => $orderId,
+                            'quantity' => $value['qty'],
+                            'money' => $product[$key]['money'],
+                            'note' => $product[$key]['note'],
+                        ]);
+                    }
+
                 }
             }
         }

@@ -8,6 +8,7 @@
             padding: 100px;
             /* height:90%; */
             width:100%;
+            min-height: 400px
         }
     </style>
     <div class="container order_manader">
@@ -74,7 +75,7 @@
                                         </td>
                                         @else
                                             <td> <div class="btn btn-success" role="alert">Không được hủy đơn</div></td>
-                                        @endif 
+                                        @endif
                     @endforeach
                 </tbody>
             @else
