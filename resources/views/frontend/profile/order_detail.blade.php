@@ -7,6 +7,7 @@
             padding: 100px;
             /* height:90%; */
             width:100%;
+            min-width: 400px;
         }
     </style>
     <div class="order-detail px-5 order_manader ">
