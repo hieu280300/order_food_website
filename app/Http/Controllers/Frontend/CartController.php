@@ -8,6 +8,7 @@ use App\Http\Requests\Frontend\CartPostRequest;
 use App\Models\Product;
 use App\Models\Shop;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
@@ -66,18 +67,22 @@ class CartController extends Controller
     public function detail_addToCart(Request $request)
     {
         $id = $request->id;
+        $shop_id = DB::table('products')
+                    ->where('id',$id)
+                    ->select('products.shop_id as shop_id')->get()->toArray();
         $qty = $request->qty;
         $array = [];
+        $array['shop_id'] = $shop_id[0]->shop_id;
         $array['id'] = $id;
         $array['qty'] = $qty;
         $array['note'] = '';
+
         if (session()->has('cart')) {
             $getSession = session()->get('cart');
             $flag = 1;
             foreach ($getSession as $key => $value) {
                 if ($id == $value['id']) {
                     $getSession[$key]['qty']=$getSession[$key]['qty']+$qty;
-                    $getSession[$key]['note']='';
                     session()->put('cart', $getSession);
                     $flag = 0;
                 }
