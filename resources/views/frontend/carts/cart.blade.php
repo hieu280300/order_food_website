@@ -13,7 +13,7 @@
 
                 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                     <div class="xacnhan-herder">
-                        <p>1. Xác nhận thông tin đơn hàng</p>
+                        <p>Xác nhận thông tin đơn hàng</p>
                     </div>
                     <div class="xacnhan">
                         <form>
@@ -40,7 +40,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="xacnhan-herder">
+                    {{-- <div class="xacnhan-herder">
                         <p>2. Hình thức thanh toán</p>
                     </div>
                     <div class="xacnhan">
@@ -86,7 +86,7 @@
                             AirPay
                             </label>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
 
                 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
