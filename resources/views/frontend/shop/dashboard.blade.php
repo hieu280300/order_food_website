@@ -92,6 +92,47 @@
                 </div>
 
         </div>
+        <div class="card flat-card">
+            <div class="row-table">
+                <div class="col-sm-6 card-body br">
+                    <div class="row">
+                        <h1>Top các các sản phẩm bán chạy</h1>
+                    </div>
+                    <table id="post"  class="table table-bordered table-hover table-striped">
+                        <thead class="thead-dark">
+                            <tr class="center">
+                           
+                                <th scope="col">Số thứ tự</th>
+                                <th scope="col">Tên sản phẩm</th>
+                                {{-- <th scope="col">Tên đường truyền</th> --}}
+                                <th scope="col">Ảnh</th>
+                                <th scope="col">giá</th>
+                                <th scope="col">Số lượng sản phẩm đã bán</th>
+                            </tr>
+                        </thead class="thead-light">
+                        <tbody>
+                            @foreach ($products as  $product)
+                                @foreach ($totalOrder as $key => $item)
+                                    @if ($product->id==$item->id)
+                                    <tr>
+                                        <td scope="col">{{ $key+1 }}</td>
+                                        <td scope="col">{{ $product->name }}</td>
+                                        <td>
+                                            <img src="{{ asset($product->thumbnail) }}" alt="{{ $product->product_name }}" class="img-flid" style="width:100px">
+                                        </td>
+                                        <td scope="col">{{ number_format($product->money)}} VNĐ</td>
+                                        <td scope="col">{{$item->total_product}}</td>
+                                        @endif
+                                        @endforeach
+                                    @endforeach
+                                </tbody>
+
+                            </table>
+                                    </div>
+               
+            </div>
+
+    </div>
 
         {{-- <div class="row">
             <div class="col-md-6">

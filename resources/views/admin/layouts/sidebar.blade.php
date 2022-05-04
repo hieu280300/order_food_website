@@ -13,7 +13,7 @@
                     <label>Navigation</label>
                 </li> --}}
                 <li class="pc-item">
-                    <a href="{{url('/admin/dashboard')}}" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">home</i></span><span class="pc-mtext">Dashboard</span></a>
+                    <a href="{{url('/admin/dashboard')}}" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">home</i></span><span class="pc-mtext">Trang chủ</span></a>
                 </li>
                 {{-- <li class="pc-item pc-caption">
                     <label>Elements</label>

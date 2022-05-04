@@ -44,7 +44,7 @@
                     <div class="col-md-12">
                         <div class="card-body">
                             <img src="admin/assets/images/logo-dark.svg" alt="" class="img-fluid mb-4">
-                            <h4 class="mb-3 f-w-400">Signin</h4>
+                            <h4 class="mb-3 f-w-400">Đăng nhập</h4>
                             @if (\Session::get('success'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                                     {{ \Session::get('success') }}
@@ -81,7 +81,7 @@
                                     </span>
                                 @endif
                             </div>
-                            <button type="submit" class="btn btn-block btn-primary mb-4">Signin</button>
+                            <button type="submit" class="btn btn-block btn-primary mb-4">Đăng nhập</button>
                         </div>
                     </div>
                 </form>

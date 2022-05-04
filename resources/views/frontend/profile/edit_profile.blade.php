@@ -16,13 +16,13 @@
         <hr>
         <div class="row">
             <div class="col-md-12">
-                <h3 style="text-align: center">Personal info</h3>
+                <h3 style="text-align: center">Chỉnh sửa thông tin</h3>
                 <form enctype="multipart/form-data" action="{{ route('updateProfile', ['id' => $user->id]) }}"
                     method="post">
                     @csrf
                     @method('PUT')
                     <div class="form-group">
-                        <label class="col-lg-3 control-label"> Name:</label>
+                        <label class="col-lg-3 control-label"> Tên:</label>
                         <div class="col-lg-12">
                             <input class="form-control" name="name" type="text" value="{{ Auth::user()->name }}">
                         </div>
@@ -31,7 +31,7 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-3 control-label">Phone:</label>
+                        <label class="col-lg-3 control-label">Số điện thoại:</label>
                         <div class="col-lg-12">
                             <input class="form-control" name="phone" type="text" value="{{ Auth::user()->phone }}">
                         </div>
@@ -40,7 +40,7 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-3 control-label">Address:</label>
+                        <label class="col-lg-3 control-label">Địa chỉ:</label>
                         <div class="col-lg-12">
                             <input class="form-control" name="address" type="text" value="{{ Auth::user()->address }}">
                         </div>
@@ -49,7 +49,7 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-3 control-label">Birthday:</label>
+                        <label class="col-lg-3 control-label">Ngày sinh:</label>
                         <div class="col-lg-12">
                             <input class="form-control" name="birthday" type="date"
                                 value="{{ Auth::user()->birthday }}">
@@ -59,12 +59,12 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-3 control-label">Gender</label>
+                        <label class="col-lg-3 control-label">Giới tính</label>
                         <div class="col-lg-12">
                             <input type="radio" name="gender" value="0" checked id="gender">
-                    <label for=" price-status-0">Male</label>
+                    <label for=" price-status-0">Nam</label>
                             <input type="radio" name="gender" value="1" id="gender">
-                            <label for="price-status-1">Female</label>
+                            <label for="price-status-1">Nữ</label>
                         </div>
                         @error('gender')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -78,14 +78,14 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-3 control-label">Avatar:</label>
+                        <label class="col-lg-3 control-label">Ảnh đại diện:</label>
                         <img src="{{ asset($user->avatar) }}" alt="{{$user->avatar }}" class="img-fluid" style="width:100px">
                             <input type="file" name="avatar" class="form-control">
                         @error('avatar')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <button class="btn btn-primary" type="submit" style="margin-left:500px">Save</button>
+                    <button class="btn btn-primary" type="submit" style="margin-left:500px">Lưu thông tin</button>
                 </form>
             </div>
         </div>

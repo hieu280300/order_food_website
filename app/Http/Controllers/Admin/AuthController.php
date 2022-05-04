@@ -65,7 +65,7 @@ class AuthController extends Controller
         {
             $user = auth()->guard('admin')->user();
             
-            \Session::put('admin','You are Login successfully!!');
+            \Session::put('admin','Bạn đã đăng nhập thành công');
             return redirect()->route('admin.dashboard');
             
         } else {
@@ -85,7 +85,7 @@ class AuthController extends Controller
 
         // \Session::flush();
 
-        \Session::put('admin','You are logout successfully');        
+        \Session::put('admin','Bạn đã đăng nhập thành công');        
         return redirect(route('admin.login'));
     }
 }

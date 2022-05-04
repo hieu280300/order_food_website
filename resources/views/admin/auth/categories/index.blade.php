@@ -9,7 +9,7 @@
 @endpush
 
 @section('content')
-    <p><a href="{{ route('admin.category.create') }} " class="btn btn-secondary">Tạo</a></p>
+    {{-- <p><a href="{{ route('admin.category.create') }} " class="btn btn-secondary">Tạo</a></p> --}}
     @if(session()->has('success'))
     <div class="alert alert-success">
         {{ session()->get('success') }}
@@ -21,7 +21,7 @@
                 <th>#</th>
                 <th>Tên thể loại</th>
                 <th>Slug</th>
-                <th colspan="3">Hành động</th>
+                {{-- <th colspan="3">Hành động</th> --}}
             </tr>
         </thead>
         <tbody>
@@ -31,7 +31,7 @@
                         <td>{{ $key+1 }}</td>
                         <td>{{ $category->category_name }}</td>
                         <td>{{$category->category_slug}}</td>
-                        <td><a href="{{route('admin.category.edit',$category->category_id)}}"><i class="fa fa-pencil-square-o" style="padding:20px;font-size:20px;color:black" aria-hidden="true"></i></a></td>
+                        {{-- <td><a href="{{route('admin.category.edit',$category->category_id)}}"><i class="fa fa-pencil-square-o" style="padding:20px;font-size:20px;color:black" aria-hidden="true"></i></a></td>
                         <td>
                             <form action="{{ route('admin.category.destroy', $category->category_id) }}" method="post">
                                 @csrf
@@ -39,7 +39,7 @@
                                 <button type="submit" style="border: none;background:none"  onclick="return confirm('Bạn muốn xóa thể loại này?')"><i class="fa fa-trash-o" aria-hidden="true" style="padding:20px;font-size:20px;color:black; "></i></button>
 
                             </form>
-                        </td>
+                        </td> --}}
                     </tr>
                 @endforeach
             @endif
