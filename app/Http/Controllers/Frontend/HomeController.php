@@ -129,12 +129,26 @@ class HomeController extends Controller
            $order_cancel= Order::with('orderDetails')->with('user')->with('shop')->where('orders.status','=','3')->Where('orders.shop_id',$id_shop)->count();
            $order_shipper= Order::with('orderDetails')->with('user')->with('shop')->where('orders.status','=','2')->Where('orders.shop_id',$id_shop)->count();
            $order_finish= Order::with('orderDetails')->with('user')->with('shop')->where('orders.status','=','4')->Where('orders.shop_id',$id_shop)->count();
+           $products = Product::where('shop_id', $id_shop)
+           ->with('category')
+           ->get();
+           $totalOrder = DB::table('products')
+            ->join('order_details','products.id','=','order_details.product_id')
+            ->where('products.shop_id',$id_shop)
+            ->select(DB::raw('products.id,SUM(order_details.quantity) as total_product','products.thumbnail as thumbnail'))
+            ->groupBy('products.id')
+            ->orderBy('total_product','DESC')
+            ->limit(3)
+            ->get()->toArray();
+
            $total_user = DB::table('orders')
            ->join('shops', 'shops.id', '=', 'orders.shop_id')
            ->join('users', 'users.id', '=', 'orders.user_id')
            ->where('shop_id',$id_shop)->select('users.name')->distinct('users.name')->count();
          
            $orders= Order::with('orderDetails')->with('user')->with('shop')->where('orders.shop_id',$id_shop)->get();
+           $data['products'] =$products;
+            $data['totalOrder'] =$totalOrder;
             $data['total_user']= $total_user;
             $data['total_order'] = $order;
             $data['orders'] = $orders;

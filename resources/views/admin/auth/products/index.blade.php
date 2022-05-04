@@ -11,7 +11,7 @@
     {{ session()->get('mess') }}
 </div>
 @endif
-        <p><a href="{{ route('admin.product.create',$shop_id) }}" class="btn btn-secondary" >Tạo</a></p>
+        {{-- <p><a href="{{ route('admin.product.create',$shop_id) }}" class="btn btn-secondary" >Tạo</a></p> --}}
     <br>
     <table id="post"  class="table table-bordered table-hover table-striped">
         <thead class="thead-dark">
@@ -25,7 +25,7 @@
                 <th scope="col">Mô tả</th>
                 <th scope="col">Số lượng</th>
                 <th scope="col">Tên thể loại</th>
-                <th scope="col" colspan="3">Hành động</th>
+                {{-- <th scope="col" colspan="3">Hành động</th> --}}
             </tr>
         </thead class="thead-light">
         <tbody>
@@ -43,7 +43,7 @@
                         <td scope="col">{{ $product->product_description }}</td>
                         <td scope="col">{{ $product->product_quantity }}</td>
                         <td scope="col">{{ $product->category_name }}</td>
-                        <td><a href="{{route('admin.product.edit',$product->product_id)}}"><i class="fa fa-pencil-square-o" style="padding:20px;font-size:20px;color:black" aria-hidden="true"></i></a></td>
+                        {{-- <td><a href="{{route('admin.product.edit',$product->product_id)}}"><i class="fa fa-pencil-square-o" style="padding:20px;font-size:20px;color:black" aria-hidden="true"></i></a></td>
                         <td>
                             <form action="{{ route('admin.product.destroy', $product->product_id) }}" method="post">
                                 @csrf
@@ -51,7 +51,7 @@
                                 <button type="submit" style="border: none;background:none"  onclick="return confirm('Bạn muốn xóa thể loại này?')"><i class="fa fa-trash-o" aria-hidden="true" style="padding:20px;font-size:20px;color:black; "></i></button>
 
                             </form>
-                        </td>
+                        </td> --}}
                     </tr>
                 @endforeach
             @endif

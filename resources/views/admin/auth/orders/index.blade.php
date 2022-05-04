@@ -83,7 +83,7 @@
                         <td>
                             <a href="{{route('admin.order.show',$order->id)}}"><i class="fa fa-info-circle" aria-hidden="true" style="padding:20px;font-size:20px;color:black"></i></a>
                         </td>
-                        <td scope="col"><a href="{{ route('admin.order.edit', $order->id) }}"><i class="fa fa-pencil-square-o" style="padding:20px;font-size:20px;color:black" aria-hidden="true"></i></a> </td>
+                        {{-- <td scope="col"><a href="{{ route('admin.order.edit', $order->id) }}"><i class="fa fa-pencil-square-o" style="padding:20px;font-size:20px;color:black" aria-hidden="true"></i></a> </td> --}}
                     </tr>
                 @endforeach
             @endif

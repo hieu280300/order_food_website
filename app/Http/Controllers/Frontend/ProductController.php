@@ -47,6 +47,7 @@ class ProductController extends Controller
                     ->orderByDesc('total_product')
                     ->limit(3)
                     ->get()->toArray();
+                    // dd($totalOrder);
 
         if(!$totalOrder){
             $totalOrder = Product::where('shop_id', $shop_id)

@@ -56,7 +56,7 @@
                     </div>
                     <div class="col-6 mb-3">
                       <h6>Số điện thoại</h6>
-                      <p class="text-muted">{{$info->name }}</p>
+                      <p class="text-muted">{{$info->phone }}</p>
                     </div>
                   </div>
                   <div class="row pt-1">
