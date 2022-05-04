@@ -34,15 +34,31 @@ class ProductController extends Controller
         $products = Product::where('shop_id', $shop_id)
             ->with('category')
             ->get();
-        // ->toArray();;
+    
         $categories = Category::where('shop_id', $shop_id)
             ->pluck('name', 'id')
             ->toArray();
-        // $categories = Category::pluck('name','id')->toArray();
+
+        $totalOrder = DB::table('products')
+                    ->join('order_details','products.id','=','order_details.product_id')
+                    ->where('products.shop_id',$shop_id)
+                    ->select(DB::raw('products.id,SUM(order_details.quantity) as total_product'))
+                    ->groupBy('products.id')
+                    ->orderByDesc('total_product')
+                    ->limit(3)
+                    ->get()->toArray();
+
+        if(!$totalOrder){
+            $totalOrder = Product::where('shop_id', $shop_id)
+            ->limit(3)
+            ->get();
+        }
+
+        $data['totalOrder'] = $totalOrder;
         $data['products'] = $products;
         $data['categories'] = $categories;
         $data['shop']=$shop;
-        // dd($data);
+
         return view('frontend.home.product', $data);
     }
     public function getShopClose(request $request)
@@ -167,13 +183,13 @@ class ProductController extends Controller
         ->join('categories','categories.shop_id','=','shops.id')
         ->where('shops.id',$id_shop)->select('categories.name as category_name','categories.id as category_id','shops.id as shop_id','shops.name as shop_name')->paginate(5);
         $dataInsert['products'] = $products;
-      
+
         foreach ($products as $product)
         {
             if (!empty($product->category_name))
             {
                 return view('frontend.shop.products.create', $dataInsert);
-               
+
             }
             else
             {
@@ -355,7 +371,7 @@ class ProductController extends Controller
     public function PostCmt(Request $request)
     {
         // dd($request->all());
-        
+
         $cmt = Comment::create([
             'user_id' => Auth::user()->id,
             'product_id' => $request->id,
