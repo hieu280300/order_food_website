@@ -6,7 +6,7 @@
 @section('content')
 <link rel="stylesheet" type="text/css" href="{{asset('frontend/assets/css/order.css')}}">
 <main>
-    <div class="container">
+    <div class="container" style="min-height: 400px">
         <form action="" method="post" >
             @csrf
             <div class="row">

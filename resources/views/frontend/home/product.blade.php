@@ -36,8 +36,9 @@
             <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 ">
                 <nav class="sticky" id="myScrollspy">
                     <ul class="nav nav-pills flex-column" id="bar_menu">
-                        <li class="nav-item"><a href="#section1" class="nav-link active"> MÓN NỔI BẬT </a></li>
-
+                        @if ($totalOrder)
+                            <li class="nav-item"><a href="#section1" class="nav-link active"> MÓN NỔI BẬT </a></li>
+                        @endif
                         @foreach ($categories as $categoryId => $categoryName)
                             <li class="nav-item"><a href="#sections{{$categoryId}}" class="nav-link">{{ $categoryName }} </a>
                             </li>
@@ -48,46 +49,38 @@
             <!-- <div id="menu" class="col-lg-9 col-md-9 col-sm-8 col-xs-12 border_right_before"></div> -->
 
             <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12 border_right_before">
-
-                <div id="section1">
-                    <h2><span class="menuhome">MÓN NỔI BẬT </h2>
-                    <div class="list_product_related flex_wrap display_flex menu_lists">
-                        @php
-                            // $totalOrder = json_decode($totalOrder);
-                            // dd($totalOrder);
-                        @endphp
-                        @foreach ($products as $product)
-                            @foreach ($totalOrder as $item)
-                                @if ($product->id==$item->id)
-                                <a href="{{ route('product-detail', ['id' => $product->id]) }}">
-
-                                    <div class="menu_item">
-                                        <input class="shop_id" id = "{{$product->shop_id}}" hidden value="{{$shop[0]['name']}}">
-                                        <div class="menu_item_image">
-                                            <img src="{{asset($product->thumbnail)}}">
-                                        </div>
-                                        <div class="menu_item_info bg_white">
-                                            <h3>
-                                                <a class="tenmon" href="{{ route('product-detail', ['id' => $product->id]) }}">{{ $product->name }}</a>
-                                            </h3>
-                                            <div class="price_product_item"><span class="gia">{{(($product->money))/1000}}</span><span class="vnd">,000₫</span></div>
-                                        </a>
-                                            <div class="">
-                                                <button id="products" class="button text">
-                                                    <a id ="{{$product->id}}" class ="show_product" style="color:white" data-toggle="modal" data-target="#exampleModal" >MUA NGAY</a>
-                                                  </button>
+                @if ($totalOrder)
+                    <div id="section1">
+                        <h2><span class="menuhome">MÓN NỔI BẬT </h2>
+                        <div class="list_product_related flex_wrap display_flex menu_lists">
+                            @foreach ($products as $product)
+                                @foreach ($totalOrder as $item)
+                                    @if ($product->id==$item->id)
+                                    <a href="{{ route('product-detail', ['id' => $product->id]) }}">
+                                        <div class="menu_item">
+                                            <input class="shop_id" id = "{{$product->shop_id}}" hidden value="{{$shop[0]['name']}}">
+                                            <div class="menu_item_image">
+                                                <img src="{{asset($product->thumbnail)}}">
                                             </div>
-
+                                            <div class="menu_item_info bg_white">
+                                                <h3>
+                                                    <a class="tenmon" href="{{ route('product-detail', ['id' => $product->id]) }}">{{ $product->name }}</a>
+                                                </h3>
+                                                <div class="price_product_item"><span class="gia">{{(($product->money))/1000}}</span><span class="vnd">,000₫</span></div>
+                                            </a>
+                                                <div class="">
+                                                    <button id="products" class="button text">
+                                                        <a id ="{{$product->id}}" class ="show_product" style="color:white" data-toggle="modal" data-target="#exampleModal" >MUA NGAY</a>
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
-
-                                    </div>
-                                @endif
+                                    @endif
+                                @endforeach
                             @endforeach
-
-
-                        @endforeach
+                        </div>
                     </div>
-                </div>
+                @endif
                 @foreach ($categories as $categoryId => $categoryName)
                 <div id="sections{{$categoryId}}">
                     <h2><span class="menuhome">{{ $categoryName }} </h2>
