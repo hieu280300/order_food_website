@@ -34,7 +34,7 @@ class ProductController extends Controller
         $products = Product::where('shop_id', $shop_id)
             ->with('category')
             ->get();
-    
+
         $categories = Category::where('shop_id', $shop_id)
             ->pluck('name', 'id')
             ->toArray();
@@ -48,12 +48,12 @@ class ProductController extends Controller
                     ->limit(3)
                     ->get()->toArray();
                     // dd($totalOrder);
-
-        if(!$totalOrder){
-            $totalOrder = Product::where('shop_id', $shop_id)
-            ->limit(3)
-            ->get();
-        }
+        // dd($totalOrder);
+        // if(!$totalOrder){
+        //     $totalOrder = Product::where('shop_id', $shop_id)
+        //     ->limit(3)
+        //     ->get();
+        // }
 
         $data['totalOrder'] = $totalOrder;
         $data['products'] = $products;
